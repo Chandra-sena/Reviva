@@ -10,7 +10,7 @@ export const WhatWeDoSection: React.FC<WhatWeDoSectionProps> = ({ onNavigate }) 
     {
       title: 'Innovation in Design',
       desc: 'Design is at the heart of everything we create. Our thoughtfully curated spaces are a seamless blend of innovation, functionality, and aesthetics',
-      img: '/media/images/commercial-tower-green.jpg',
+      img: '/media/images/architect-sketching-building.jpg',
       imageLeft: true,
     },
     {

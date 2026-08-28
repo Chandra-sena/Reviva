@@ -7,6 +7,7 @@ import { PassionAtWork } from './components/PassionAtWork';
 import { FeaturedCarousel } from './components/FeaturedCarousel';
 import { WhatWeDoSection } from './components/WhatWeDoSection';
 import { MoreAboutSection } from './components/MoreAboutSection';
+import { MissionVisionSection } from './components/MissionVisionSection';
 import { EnquiryModal } from './components/EnquiryModal';
 import { FloatingEnquiryButton } from './components/FloatingEnquiryButton';
 import { Footer } from './components/Footer';
@@ -16,7 +17,6 @@ import { PropertiesPage } from './pages/PropertiesPage';
 import { PropertyDetailPage } from './pages/PropertyDetailPage';
 import { WhoWeArePage } from './pages/WhoWeArePage';
 import { PhilosophyPage } from './pages/PhilosophyPage';
-import { LeadershipPage } from './pages/LeadershipPage';
 import { ShowcasePage } from './pages/ShowcasePage';
 import { WhatWeDoPage } from './pages/WhatWeDoPage';
 import { CommercialPage } from './pages/CommercialPage';
@@ -107,15 +107,6 @@ export function App() {
         <PhilosophyPage
           cityInfo={cityInfo}
           onOpenEnquiry={() => { setEnquiryProperty(null); setIsEnquiryOpen(true); }}
-        />
-      );
-    }
-
-    if (path.startsWith('/leadership')) {
-      return (
-        <LeadershipPage
-          cityInfo={cityInfo}
-          onNavigate={navigate}
         />
       );
     }
@@ -252,6 +243,9 @@ export function App() {
 
         {/* 5. MORE ABOUT REVIVA Legacy Section */}
         <MoreAboutSection />
+
+        {/* 6. Our Vision & Mission Section */}
+        <MissionVisionSection />
       </>
     );
   };

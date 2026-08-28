@@ -99,29 +99,14 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
               paddingBottom: '2.5rem'
             }}
           >
-            {/* Column 1: Address & About */}
+            {/* Column 1: Who We Are */}
             <div>
-              <div style={{ display: 'flex', alignItems: 'flex-start', gap: '0.6rem', marginBottom: '1.5rem', padding: '0.85rem 1rem', background: 'rgba(255,255,255,0.03)', borderRadius: '10px', border: '1px solid rgba(255,255,255,0.06)' }}>
-                <MapPin size={16} color="#9E783C" style={{ marginTop: '3px', flexShrink: 0 }} />
-                <a
-                  href="https://maps.app.goo.gl/iwVLu2ZQct2h94TA8"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  style={{ fontSize: '0.78rem', color: '#c3ccd9', lineHeight: 1.6, textDecoration: 'none', fontWeight: 400 }}
-                  onMouseEnter={(e) => (e.currentTarget.style.color = '#e5b869')}
-                  onMouseLeave={(e) => (e.currentTarget.style.color = '#c3ccd9')}
-                >
-                  Sy No 13, Indian Gas Godown Road,<br />
-                  Channasandra, Kadugodi, Bengaluru - 560067
-                </a>
-              </div>
               <h4 style={{ fontSize: '0.72rem', fontWeight: 500, textTransform: 'uppercase', letterSpacing: '3px', color: '#9E783C', marginBottom: '1.25rem' }}>
                 Who We Are
               </h4>
               <div style={{ display: 'flex', flexDirection: 'column', gap: '0.65rem' }}>
                 {[
                   { name: 'Philosophy & Vision', path: '/philosophy' },
-                  { name: 'Leadership & Founder', path: '/leadership' },
                   { name: 'Reviva Journey & Showcase', path: '/showcase' },
                   { name: 'Awards & Honours', path: '/showcase' }
                 ].map((item, idx) => (
@@ -159,12 +144,6 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
 
             {/* Column 2: Our Projects */}
             <div>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', marginBottom: '1.5rem', padding: '0.85rem 1rem', background: 'rgba(255,255,255,0.03)', borderRadius: '10px', border: '1px solid rgba(255,255,255,0.06)' }}>
-                <Mail size={16} color="#9E783C" style={{ flexShrink: 0 }} />
-                <a href="mailto:info@revivaprojects.com" style={{ fontSize: '0.78rem', color: '#c3ccd9', textDecoration: 'none', fontWeight: 400 }}>
-                  info@revivaprojects.com
-                </a>
-              </div>
               <h4 style={{ fontSize: '0.72rem', fontWeight: 500, textTransform: 'uppercase', letterSpacing: '3px', color: '#9E783C', marginBottom: '1.25rem' }}>
                 Our Projects
               </h4>
@@ -243,12 +222,6 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
 
             {/* Column 3: Quick Navigation */}
             <div>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', marginBottom: '1.5rem', padding: '0.85rem 1rem', background: 'rgba(255,255,255,0.03)', borderRadius: '10px', border: '1px solid rgba(255,255,255,0.06)' }}>
-                <Phone size={16} color="#9E783C" style={{ flexShrink: 0 }} />
-                <a href="tel:+919148536320" style={{ fontSize: '0.78rem', color: '#c3ccd9', textDecoration: 'none', fontWeight: 400 }}>
-                  +91 91485 36320
-                </a>
-              </div>
               <h4 style={{ fontSize: '0.72rem', fontWeight: 500, textTransform: 'uppercase', letterSpacing: '3px', color: '#9E783C', marginBottom: '1.25rem' }}>
                 Quick Navigation
               </h4>
@@ -292,12 +265,6 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
 
             {/* Column 4: Location Focus */}
             <div>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', marginBottom: '1.5rem', padding: '0.85rem 1rem', background: 'rgba(255,255,255,0.03)', borderRadius: '10px', border: '1px solid rgba(255,255,255,0.06)' }}>
-                <Globe size={16} color="#9E783C" style={{ flexShrink: 0 }} />
-                <a href="https://www.revivaprojects.com" target="_blank" rel="noopener noreferrer" style={{ fontSize: '0.78rem', color: '#c3ccd9', textDecoration: 'none', fontWeight: 400 }}>
-                  www.revivaprojects.com
-                </a>
-              </div>
               <h4 style={{ fontSize: '0.72rem', fontWeight: 500, textTransform: 'uppercase', letterSpacing: '3px', color: '#9E783C', marginBottom: '1.25rem' }}>
                 Location Focus
               </h4>
@@ -325,6 +292,53 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
               </div>
             </div>
 
+          </div>
+
+          {/* Contact Info Row: Address, Email, Phone, Website */}
+          <div
+            className="stagger-children"
+            style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))',
+              gap: '1rem',
+              paddingBottom: '2.5rem'
+            }}
+          >
+            <div style={{ display: 'flex', alignItems: 'flex-start', gap: '0.6rem', padding: '0.85rem 1rem', background: 'rgba(255,255,255,0.03)', borderRadius: '10px', border: '1px solid rgba(255,255,255,0.06)' }}>
+              <MapPin size={16} color="#9E783C" style={{ marginTop: '3px', flexShrink: 0 }} />
+              <a
+                href="https://maps.app.goo.gl/iwVLu2ZQct2h94TA8"
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{ fontSize: '0.78rem', color: '#c3ccd9', lineHeight: 1.6, textDecoration: 'none', fontWeight: 400 }}
+                onMouseEnter={(e) => (e.currentTarget.style.color = '#e5b869')}
+                onMouseLeave={(e) => (e.currentTarget.style.color = '#c3ccd9')}
+              >
+                Sy No 13, Indian Gas Godown Road,<br />
+                Channasandra, Kadugodi, Bengaluru - 560067
+              </a>
+            </div>
+
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', padding: '0.85rem 1rem', background: 'rgba(255,255,255,0.03)', borderRadius: '10px', border: '1px solid rgba(255,255,255,0.06)' }}>
+              <Mail size={16} color="#9E783C" style={{ flexShrink: 0 }} />
+              <a href="mailto:info@revivaprojects.com" style={{ fontSize: '0.78rem', color: '#c3ccd9', textDecoration: 'none', fontWeight: 400 }}>
+                info@revivaprojects.com
+              </a>
+            </div>
+
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', padding: '0.85rem 1rem', background: 'rgba(255,255,255,0.03)', borderRadius: '10px', border: '1px solid rgba(255,255,255,0.06)' }}>
+              <Phone size={16} color="#9E783C" style={{ flexShrink: 0 }} />
+              <a href="tel:+919148536320" style={{ fontSize: '0.78rem', color: '#c3ccd9', textDecoration: 'none', fontWeight: 400 }}>
+                +91 91485 36320
+              </a>
+            </div>
+
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', padding: '0.85rem 1rem', background: 'rgba(255,255,255,0.03)', borderRadius: '10px', border: '1px solid rgba(255,255,255,0.06)' }}>
+              <Globe size={16} color="#9E783C" style={{ flexShrink: 0 }} />
+              <a href="https://www.revivaprojects.com" target="_blank" rel="noopener noreferrer" style={{ fontSize: '0.78rem', color: '#c3ccd9', textDecoration: 'none', fontWeight: 400 }}>
+                www.revivaprojects.com
+              </a>
+            </div>
           </div>
 
 

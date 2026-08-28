@@ -126,7 +126,7 @@ export const FeaturedCarousel: React.FC<FeaturedCarouselProps> = ({ onSelectProj
         {/* Active Banner Slide */}
         <div
           key={activeItem.id}
-          className="card-tilt fade-in-up"
+          className="card-tilt fade-in-up featured-banner"
           style={{
             position: 'relative',
             borderRadius: '12px',
@@ -141,13 +141,13 @@ export const FeaturedCarousel: React.FC<FeaturedCarouselProps> = ({ onSelectProj
             src={activeItem.imageDesktop}
             alt={activeItem.title}
             style={{
+              position: 'absolute',
+              inset: 0,
               width: '100%',
-              height: 'auto',
-              maxHeight: '520px',
-              objectFit: 'contain',
+              height: '100%',
+              objectFit: 'cover',
+              objectPosition: 'center',
               display: 'block',
-              margin: '0 auto',
-              background: '#0a0d14',
             }}
           />
 

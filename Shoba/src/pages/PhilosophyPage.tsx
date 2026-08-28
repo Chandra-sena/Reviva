@@ -6,6 +6,9 @@ import { LeafAccent } from '../components/LeafAccent';
 const lifeIsBeautifulImage = '/media/images/life-is-beautiful.jpg';
 const visionImage = '/media/images/our-vision-dove.jpg';
 const missionImage = '/media/images/our-mission-building.jpg';
+const creatorImage = '/media/images/modern-interior-design.jpg';
+const caregiverImage = '/media/images/plant-atrium-corridor.jpg';
+const explorerImage = '/media/images/property-gallery-3.jpg';
 
 interface PhilosophyPageProps {
   cityInfo: CityInfo;
@@ -18,7 +21,7 @@ export const PhilosophyPage: React.FC<PhilosophyPageProps> = ({ onOpenEnquiry })
       {/* Hero Banner */}
       <section
         style={{
-          background: 'linear-gradient(180deg, rgba(13, 22, 22, 0.9) 0%, rgba(13, 22, 22, 0.7) 100%), url("/media/images/eco-house-hero.jpg") center/cover no-repeat',
+          background: 'linear-gradient(180deg, rgba(13, 22, 22, 0.9) 0%, rgba(13, 22, 22, 0.7) 100%), url("/media/images/luxury-villa-pool.jpg") center/cover no-repeat',
           padding: '6rem 0 4rem 0',
           color: '#ffffff',
           textAlign: 'center',
@@ -45,7 +48,7 @@ export const PhilosophyPage: React.FC<PhilosophyPageProps> = ({ onOpenEnquiry })
         <div className="container">
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '3.5rem', alignItems: 'center' }}>
             <div
-              className="reveal-scale card-tilt"
+              className="reveal-scale card-tilt img-zoom-hover"
               style={{
                 position: 'relative',
                 borderRadius: '8px',
@@ -53,21 +56,43 @@ export const PhilosophyPage: React.FC<PhilosophyPageProps> = ({ onOpenEnquiry })
                 boxShadow: '0 20px 40px rgba(0,0,0,0.1)',
                 minHeight: '360px',
                 display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                padding: '2rem',
+                alignItems: 'flex-end',
               }}
             >
               <img
-                className="flip-parallax"
                 src={lifeIsBeautifulImage}
-                alt="Life is Beautiful - Reviva community garden"
+                alt="Reviva community garden, resident life amid landscaped greenery"
                 style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }}
               />
-              <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(135deg, rgba(158, 120, 60, 0.55) 0%, rgba(20, 20, 15, 0.65) 100%)' }} />
-              <p className="font-script" style={{ position: 'relative', zIndex: 1, fontSize: '3rem', color: '#ffffff', textAlign: 'center', margin: 0, textShadow: '0 4px 20px rgba(0,0,0,0.5)' }}>
-                Life is Beautiful
-              </p>
+              {/* Bottom-anchored scrim: keeps the photo legible while guaranteeing text contrast */}
+              <div
+                style={{
+                  position: 'absolute',
+                  inset: 0,
+                  background: 'linear-gradient(to top, rgba(10, 12, 10, 0.88) 0%, rgba(10, 12, 10, 0.45) 42%, rgba(10, 12, 10, 0) 72%)',
+                }}
+              />
+              <div style={{ position: 'relative', zIndex: 1, padding: '2.5rem', width: '100%' }}>
+                <span
+                  style={{
+                    display: 'block',
+                    fontSize: '0.75rem',
+                    fontWeight: 600,
+                    letterSpacing: 'var(--letter-spacing-caps)',
+                    textTransform: 'uppercase',
+                    color: 'var(--primary-accent)',
+                    marginBottom: '0.6rem',
+                  }}
+                >
+                  Our Philosophy
+                </span>
+                <p
+                  className="font-editorial-quote"
+                  style={{ fontSize: 'clamp(2rem, 4vw, 2.75rem)', color: '#ffffff', margin: 0, textShadow: '0 2px 16px rgba(0,0,0,0.4)' }}
+                >
+                  Life is Beautiful
+                </p>
+              </div>
             </div>
 
             <div className="reveal-right">
@@ -106,28 +131,37 @@ export const PhilosophyPage: React.FC<PhilosophyPageProps> = ({ onOpenEnquiry })
           </div>
 
           <div className="stagger-children" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: '2rem' }}>
-            <div className="reviva-card-hover" style={{ background: '#fff', padding: '2rem', borderRadius: '8px', border: '1px solid #e2e8f0', boxShadow: '0 4px 12px rgba(0,0,0,0.04)' }}>
-              <ShieldCheck size={36} color="#9E783C" style={{ marginBottom: '1rem' }} />
-              <h4 style={{ fontSize: '1.2rem', fontWeight: 700, color: '#0f172a', marginBottom: '0.5rem' }}>The Creator</h4>
-              <p style={{ color: '#64748b', fontSize: '0.95rem', lineHeight: 1.6 }}>
-                As visionaries, we create spaces that inspire connection and transformation through innovative design and timeless aesthetics.
-              </p>
+            <div className="reviva-card-hover" style={{ background: '#fff', borderRadius: '8px', border: '1px solid #e2e8f0', boxShadow: '0 4px 12px rgba(0,0,0,0.04)', overflow: 'hidden' }}>
+              <img src={creatorImage} alt="The Creator - innovative architectural design" style={{ width: '100%', height: '200px', objectFit: 'cover', display: 'block' }} />
+              <div style={{ padding: '2rem' }}>
+                <ShieldCheck size={36} color="#9E783C" style={{ marginBottom: '1rem' }} />
+                <h4 style={{ fontSize: '1.2rem', fontWeight: 700, color: '#0f172a', marginBottom: '0.5rem' }}>The Creator</h4>
+                <p style={{ color: '#64748b', fontSize: '0.95rem', lineHeight: 1.6 }}>
+                  As visionaries, we create spaces that inspire connection and transformation through innovative design and timeless aesthetics.
+                </p>
+              </div>
             </div>
 
-            <div className="reviva-card-hover" style={{ background: '#fff', padding: '2rem', borderRadius: '8px', border: '1px solid #e2e8f0', boxShadow: '0 4px 12px rgba(0,0,0,0.04)' }}>
-              <HeartHandshake size={36} color="#9E783C" style={{ marginBottom: '1rem' }} />
-              <h4 style={{ fontSize: '1.2rem', fontWeight: 700, color: '#0f172a', marginBottom: '0.5rem' }}>The Caregiver</h4>
-              <p style={{ color: '#64748b', fontSize: '0.95rem', lineHeight: 1.6 }}>
-                Committed to sustainability and community, we nurture environments where people and nature thrive together.
-              </p>
+            <div className="reviva-card-hover" style={{ background: '#fff', borderRadius: '8px', border: '1px solid #e2e8f0', boxShadow: '0 4px 12px rgba(0,0,0,0.04)', overflow: 'hidden' }}>
+              <img src={caregiverImage} alt="The Caregiver - sustainable green spaces" style={{ width: '100%', height: '200px', objectFit: 'cover', display: 'block' }} />
+              <div style={{ padding: '2rem' }}>
+                <HeartHandshake size={36} color="#9E783C" style={{ marginBottom: '1rem' }} />
+                <h4 style={{ fontSize: '1.2rem', fontWeight: 700, color: '#0f172a', marginBottom: '0.5rem' }}>The Caregiver</h4>
+                <p style={{ color: '#64748b', fontSize: '0.95rem', lineHeight: 1.6 }}>
+                  Committed to sustainability and community, we nurture environments where people and nature thrive together.
+                </p>
+              </div>
             </div>
 
-            <div className="reviva-card-hover" style={{ background: '#fff', padding: '2rem', borderRadius: '8px', border: '1px solid #e2e8f0', boxShadow: '0 4px 12px rgba(0,0,0,0.04)' }}>
-              <Award size={36} color="#9E783C" style={{ marginBottom: '1rem' }} />
-              <h4 style={{ fontSize: '1.2rem', fontWeight: 700, color: '#0f172a', marginBottom: '0.5rem' }}>The Explorer</h4>
-              <p style={{ color: '#64748b', fontSize: '0.95rem', lineHeight: 1.6 }}>
-                Reviva redefines modern living with thoughtful, future-ready spaces in pursuit of beauty, purpose, and possibility.
-              </p>
+            <div className="reviva-card-hover" style={{ background: '#fff', borderRadius: '8px', border: '1px solid #e2e8f0', boxShadow: '0 4px 12px rgba(0,0,0,0.04)', overflow: 'hidden' }}>
+              <img src={explorerImage} alt="The Explorer - future-ready living spaces" style={{ width: '100%', height: '200px', objectFit: 'cover', display: 'block' }} />
+              <div style={{ padding: '2rem' }}>
+                <Award size={36} color="#9E783C" style={{ marginBottom: '1rem' }} />
+                <h4 style={{ fontSize: '1.2rem', fontWeight: 700, color: '#0f172a', marginBottom: '0.5rem' }}>The Explorer</h4>
+                <p style={{ color: '#64748b', fontSize: '0.95rem', lineHeight: 1.6 }}>
+                  Reviva redefines modern living with thoughtful, future-ready spaces in pursuit of beauty, purpose, and possibility.
+                </p>
+              </div>
             </div>
           </div>
         </div>

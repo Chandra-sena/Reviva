@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import type { BlogPost, CityInfo } from '../types';
-import { Building, Scale, Home, Compass, Lightbulb, Leaf } from 'lucide-react';
+import { Building, Scale, Home, Compass, Leaf } from 'lucide-react';
 import { LeafAccent } from '../components/LeafAccent';
 
 interface BlogListPageProps {
@@ -15,7 +15,6 @@ const CATEGORIES = [
   { id: 'Legal', title: 'Legal', iconComp: Scale, desc: 'Informative guides on safe, process-driven property purchase' },
   { id: 'Real Estate', title: 'Real Estate', iconComp: Home, desc: 'Commonly used terms; industry overview in different cities' },
   { id: 'Architecture', title: 'Architecture', iconComp: Compass, desc: 'Explore diverse global themes such as Greek, Spanish, NYC, & more' },
-  { id: 'Insights', title: 'Insights', iconComp: Lightbulb, desc: "'How-to' explainers, expert advice, helpful suggestions" },
   { id: 'Sustainability', title: 'Sustainability', iconComp: Leaf, desc: 'Green building, eco-materials, and sustainable living trends' },
 ];
 
@@ -149,7 +148,8 @@ export const BlogListPage: React.FC<BlogListPageProps> = ({ blogs, onNavigate })
             className="stagger-children"
             style={{
               display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 340px))',
+              justifyContent: 'center',
               gap: '2rem'
             }}
           >
@@ -180,14 +180,14 @@ export const BlogListPage: React.FC<BlogListPageProps> = ({ blogs, onNavigate })
 
                 <div style={{ padding: '1.5rem', flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
                   <div>
-                    <span 
-                      style={{ 
-                        display: 'inline-block', 
-                        background: '#f1f5f9', 
-                        color: '#9E783C', 
-                        fontSize: '0.75rem', 
-                        fontWeight: 700, 
-                        padding: '0.2rem 0.6rem', 
+                    <span
+                      style={{
+                        display: 'inline-block',
+                        background: '#f1f5f9',
+                        color: '#9E783C',
+                        fontSize: '0.75rem',
+                        fontWeight: 700,
+                        padding: '0.2rem 0.6rem',
                         borderRadius: '4px',
                         marginBottom: '0.75rem',
                         textTransform: 'uppercase'

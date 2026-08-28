@@ -32,7 +32,7 @@ export const CareersPage: React.FC<CareersPageProps> = () => {
           position: 'relative',
           width: '100%',
           height: '360px',
-          background: `linear-gradient(180deg, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.75) 100%), url('/media/images/reviva-harmony-with-nature.jpg') center/cover no-repeat`,
+          background: `linear-gradient(180deg, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.75) 100%), url('/media/images/careers-team-collaboration.jpg') center/cover no-repeat`,
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
@@ -71,16 +71,19 @@ export const CareersPage: React.FC<CareersPageProps> = () => {
         {/* Culture & Growth Cards */}
         <div className="stagger-children" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: '2rem', marginBottom: '4.5rem' }}>
           {[
-            { icon: Award, title: 'Impactful Projects', desc: 'Craft sustainable living environments that leave a positive ecological footprint.' },
-            { icon: HeartHandshake, title: 'Collaborative Environment', desc: 'Work alongside experienced engineers, architects, and real estate professionals.' },
-            { icon: Users, title: 'Inclusive Culture', desc: 'Equal opportunity workplace fostering personal growth, innovation, and leadership.' },
+            { icon: Award, img: '/media/images/careers-solar-impact.jpg', title: 'Impactful Projects', desc: 'Craft sustainable living environments that leave a positive ecological footprint.' },
+            { icon: HeartHandshake, img: '/media/images/careers-site-collaboration.jpg', title: 'Collaborative Environment', desc: 'Work alongside experienced engineers, architects, and real estate professionals.' },
+            { icon: Users, img: '/media/images/careers-inclusive-team.jpg', title: 'Inclusive Culture', desc: 'Equal opportunity workplace fostering personal growth, innovation, and leadership.' },
           ].map((item, idx) => {
             const IconComponent = item.icon;
             return (
-              <div key={idx} className="reviva-card-hover" style={{ background: '#fcfbf7', padding: '2.25rem', borderRadius: '12px', border: '1px solid #e5e7eb', textAlign: 'center' }}>
-                <IconComponent size={36} color="#9F783D" style={{ margin: '0 auto 1rem auto' }} />
-                <h3 style={{ fontSize: '1.2rem', fontWeight: 600, color: '#00433D', marginBottom: '0.5rem' }}>{item.title}</h3>
-                <p style={{ color: '#4b5563', fontSize: '0.95rem', lineHeight: 1.6 }}>{item.desc}</p>
+              <div key={idx} className="reviva-card-hover" style={{ background: '#fcfbf7', borderRadius: '12px', border: '1px solid #e5e7eb', textAlign: 'center', overflow: 'hidden' }}>
+                <img src={item.img} alt={item.title} style={{ width: '100%', height: '170px', objectFit: 'cover', display: 'block' }} />
+                <div style={{ padding: '2.25rem' }}>
+                  <IconComponent size={36} color="#9F783D" style={{ margin: '0 auto 1rem auto' }} />
+                  <h3 style={{ fontSize: '1.2rem', fontWeight: 600, color: '#00433D', marginBottom: '0.5rem' }}>{item.title}</h3>
+                  <p style={{ color: '#4b5563', fontSize: '0.95rem', lineHeight: 1.6 }}>{item.desc}</p>
+                </div>
               </div>
             );
           })}

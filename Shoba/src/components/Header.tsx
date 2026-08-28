@@ -60,7 +60,6 @@ export const Header: React.FC<HeaderProps> = ({ onNavigate, onOpenEnquiry }) => 
       hasArrow: true,
       subItems: [
         { label: 'Philosophy & Vision', path: '/philosophy' },
-        { label: 'Leadership & Founder', path: '/leadership' },
         { label: 'Reviva Journey & Showcase', path: '/showcase' },
         { label: 'Awards & Honours', path: '/showcase' },
       ],

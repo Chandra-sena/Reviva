@@ -1,7 +1,6 @@
 import React from 'react';
-import { ShieldCheck, Award, Factory, Users } from 'lucide-react';
+import { ShieldCheck, Factory, Users } from 'lucide-react';
 import { LeafAccent } from './LeafAccent';
-import { CountUp } from './CountUp';
 
 export const MoreAboutSection: React.FC = () => {
   return (
@@ -33,16 +32,6 @@ export const MoreAboutSection: React.FC = () => {
           </div>
 
           <div className="reviva-card-hover" style={{ background: '#f8fafc', padding: '2rem', borderRadius: '8px', border: '1px solid #e2e8f0', textAlign: 'center' }}>
-            <Award size={36} color="#9E783C" style={{ margin: '0 auto 1rem auto' }} />
-            <h4 style={{ fontSize: '1.1rem', fontWeight: 700, color: '#0f172a', marginBottom: '0.5rem' }}>
-              <CountUp end={500} suffix="+" /> Industry Awards
-            </h4>
-            <p style={{ color: '#64748b', fontSize: '0.85rem', lineHeight: 1.6 }}>
-              Consistently recognized as India’s Most Trusted Real Estate Brand by independent industry audits.
-            </p>
-          </div>
-
-          <div className="reviva-card-hover" style={{ background: '#f8fafc', padding: '2rem', borderRadius: '8px', border: '1px solid #e2e8f0', textAlign: 'center' }}>
             <Factory size={36} color="#9E783C" style={{ margin: '0 auto 1rem auto' }} />
             <h4 style={{ fontSize: '1.1rem', fontWeight: 700, color: '#0f172a', marginBottom: '0.5rem' }}>
               German Engineering
@@ -55,10 +44,10 @@ export const MoreAboutSection: React.FC = () => {
           <div className="reviva-card-hover" style={{ background: '#f8fafc', padding: '2rem', borderRadius: '8px', border: '1px solid #e2e8f0', textAlign: 'center' }}>
             <Users size={36} color="#9E783C" style={{ margin: '0 auto 1rem auto' }} />
             <h4 style={{ fontSize: '1.1rem', fontWeight: 700, color: '#0f172a', marginBottom: '0.5rem' }}>
-              <CountUp end={40000} suffix="+" /> Happy Families
+              Countless Happy Families
             </h4>
             <p style={{ color: '#64748b', fontSize: '0.85rem', lineHeight: 1.6 }}>
-              A thriving community of satisfied homeowners across Bangalore, NCR, Mumbai, Chennai, and Hyderabad.
+              A thriving community of satisfied homeowners across Bangalore.
             </p>
           </div>
         </div>

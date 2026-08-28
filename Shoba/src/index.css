@@ -1,29 +1,12 @@
-/* Hasweny (brand PRIMARY font) and Gilroy-Bold (brand TITLE font) are licensed
-   fonts from the REVIVA brand manual — no webfont files for them exist in this
-   project, and Gilroy is a commercial font, so it isn't safe to source/embed a
-   copy without a confirmed license. Fraunces (elegant serif, close match to
-   Hasweny's letterforms) and Poppins (the standard free stand-in for Gilroy's
-   bold geometric sans) are loaded as the working substitutes. If licensed
-   Hasweny/Gilroy-Bold webfont files become available, add real `src: url(...)`
-   entries to the @font-face rules below — the CSS variables already reference
-   'Hasweny' and 'Gilroy-Bold' first, so real files take over automatically. */
-@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..700&family=Poppins:wght@300;400;500;600;700;800&family=Josefin+Sans:wght@300;400;500;600&display=swap');
-
-@font-face {
-  font-family: 'Hasweny';
-  src: local('Hasweny'), local('Hasweny-Regular');
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Gilroy-Bold';
-  src: local('Gilroy-Bold'), local('Gilroy Bold');
-  font-weight: 700;
-  font-style: normal;
-  font-display: swap;
-}
+/* Matched to the live revivaprojects.com site: it renders headings and body
+   copy in 'SegoeUI' (a self-hosted @font-face there) and links in 'Noto Sans'.
+   'Segoe UI' itself is a Microsoft system font (not distributable/embeddable),
+   so it's referenced as a system-font-stack entry — native on Windows, and
+   falls through to each OS's closest equivalent elsewhere, same as the source
+   site's own fallback chain. Noto Sans is a free Google Font, loaded below. */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@300;400;500;600;700&display=swap');
+/* Playfair Display: elegant editorial serif, used sparingly for photo-overlay quote moments only */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@1,500;1,600&display=swap');
 
 :root {
   /* Reviva Brand Design System Tokens */
@@ -48,12 +31,11 @@
   --border-light: #e5e7eb;
   --glass-bg: rgba(255, 255, 255, 0.95);
   
-  /* REVIVA BRAND BOOK FONTS
-     Title font: Gilroy-Bold (brand) -> Poppins (free substitute)
-     Primary font: Hasweny (brand) -> Fraunces (free substitute) */
-  --font-heading: 'Gilroy-Bold', 'Gilroy', 'Poppins', system-ui, -apple-system, sans-serif;
-  --font-body: 'Hasweny', 'Fraunces', 'Josefin Sans', system-ui, -apple-system, sans-serif;
-  --font-script: 'Hasweny', 'Fraunces', serif;
+  /* Matched to revivaprojects.com live site typography */
+  --font-heading: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, 'Helvetica Neue', Arial, sans-serif;
+  --font-body: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, 'Helvetica Neue', Arial, sans-serif;
+  --font-script: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, 'Helvetica Neue', Arial, sans-serif;
+  --font-link: 'Noto Sans', -apple-system, BlinkMacSystemFont, Roboto, 'Helvetica Neue', Arial, sans-serif;
 
   /* Typography Scale */
   --font-weight-body: 300;
@@ -184,6 +166,10 @@ p, span, li, button, a, label, input, textarea {
   letter-spacing: var(--letter-spacing-body);
 }
 
+a {
+  font-family: var(--font-link);
+}
+
 /* Small caps / UI labels */
 .ui-label, .label-caps {
   font-family: var(--font-body);
@@ -219,6 +205,18 @@ p, span, li, button, a, label, input, textarea {
 @media (max-width: 768px) {
   .container {
     padding: 0 1rem;
+  }
+}
+
+/* Featured/Iconic Banner Carousel — fills the card edge-to-edge via
+   object-fit: cover on a fixed aspect-ratio box, no letterboxing. Ratio
+   tightens on mobile so the crop stays flattering on a narrow viewport. */
+.featured-banner {
+  aspect-ratio: 16 / 7;
+}
+@media (max-width: 768px) {
+  .featured-banner {
+    aspect-ratio: 4 / 3;
   }
 }
 
@@ -469,6 +467,19 @@ p, span, li, button, a, label, input, textarea {
   transform: translateY(-1px);
 }
 
+/* Full-page contact form controls (larger touch targets than the compact modal .form-input) */
+.contact-form-input {
+  font-family: var(--font-body);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+.contact-form-input:focus {
+  border-color: #9F783D !important;
+  box-shadow: 0 0 0 3px rgba(159, 120, 61, 0.25);
+}
+.contact-form-input[aria-invalid="true"]:focus {
+  box-shadow: 0 0 0 3px rgba(185, 28, 28, 0.2);
+}
+
 /* ==========================================================================
    UI/UX PRO MAX — PREMIUM MOTION & HOVER ANIMATION ENGINE
    ========================================================================== */
@@ -680,6 +691,14 @@ html {
   font-weight: 400;
   letter-spacing: 0.5px;
   line-height: 1.3;
+}
+
+/* Editorial photo-overlay quote (Playfair Display, used sparingly over imagery) */
+.font-editorial-quote {
+  font-family: 'Playfair Display', var(--font-script);
+  font-style: italic;
+  font-weight: 500;
+  line-height: 1.15;
 }
 
 /* ==========================================================================

@@ -568,26 +568,6 @@ Architects and designers play a crucial role in bringing modern home designs to 
 
 Modern home designs for better living offer a perfect blend of style, comfort, and sustainability. They cater to the demands of contemporary life while paving the way for a greener, smarter future. Whether you’re planning to build your dream home or revamp your current space, adopting modern design principles can significantly enhance your living experience. By embracing innovative layouts, eco-friendly materials, and smart technologies, you’re investing in a beautiful home and a lifestyle that prioritizes well-being and environmental stewardship.`
   },
-  {
-    id: 'blog-1',
-    title: 'Reviva Vintage Valley: Eco-Conscious Living in Channasandra, Whitefield',
-    category: 'Reviva',
-    date: 'Aug 10, 2026',
-    readTime: '4 min read',
-    image: '/media/images/reviva-vintage-valley.jpg',
-    snippet: 'Discover how Reviva Vintage Valley combines thoughtful architecture, green patios, and community spaces in Kadugodi Whitefield.',
-    content: `Reviva Vintage Valley marks Reviva’s flagship residential venture in Whitefield. Located on Indian Gas Godown Road, Channasandra, Kadugodi, Bengaluru – 560067, it redefines urban luxury with sustainable design principles.`
-  },
-  {
-    id: 'blog-2',
-    title: 'Reviva Farms: Exploring Self-Sustaining Lifestyles in Bengaluru',
-    category: 'Reviva',
-    date: 'Jul 28, 2026',
-    readTime: '5 min read',
-    image: '/media/images/reviva-harmony-with-nature.jpg',
-    snippet: 'Learn how Reviva Farms brings urban farming, solar power, and eco farm houses to modern home buyers.',
-    content: `Reviva Farms invites residents to experience true harmony with nature. Blending self-sustaining farm houses, private organic plots, and farm-to-table green zones, this sanctuary offers a peaceful retreat.`
-  }
 ];
 
 export const INITIAL_FAQS: FaqItem[] = [
