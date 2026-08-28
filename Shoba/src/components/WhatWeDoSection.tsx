@@ -1,5 +1,4 @@
 import React from 'react';
-import { DoveAccent } from './DoveAccent';
 
 interface WhatWeDoSectionProps {
   onNavigate: (path: string) => void;
@@ -29,7 +28,6 @@ export const WhatWeDoSection: React.FC<WhatWeDoSectionProps> = ({ onNavigate }) 
 
   return (
     <section style={{ padding: '5rem 0', background: '#ffffff', position: 'relative', overflow: 'hidden' }}>
-      <DoveAccent corner="bottom-right" size="14%" opacity={0.1} />
       <div className="container" style={{ position: 'relative', zIndex: 1 }}>
         
         {/* Section Header */}

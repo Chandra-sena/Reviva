@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { MapPin, Mail, Phone, Globe, ChevronDown, ArrowUp, ShieldCheck, Leaf, Award, Compass } from 'lucide-react';
 import { DoveMark, RevivaWordmark } from './RevivaLogo';
-import { LeafAccent } from './LeafAccent';
 
 interface FooterProps {
   onNavigate: (path: string) => void;
@@ -32,7 +31,6 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
         }}
       />
 
-      <LeafAccent corner="top-left" size="20%" opacity={0.1} color="#e5b869" />
 
       <div style={{ position: 'relative', zIndex: 1, padding: '3.5rem 0 2.5rem 0' }}>
         <div className="container" style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 1.5rem' }}>

@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import type { Property, CityInfo } from '../types';
 import { Breadcrumbs } from '../components/Breadcrumbs';
-import { LeafAccent } from '../components/LeafAccent';
-import { 
-  MapPin, Download, Share2, ArrowLeft, Maximize2, Check,
-  FileText, LayoutGrid, Map, ChevronLeft, ChevronRight, X, Send, Sparkles, Navigation
+import { DoveMark, RevivaWordmark } from '../components/RevivaLogo';
+import {
+  MapPin, Download, Share2, ArrowLeft, Check,
+  FileText, LayoutGrid, Map, X, Send, Sparkles, Navigation, ChevronLeft, ChevronRight
 } from 'lucide-react';
 
 interface PropertyDetailPageProps {
@@ -14,6 +14,12 @@ interface PropertyDetailPageProps {
   onNavigate: (path: string) => void;
   onBookVisit: (property: Property) => void;
 }
+
+const RESOURCE_LABELS: Record<'brochure' | 'masterplan' | 'floorplan', string> = {
+  brochure: 'Brochure',
+  masterplan: 'Master Plan',
+  floorplan: 'Floor Plan',
+};
 
 export const PropertyDetailPage: React.FC<PropertyDetailPageProps> = ({
   propertyId,
@@ -26,14 +32,15 @@ export const PropertyDetailPage: React.FC<PropertyDetailPageProps> = ({
   
   // State variables for Reviva project details interaction
   const [activeTab, setActiveTab] = useState<'overview' | 'amenities' | 'rera'>('overview');
-  const [currentSlideIndex, setCurrentSlideIndex] = useState<number>(0);
   const [copiedLink, setCopiedLink] = useState(false);
+  const [currentSlideIndex, setCurrentSlideIndex] = useState(0);
   
   // Modal states for Master Plan, Floor Plan & Brochure
-  const [modalMode, setModalMode] = useState<'brochure' | 'masterplan' | 'floorplan' | 'lightbox' | null>(null);
+  const [modalMode, setModalMode] = useState<'brochure' | 'masterplan' | 'floorplan' | null>(null);
   const [activeFloorPlanBhk, setActiveFloorPlanBhk] = useState<'2.5 BHK' | '3 BHK'>('2.5 BHK');
   const [isEnquiryOpen, setIsEnquiryOpen] = useState(false);
   const [enquirySubmitted, setEnquirySubmitted] = useState(false);
+  const [pendingResource, setPendingResource] = useState<'brochure' | 'masterplan' | 'floorplan' | null>(null);
 
   if (!property) {
     return (
@@ -54,7 +61,15 @@ export const PropertyDetailPage: React.FC<PropertyDetailPageProps> = ({
       '/media/images/property-gallery-3.jpg',
       '/media/images/property-gallery-4.jpg'
     ])
-  ];
+  ].filter((src, idx, arr) => arr.indexOf(src) === idx);
+
+  const handleNextSlide = () => {
+    setCurrentSlideIndex((prev) => (prev + 1) % galleryImages.length);
+  };
+
+  const handlePrevSlide = () => {
+    setCurrentSlideIndex((prev) => (prev - 1 + galleryImages.length) % galleryImages.length);
+  };
 
   const downloadFile = (url: string) => {
     const link = document.createElement('a');
@@ -66,20 +81,8 @@ export const PropertyDetailPage: React.FC<PropertyDetailPageProps> = ({
   };
 
   const handleResourceClick = (mode: 'brochure' | 'masterplan' | 'floorplan') => {
-    const url = mode === 'brochure' ? property.brochureUrl : mode === 'masterplan' ? property.masterPlanUrl : property.floorPlanUrl;
-    if (url) {
-      downloadFile(url);
-    } else {
-      setModalMode(mode);
-    }
-  };
-
-  const handleNextSlide = () => {
-    setCurrentSlideIndex((prev) => (prev + 1) % galleryImages.length);
-  };
-
-  const handlePrevSlide = () => {
-    setCurrentSlideIndex((prev) => (prev - 1 + galleryImages.length) % galleryImages.length);
+    setPendingResource(mode);
+    setIsEnquiryOpen(true);
   };
 
   const handleShare = () => {
@@ -94,6 +97,15 @@ export const PropertyDetailPage: React.FC<PropertyDetailPageProps> = ({
     setTimeout(() => {
       setEnquirySubmitted(false);
       setIsEnquiryOpen(false);
+      if (pendingResource) {
+        const url = pendingResource === 'brochure' ? property.brochureUrl : pendingResource === 'masterplan' ? property.masterPlanUrl : property.floorPlanUrl;
+        if (url) {
+          downloadFile(url);
+        } else {
+          setModalMode(pendingResource);
+        }
+        setPendingResource(null);
+      }
     }, 2500);
   };
 
@@ -101,7 +113,7 @@ export const PropertyDetailPage: React.FC<PropertyDetailPageProps> = ({
     <div className="page-enter" style={{ background: '#ffffff', color: '#111827', minHeight: '100vh', paddingBottom: '4rem' }}>
 
       {/* 1. REVIVA HERO BANNER SECTION (Exact match to www.revivaprojects.com/projects/vintage-valley/) */}
-      <div 
+      <div
         style={{
           position: 'relative',
           width: '100%',
@@ -109,34 +121,33 @@ export const PropertyDetailPage: React.FC<PropertyDetailPageProps> = ({
           display: 'flex',
           flexDirection: 'column',
           justifyContent: 'space-between',
-          background: `linear-gradient(180deg, rgba(0,0,0,0.35) 0%, rgba(0,0,0,0.65) 100%), url('${galleryImages[0]}') center/cover no-repeat`,
+          background: `linear-gradient(180deg, rgba(0,0,0,0.35) 0%, rgba(0,0,0,0.65) 100%), url('${galleryImages[0]}') ${property.id === 'reviva-trinity-lifescape' ? 'top' : 'center'}/cover no-repeat`,
           color: '#ffffff',
           padding: '100px 1.5rem 3rem 1.5rem',
           overflow: 'hidden'
         }}
       >
-        <LeafAccent corner="top-left" size="11%" opacity={0.1} color="#3a7d6f" />
 
         {/* Top Breadcrumb & Share Actions Bar */}
         <div className="container" style={{ position: 'relative', zIndex: 1, display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '1rem' }}>
-          <Breadcrumbs 
+          <Breadcrumbs
             items={[
               { label: 'Projects', path: '/properties' },
               { label: property.name }
-            ]} 
-            onNavigate={onNavigate} 
+            ]}
+            onNavigate={onNavigate}
           />
 
           <div style={{ display: 'flex', gap: '0.75rem' }}>
-            <button 
+            <button
               onClick={handleShare}
-              style={{ 
-                background: 'rgba(0,0,0,0.5)', 
-                border: '1px solid rgba(255,255,255,0.4)', 
-                color: '#fff', 
-                padding: '0.45rem 1rem', 
-                borderRadius: '50px', 
-                fontSize: '0.8rem', 
+              style={{
+                background: 'rgba(0,0,0,0.5)',
+                border: '1px solid rgba(255,255,255,0.4)',
+                color: '#fff',
+                padding: '0.45rem 1rem',
+                borderRadius: '50px',
+                fontSize: '0.8rem',
                 cursor: 'pointer',
                 display: 'flex',
                 alignItems: 'center',
@@ -148,15 +159,15 @@ export const PropertyDetailPage: React.FC<PropertyDetailPageProps> = ({
               <span>{copiedLink ? 'Link Copied!' : 'Share'}</span>
             </button>
 
-            <button 
+            <button
               onClick={() => onNavigate('/properties')}
-              style={{ 
-                background: 'rgba(0,0,0,0.5)', 
-                border: '1px solid rgba(255,255,255,0.4)', 
-                color: '#fff', 
-                padding: '0.45rem 1rem', 
-                borderRadius: '50px', 
-                fontSize: '0.8rem', 
+              style={{
+                background: 'rgba(0,0,0,0.5)',
+                border: '1px solid rgba(255,255,255,0.4)',
+                color: '#fff',
+                padding: '0.45rem 1rem',
+                borderRadius: '50px',
+                fontSize: '0.8rem',
                 cursor: 'pointer',
                 display: 'flex',
                 alignItems: 'center',
@@ -232,32 +243,67 @@ export const PropertyDetailPage: React.FC<PropertyDetailPageProps> = ({
       </div>
 
       {/* 2. OVERVIEW & BRAND LOGO SECTION (Reviva Project Overview & Leaf Logo Branding) */}
+      {property.id !== 'reviva-farms' && (
       <div className="container" style={{ padding: '4rem 1.5rem' }}>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '3rem', alignItems: 'center' }}>
           
-          {/* Left: Green Brand Logo Graphic Box */}
-          <div
-            className="reveal-left card-tilt"
-            style={{
-              background: '#00433D',
-              borderRadius: '16px', 
-              padding: '3.5rem 2rem', 
-              textAlign: 'center', 
-              color: '#ffffff',
-              boxShadow: '0 20px 40px rgba(0, 67, 61, 0.25)',
-              position: 'relative',
-              overflow: 'hidden'
-            }}
-          >
-            <div style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, opacity: 0.1, background: 'radial-gradient(circle, #ffffff 10%, transparent 10%) center/20px 20px' }} />
-            <div style={{ fontSize: '0.8rem', letterSpacing: '3px', textTransform: 'uppercase', color: '#9F783D', fontWeight: 700 }}>
-              REVIVA
+          {/* Left: Brand Logo Graphic Box */}
+          {property.id === 'vintage-valley' ? (
+            <div className="reveal-left card-tilt" style={{ borderRadius: '16px', overflow: 'hidden', boxShadow: '0 20px 40px rgba(0, 67, 61, 0.25)' }}>
+              <img
+                src="/media/images/reviva-vintage-valley-brand-cover.jpg"
+                alt="Reviva Vintage Valley brand cover"
+                style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+              />
             </div>
-            <h2 style={{ fontFamily: 'serif', fontSize: '2.5rem', fontWeight: 400, letterSpacing: '2px', margin: '0.5rem 0 1rem 0' }}>
-              {property.name.toLowerCase()}
-            </h2>
-            <div style={{ width: '40px', height: '2px', background: '#9F783D', margin: '0 auto' }} />
-          </div>
+          ) : property.id === 'reviva-trinity-lifescape' ? (
+            <div
+              className="reveal-left card-tilt"
+              style={{
+                background: 'linear-gradient(160deg, #00433D 0%, #012e2a 100%)',
+                borderRadius: '16px',
+                padding: '4rem 2rem',
+                textAlign: 'center',
+                color: '#ffffff',
+                boxShadow: '0 20px 40px rgba(0, 67, 61, 0.25)',
+                position: 'relative',
+                overflow: 'hidden'
+              }}
+            >
+              <div style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, opacity: 0.08, background: 'radial-gradient(circle, #ffffff 10%, transparent 10%) center/20px 20px' }} />
+              <div style={{ position: 'relative', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                <DoveMark size={46} color="#e5b869" />
+                <RevivaWordmark height={30} color="#e5b869" style={{ marginTop: '0.85rem' }} />
+                <div style={{ width: '40px', height: '2px', background: '#9F783D', margin: '1.5rem 0' }} />
+                <h2 style={{ fontFamily: 'serif', fontStyle: 'italic', fontSize: '2.25rem', fontWeight: 400, color: '#ffffff' }}>
+                  trinity lifescape
+                </h2>
+              </div>
+            </div>
+          ) : (
+            <div
+              className="reveal-left card-tilt"
+              style={{
+                background: '#00433D',
+                borderRadius: '16px',
+                padding: '3.5rem 2rem',
+                textAlign: 'center',
+                color: '#ffffff',
+                boxShadow: '0 20px 40px rgba(0, 67, 61, 0.25)',
+                position: 'relative',
+                overflow: 'hidden'
+              }}
+            >
+              <div style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, opacity: 0.1, background: 'radial-gradient(circle, #ffffff 10%, transparent 10%) center/20px 20px' }} />
+              <div style={{ fontSize: '0.8rem', letterSpacing: '3px', textTransform: 'uppercase', color: '#9F783D', fontWeight: 700 }}>
+                REVIVA
+              </div>
+              <h2 style={{ fontFamily: 'serif', fontSize: '2.5rem', fontWeight: 400, letterSpacing: '2px', margin: '0.5rem 0 1rem 0' }}>
+                {property.name.toLowerCase()}
+              </h2>
+              <div style={{ width: '40px', height: '2px', background: '#9F783D', margin: '0 auto' }} />
+            </div>
+          )}
 
           {/* Right: Overview Description */}
           <div className="reveal-right">
@@ -277,6 +323,7 @@ export const PropertyDetailPage: React.FC<PropertyDetailPageProps> = ({
 
         </div>
       </div>
+      )}
 
       {/* 3. TABBED SPECIFICATIONS & PROJECT RESOURCES BOX (Exact Match to Reviva Details Page) */}
       {property.id !== 'reviva-farms' && (
@@ -472,8 +519,8 @@ export const PropertyDetailPage: React.FC<PropertyDetailPageProps> = ({
       </div>
       )}
 
-      {/* 4. PHOTO GALLERY CAROUSEL SECTION */}
-      <div className="container reveal" style={{ padding: '0 1.5rem 4rem 1.5rem' }}>
+      {/* 4. PROJECT PHOTO GALLERY */}
+      <div className="container" style={{ padding: property.id === 'reviva-farms' ? '4rem 1.5rem 4rem 1.5rem' : '0 1.5rem 4rem 1.5rem' }}>
         <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
           <span style={{ fontSize: '0.8rem', letterSpacing: '2px', textTransform: 'uppercase', color: '#9F783D', fontWeight: 700 }}>
             ARCHITECTURE & RENDERS
@@ -486,102 +533,75 @@ export const PropertyDetailPage: React.FC<PropertyDetailPageProps> = ({
         <div style={{ position: 'relative', borderRadius: '16px', overflow: 'hidden', boxShadow: '0 20px 40px rgba(0,0,0,0.12)', background: '#000000' }}>
           <img
             src={galleryImages[currentSlideIndex]}
-            alt={`Slide ${currentSlideIndex + 1}`}
-            style={{ width: '100%', maxHeight: '550px', objectFit: 'contain', display: 'block', margin: '0 auto' }}
+            alt={`${property.name} — view ${currentSlideIndex + 1}`}
+            style={{
+              width: '100%',
+              height: '550px',
+              objectFit: 'cover',
+              objectPosition: property.id === 'reviva-trinity-lifescape' ? 'top' : 'center',
+              display: 'block',
+            }}
           />
 
-          {/* Carousel Left/Right Buttons */}
-          <button 
-            onClick={handlePrevSlide}
-            style={{ 
-              position: 'absolute', 
-              top: '50%', 
-              left: '1rem', 
-              transform: 'translateY(-50%)', 
-              background: 'rgba(0,0,0,0.6)', 
-              color: '#ffffff', 
-              border: 'none', 
-              width: '44px', 
-              height: '44px', 
-              borderRadius: '50%', 
-              cursor: 'pointer',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              backdropFilter: 'blur(4px)'
-            }}
-          >
-            <ChevronLeft size={24} />
-          </button>
+          {galleryImages.length > 1 && (
+            <>
+              <button
+                onClick={handlePrevSlide}
+                aria-label="Previous image"
+                style={{
+                  position: 'absolute', top: '50%', left: '1rem', transform: 'translateY(-50%)',
+                  background: 'rgba(0,0,0,0.6)', color: '#ffffff', border: 'none', width: '44px', height: '44px',
+                  borderRadius: '50%', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center',
+                  backdropFilter: 'blur(4px)',
+                }}
+              >
+                <ChevronLeft size={24} />
+              </button>
 
-          <button 
-            onClick={handleNextSlide}
-            style={{ 
-              position: 'absolute', 
-              top: '50%', 
-              right: '1rem', 
-              transform: 'translateY(-50%)', 
-              background: 'rgba(0,0,0,0.6)', 
-              color: '#ffffff', 
-              border: 'none', 
-              width: '44px', 
-              height: '44px', 
-              borderRadius: '50%', 
-              cursor: 'pointer',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              backdropFilter: 'blur(4px)'
-            }}
-          >
-            <ChevronRight size={24} />
-          </button>
+              <button
+                onClick={handleNextSlide}
+                aria-label="Next image"
+                style={{
+                  position: 'absolute', top: '50%', right: '1rem', transform: 'translateY(-50%)',
+                  background: 'rgba(0,0,0,0.6)', color: '#ffffff', border: 'none', width: '44px', height: '44px',
+                  borderRadius: '50%', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center',
+                  backdropFilter: 'blur(4px)',
+                }}
+              >
+                <ChevronRight size={24} />
+              </button>
 
-          {/* Lightbox Expand Icon */}
-          <button
-            onClick={() => setModalMode('lightbox')}
-            style={{
-              position: 'absolute',
-              bottom: '1rem',
-              left: '1rem',
-              background: 'rgba(0,0,0,0.7)',
-              color: '#ffffff',
-              border: 'none',
-              padding: '0.4rem 0.8rem',
-              borderRadius: '6px',
-              fontSize: '0.8rem',
-              cursor: 'pointer',
-              display: 'flex',
-              alignItems: 'center',
-              gap: '0.4rem'
-            }}
-          >
-            <Maximize2 size={14} color="#9F783D" />
-            <span>Full Screen View</span>
-          </button>
+              <div style={{ position: 'absolute', bottom: '1rem', right: '1rem', background: 'rgba(0,0,0,0.6)', color: '#ffffff', fontSize: '0.75rem', padding: '0.3rem 0.7rem', borderRadius: '50px' }}>
+                {currentSlideIndex + 1} / {galleryImages.length}
+              </div>
+            </>
+          )}
         </div>
 
-        {/* Carousel Pagination Dots */}
-        <div style={{ display: 'flex', justifyContent: 'center', gap: '0.5rem', marginTop: '1.25rem' }}>
-          {galleryImages.map((_, idx) => (
-            <button
-              key={idx}
-              onClick={() => setCurrentSlideIndex(idx)}
-              style={{
-                width: currentSlideIndex === idx ? '24px' : '10px',
-                height: '10px',
-                borderRadius: '5px',
-                background: currentSlideIndex === idx ? '#9F783D' : '#d1d5db',
-                border: 'none',
-                cursor: 'pointer',
-                transition: 'all 0.3s ease'
-              }}
-            />
-          ))}
-        </div>
+        {galleryImages.length > 1 && (
+          <div style={{ display: 'flex', justifyContent: 'center', gap: '0.5rem', marginTop: '1.25rem' }}>
+            {galleryImages.map((_, idx) => (
+              <button
+                key={idx}
+                onClick={() => setCurrentSlideIndex(idx)}
+                aria-label={`Go to image ${idx + 1}`}
+                style={{
+                  width: currentSlideIndex === idx ? '24px' : '10px',
+                  height: '10px',
+                  borderRadius: '5px',
+                  background: currentSlideIndex === idx ? '#9F783D' : '#d1d5db',
+                  border: 'none',
+                  cursor: 'pointer',
+                  transition: 'all 0.3s ease',
+                }}
+              />
+            ))}
+          </div>
+        )}
       </div>
 
       {/* 5. LOCATION ADVANTAGE & INTERACTIVE MAP SECTION */}
+      {property.id !== 'reviva-farms' && (
       <div className="container" style={{ padding: '0 1.5rem 4rem 1.5rem' }}>
         <div className="reveal" style={{ textAlign: 'center', marginBottom: '2rem' }}>
           <span style={{ fontSize: '0.8rem', letterSpacing: '2px', textTransform: 'uppercase', color: '#9F783D', fontWeight: 700 }}>
@@ -627,7 +647,7 @@ export const PropertyDetailPage: React.FC<PropertyDetailPageProps> = ({
 
             <a
               className="btn-arrow-hover"
-              href={property.id === 'reviva-trinity-lifescape' ? "https://www.google.com/maps/search/?api=1&query=12.840172,77.694883" : "https://maps.app.goo.gl/iwVLu2ZQct2h94TA8"}
+              href={property.id === 'reviva-trinity-lifescape' ? "https://www.google.com/maps/search/?api=1&query=12.84013,77.69746" : "https://maps.app.goo.gl/iwVLu2ZQct2h94TA8"}
               target="_blank"
               rel="noopener noreferrer"
               style={{
@@ -657,7 +677,7 @@ export const PropertyDetailPage: React.FC<PropertyDetailPageProps> = ({
               height="100%"
               src={
                 property.id === 'reviva-trinity-lifescape'
-                  ? "https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d4416.825383235035!2d77.69488307507419!3d12.840171987463268!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMTLCsDUwJzI0LjYiTiA3N8KwNDEnNTAuOSJF!5e1!3m2!1sen!2sin!4v1787563523177!5m2!1sen!2sin"
+                  ? "https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d5328.556283578539!2d77.69745999999999!3d12.840130000000002!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMTLCsDUwJzI0LjUiTiA3N8KwNDEnNTAuOSJF!5e1!3m2!1sen!2sin!4v1787916025801!5m2!1sen!2sin"
                   : "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4414.248520803587!2d77.76903107507673!3d12.986013387330626!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae0fd89043e97d%3A0xfbf0cc9a4e929e5c!2sReviva%20Vintage%20Valley!5e1!3m2!1sen!2sin!4v1787563205095!5m2!1sen!2sin"
               }
               style={{ border: 0 }}
@@ -669,7 +689,7 @@ export const PropertyDetailPage: React.FC<PropertyDetailPageProps> = ({
 
         </div>
       </div>
-
+      )}
 
 
       {/* POPUP MODALS: BROCHURE, MASTER PLAN, FLOOR PLAN */}
@@ -681,7 +701,7 @@ export const PropertyDetailPage: React.FC<PropertyDetailPageProps> = ({
               background: '#ffffff',
               color: '#111827',
               width: '100%',
-              maxWidth: modalMode === 'lightbox' ? '950px' : '700px',
+              maxWidth: '700px',
               padding: '2rem',
               borderRadius: '16px',
               position: 'relative',
@@ -709,7 +729,7 @@ export const PropertyDetailPage: React.FC<PropertyDetailPageProps> = ({
                 </p>
 
                 <div style={{ border: '1px solid #e5e7eb', borderRadius: '12px', padding: '2rem', background: '#f9fafb', marginBottom: '2rem' }}>
-                  <img className="flip-parallax" src={galleryImages[0]} alt="Brochure Cover" style={{ width: '100%', maxHeight: '280px', objectFit: 'cover', borderRadius: '8px', marginBottom: '1rem' }} />
+                  <img className="flip-parallax" src={galleryImages[0]} alt="Brochure Cover" style={{ width: '100%', maxHeight: '280px', objectFit: 'cover', objectPosition: property.id === 'reviva-trinity-lifescape' ? 'top' : 'center', borderRadius: '8px', marginBottom: '1rem' }} />
                   <div style={{ fontWeight: 700, fontSize: '1.1rem' }}>Reviva Digital Brochure (PDF format)</div>
                 </div>
 
@@ -813,23 +833,13 @@ export const PropertyDetailPage: React.FC<PropertyDetailPageProps> = ({
               </div>
             )}
 
-            {/* Modal Content: Full Lightbox */}
-            {modalMode === 'lightbox' && (
-              <div>
-                <img
-                  src={galleryImages[currentSlideIndex]}
-                  alt="Full view render"
-                  style={{ width: '100%', maxHeight: '75vh', objectFit: 'contain', borderRadius: '8px' }}
-                />
-              </div>
-            )}
           </div>
         </div>
       )}
 
       {/* ENQUIRY POPUP FORM MODAL (Exact match to revivaprojects.com Elementor Enquiry Popup) */}
       {isEnquiryOpen && (
-        <div className="modal-overlay" onClick={() => setIsEnquiryOpen(false)}>
+        <div className="modal-overlay" onClick={() => { setIsEnquiryOpen(false); setPendingResource(null); }}>
           <div 
             onClick={(e) => e.stopPropagation()}
             style={{
@@ -843,8 +853,8 @@ export const PropertyDetailPage: React.FC<PropertyDetailPageProps> = ({
               boxShadow: '0 25px 50px rgba(0,0,0,0.3)'
             }}
           >
-            <button 
-              onClick={() => setIsEnquiryOpen(false)}
+            <button
+              onClick={() => { setIsEnquiryOpen(false); setPendingResource(null); }}
               style={{ position: 'absolute', top: '1.25rem', right: '1.25rem', background: 'none', border: 'none', cursor: 'pointer', color: '#374151' }}
             >
               <X size={24} />
@@ -855,10 +865,12 @@ export const PropertyDetailPage: React.FC<PropertyDetailPageProps> = ({
                 REVIVA PROJECTS
               </div>
               <h3 style={{ fontFamily: 'serif', fontSize: '1.75rem', color: '#00433D', marginTop: '0.25rem' }}>
-                Enquire About {property.name}
+                {pendingResource ? `Get the ${RESOURCE_LABELS[pendingResource]}` : `Enquire About ${property.name}`}
               </h3>
               <p style={{ color: '#6b7280', fontSize: '0.85rem', marginTop: '0.25rem' }}>
-                Leave your details below and our team will connect with you shortly.
+                {pendingResource
+                  ? `Fill this form to download the ${RESOURCE_LABELS[pendingResource]} for ${property.name}.`
+                  : 'Leave your details below and our team will connect with you shortly.'}
               </p>
             </div>
 
@@ -869,7 +881,9 @@ export const PropertyDetailPage: React.FC<PropertyDetailPageProps> = ({
                 </div>
                 <h4 style={{ fontSize: '1.2rem', fontWeight: 700, color: '#111827' }}>Thank You!</h4>
                 <p style={{ color: '#6b7280', fontSize: '0.9rem', marginTop: '0.5rem' }}>
-                  Your enquiry has been received. Our sales executive will call you soon.
+                  {pendingResource
+                    ? `Your ${RESOURCE_LABELS[pendingResource]} download will start shortly. Our sales executive will also call you soon.`
+                    : 'Your enquiry has been received. Our sales executive will call you soon.'}
                 </p>
               </div>
             ) : (
@@ -910,7 +924,7 @@ export const PropertyDetailPage: React.FC<PropertyDetailPageProps> = ({
                   }}
                 >
                   <Send size={16} />
-                  <span>SEND ENQUIRY</span>
+                  <span>{pendingResource ? `DOWNLOAD ${RESOURCE_LABELS[pendingResource].toUpperCase()}` : 'SEND ENQUIRY'}</span>
                 </button>
               </form>
             )}

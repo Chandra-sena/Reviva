@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import type { BlogPost, CityInfo } from '../types';
 import { Building, Scale, Home, Compass, Leaf } from 'lucide-react';
-import { LeafAccent } from '../components/LeafAccent';
 
 interface BlogListPageProps {
   blogs: BlogPost[];
@@ -30,7 +29,6 @@ export const BlogListPage: React.FC<BlogListPageProps> = ({ blogs, onNavigate })
 
       {/* Page Header */}
       <section style={{ background: '#f8fafc', borderBottom: '1px solid #e2e8f0', padding: '7.5rem 0 3.5rem 0', textAlign: 'center', position: 'relative', overflow: 'hidden' }}>
-        <LeafAccent corner="top-left" size="11%" opacity={0.07} />
         <div className="container" style={{ position: 'relative', zIndex: 1 }}>
           <span className="hero-reveal" style={{ color: '#9E783C', fontSize: '1.25rem', fontWeight: 600, letterSpacing: '4px', textTransform: 'uppercase', display: 'inline-block', marginBottom: '0.5rem' }}>
             REAL ESTATE LIBRARY

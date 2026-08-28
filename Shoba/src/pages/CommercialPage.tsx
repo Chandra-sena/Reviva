@@ -1,6 +1,5 @@
 import React from 'react';
 import type { CityInfo } from '../types';
-import { LeafAccent } from '../components/LeafAccent';
 
 interface CommercialPageProps {
   cityInfo: CityInfo;
@@ -21,7 +20,6 @@ export const CommercialPage: React.FC<CommercialPageProps> = () => {
           overflow: 'hidden',
         }}
       >
-        <LeafAccent corner="bottom-right" size="16%" opacity={0.12} color="#3a7d6f" />
         <div className="container" style={{ position: 'relative', zIndex: 1 }}>
           <span className="hero-reveal" style={{ color: 'var(--primary-accent)', fontSize: '0.85rem', fontWeight: 700, letterSpacing: '2px', textTransform: 'uppercase', display: 'inline-block' }}>
             WHAT WE DO

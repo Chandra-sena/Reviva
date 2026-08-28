@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import type { CityInfo } from '../types';
 import { Gift, Award, Crown, UserCheck } from 'lucide-react';
-import { LeafAccent } from '../components/LeafAccent';
 
 interface RevivaPrivilegePageProps {
   cityInfo: CityInfo;
@@ -32,7 +31,6 @@ export const RevivaPrivilegePage: React.FC<RevivaPrivilegePageProps> = ({ cityIn
           overflow: 'hidden',
         }}
       >
-        <LeafAccent corner="top-left" size="14%" opacity={0.12} color="#3a7d6f" />
         <div style={{ position: 'relative', zIndex: 1 }}>
           <span className="hero-reveal" style={{ color: '#e5b869', fontSize: '0.85rem', fontWeight: 700, letterSpacing: '2px', textTransform: 'uppercase', marginBottom: '0.5rem', textShadow: '0 2px 8px rgba(0,0,0,0.8)' }}>
             EXCLUSIVE MEMBERSHIP & REFERRAL CLUB

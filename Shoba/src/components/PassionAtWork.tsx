@@ -1,6 +1,4 @@
 import React from 'react';
-import { LeafAccent } from './LeafAccent';
-import { BirdsAccent } from './BirdsAccent';
 
 interface PassionAtWorkProps {
   onReadMore: () => void;
@@ -18,9 +16,7 @@ export const PassionAtWork: React.FC<PassionAtWorkProps> = ({ onReadMore }) => {
         overflow: 'hidden',
       }}
     >
-      <BirdsAccent corner="top-right" size="45%" opacity={0.18} />
 
-      <LeafAccent corner="bottom-left" size="26%" opacity={0.14} />
 
       <div className="container" style={{ position: 'relative', zIndex: 2 }}>
         <div 

@@ -1,7 +1,6 @@
 import React from 'react';
 import type { CityInfo } from '../types';
 import { Leaf, Sun, Droplets, Recycle, ShieldCheck, Package } from 'lucide-react';
-import { DoveAccent } from '../components/DoveAccent';
 
 interface SustainabilityPageProps {
   cityInfo: CityInfo;
@@ -29,7 +28,6 @@ export const SustainabilityPage: React.FC<SustainabilityPageProps> = () => {
           overflow: 'hidden',
         }}
       >
-        <DoveAccent corner="bottom-right" size="17%" opacity={0.14} color="#3a7d6f" />
         <span className="hero-reveal" style={{ position: 'relative', zIndex: 1, color: '#e5b869', fontSize: '0.85rem', fontWeight: 700, letterSpacing: '2px', textTransform: 'uppercase', marginBottom: '0.5rem', textShadow: '0 2px 8px rgba(0,0,0,0.8)' }}>
           REVIVA ECO LIVING
         </span>
@@ -204,44 +202,6 @@ export const SustainabilityPage: React.FC<SustainabilityPageProps> = () => {
               <div style={{ background: '#f8fafc', padding: '1rem', borderRadius: '8px', border: '1px solid #e2e8f0', display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
                 <Package color="#9E783C" size={20} />
                 <span style={{ fontWeight: 600, fontSize: '0.9rem' }}>Sustainable Materials</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* Feature 4: Earth-Friendly Spaces */}
-      <div style={{ background: '#f8fafc', padding: '5rem 0', borderTop: '1px solid #e2e8f0', borderBottom: '1px solid #e2e8f0' }}>
-        <div className="container">
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '3.5rem', alignItems: 'center' }}>
-            <div className="reveal-left">
-              <span style={{ color: '#9E783C', fontSize: '0.85rem', fontWeight: 700, letterSpacing: '2px', textTransform: 'uppercase' }}>
-                NURTURING NATURE
-              </span>
-              <h2 style={{ fontFamily: 'var(--font-heading)', fontSize: '2.25rem', fontWeight: 700, color: '#0f172a', margin: '0.5rem 0 1.5rem 0' }}>
-                Earth-Friendly Spaces
-              </h2>
-              <p style={{ color: '#4b5563', lineHeight: 1.8, fontSize: '1.05rem' }}>
-                Reviva’s projects are crafted to nurture the planet while enhancing your quality of life.
-              </p>
-            </div>
-
-            <div className="reveal-right">
-              <div
-                  style={{
-                  borderRadius: '12px',
-                  overflow: 'hidden',
-                  boxShadow: '0 12px 30px rgba(0,0,0,0.1)',
-                  border: '1px solid #e2e8f0',
-                  background: '#ffffff',
-                }}
-              >
-                <img
-                  className="flip-parallax"
-                  src="/media/images/reviva-building-with-nature.jpg"
-                  alt="Earth-Friendly Spaces - Reviva Projects"
-                  style={{ width: '100%', height: 'auto', maxHeight: '420px', objectFit: 'cover', display: 'block', margin: '0 auto' }}
-                />
               </div>
             </div>
           </div>

@@ -1,7 +1,6 @@
 import React, { useRef, useState } from 'react';
 import type { CityInfo } from '../types';
 import { MapPin, PhoneCall, Mail, MessageCircle, Send, CheckCircle2, AlertCircle } from 'lucide-react';
-import { LeafAccent } from '../components/LeafAccent';
 
 interface ContactPageProps {
   cityInfo: CityInfo;
@@ -147,7 +146,6 @@ export const ContactPage: React.FC<ContactPageProps> = () => {
 
         {/* Header Title */}
         <div className="reveal" style={{ marginBottom: '3rem', position: 'relative', overflow: 'hidden' }}>
-          <LeafAccent corner="top-right" size="10%" opacity={0.08} />
           <h1
             className="gold-shimmer-text"
             style={{

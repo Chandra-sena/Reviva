@@ -452,7 +452,14 @@ export const Header: React.FC<HeaderProps> = ({ onNavigate, onOpenEnquiry }) => 
             }}
           >
             <DoveMark size={38} color="#e5b869" />
-            <RevivaWordmark height={30} color="rgba(255, 255, 255, 0.95)" />
+            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', width: '176px' }}>
+              <RevivaWordmark height={30} color="rgba(255, 255, 255, 0.95)" />
+              <div style={{ width: '115.5%', alignSelf: 'flex-end', marginTop: '3px' }}>
+                <span style={{ fontSize: '0.68rem', fontWeight: 300, letterSpacing: '0.329em', color: '#e5b869', textTransform: 'uppercase', display: 'block', textAlign: 'center' }}>
+                  PROJECTS
+                </span>
+              </div>
+            </div>
           </div>
         </div>
       )}

@@ -1,7 +1,6 @@
 import React from 'react';
 import type { CityInfo } from '../types';
 import { Home, Building, Sparkles, Wrench, ArrowRight } from 'lucide-react';
-import { LeafAccent } from '../components/LeafAccent';
 
 const residentialImage = '/media/images/residential-towers.jpeg';
 const commercialImage = '/media/images/commercial-business-park.jpeg';
@@ -69,7 +68,6 @@ export const WhatWeDoPage: React.FC<WhatWeDoPageProps> = ({ onNavigate }) => {
           overflow: 'hidden',
         }}
       >
-        <LeafAccent corner="bottom-right" size="15%" opacity={0.12} color="#e5b869" />
         <div style={{ position: 'relative', zIndex: 1 }}>
           <span className="hero-reveal" style={{ color: '#e5b869', fontSize: '0.85rem', fontWeight: 700, letterSpacing: '2px', textTransform: 'uppercase', marginBottom: '0.5rem', textShadow: '0 2px 8px rgba(0,0,0,0.8)' }}>
             PORTFOLIO & VERTICALS

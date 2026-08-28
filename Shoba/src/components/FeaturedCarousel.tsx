@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
-import { LeafAccent } from './LeafAccent';
 
 interface FeaturedItem {
   id: string;
@@ -69,7 +68,6 @@ export const FeaturedCarousel: React.FC<FeaturedCarouselProps> = ({ onSelectProj
         overflow: 'hidden',
       }}
     >
-      <LeafAccent corner="bottom-right" size="16%" opacity={0.1} color="#3a7d6f" />
       <div className="container reveal" style={{ position: 'relative', zIndex: 1 }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: '1.5rem' }}>
           <div>
@@ -146,7 +144,7 @@ export const FeaturedCarousel: React.FC<FeaturedCarouselProps> = ({ onSelectProj
               width: '100%',
               height: '100%',
               objectFit: 'cover',
-              objectPosition: 'center',
+              objectPosition: activeItem.id === 'reviva-trinity-lifescape' ? 'top' : 'center',
               display: 'block',
             }}
           />

@@ -1,7 +1,6 @@
 import React from 'react';
 import type { CityInfo } from '../types';
 import { Briefcase, Building, CheckCircle } from 'lucide-react';
-import { DoveAccent } from '../components/DoveAccent';
 
 interface ContractingPageProps {
   cityInfo: CityInfo;
@@ -22,7 +21,6 @@ export const ContractingPage: React.FC<ContractingPageProps> = () => {
           overflow: 'hidden',
         }}
       >
-        <DoveAccent corner="bottom-left" size="16%" opacity={0.12} color="#3a7d6f" />
         <div className="container" style={{ position: 'relative', zIndex: 1 }}>
           <span className="hero-reveal" style={{ color: 'var(--primary-accent)', fontSize: '0.85rem', fontWeight: 700, letterSpacing: '2px', textTransform: 'uppercase', display: 'inline-block' }}>
             WHAT WE DO

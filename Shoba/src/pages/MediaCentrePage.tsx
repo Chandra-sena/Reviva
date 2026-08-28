@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import type { CityInfo } from '../types';
 import { Calendar, Download, ExternalLink, Check } from 'lucide-react';
-import { LeafAccent } from '../components/LeafAccent';
 
 interface MediaCentrePageProps {
   cityInfo: CityInfo;
@@ -51,7 +50,7 @@ export const MediaCentrePage: React.FC<MediaCentrePageProps> = () => {
           position: 'relative',
           width: '100%',
           height: '380px',
-          background: `linear-gradient(180deg, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0.7) 100%), url('/media/images/luxury-villa-pool.jpg') center/cover no-repeat`,
+          background: `linear-gradient(180deg, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0.7) 100%), url('/media/images/media-centre-hero.jpg') center/cover no-repeat`,
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
@@ -61,7 +60,6 @@ export const MediaCentrePage: React.FC<MediaCentrePageProps> = () => {
           overflow: 'hidden',
         }}
       >
-        <LeafAccent corner="bottom-left" size="15%" opacity={0.12} color="#3a7d6f" />
         <span className="hero-reveal" style={{ position: 'relative', zIndex: 1, color: '#e5b869', fontSize: '0.85rem', fontWeight: 700, letterSpacing: '2px', textTransform: 'uppercase', marginBottom: '0.5rem', textShadow: '0 2px 8px rgba(0,0,0,0.8)' }}>
           PRESS & NEWSROOM
         </span>

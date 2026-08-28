@@ -1,7 +1,6 @@
 import React from 'react';
 import type { CityInfo } from '../types';
 import { Layers, ShieldCheck, Cpu, Feather } from 'lucide-react';
-import { LeafAccent } from '../components/LeafAccent';
 
 interface ManufacturingPageProps {
   cityInfo: CityInfo;
@@ -22,7 +21,6 @@ export const ManufacturingPage: React.FC<ManufacturingPageProps> = () => {
           overflow: 'hidden',
         }}
       >
-        <LeafAccent corner="top-right" size="16%" opacity={0.12} color="#3a7d6f" />
         <div className="container" style={{ position: 'relative', zIndex: 1 }}>
           <span className="hero-reveal" style={{ color: 'var(--primary-accent)', fontSize: '0.85rem', fontWeight: 700, letterSpacing: '2px', textTransform: 'uppercase' }}>
             WHAT WE DO

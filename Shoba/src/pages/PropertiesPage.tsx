@@ -2,7 +2,6 @@ import React, { useState, useMemo, useRef } from 'react';
 import type { Property, CityInfo } from '../types';
 import { PropertyCard } from '../components/PropertyCard';
 import { Sparkles, Search, Filter, Building2 } from 'lucide-react';
-import { BirdsAccent } from '../components/BirdsAccent';
 import { gsap, useGSAP } from '../lib/gsapSetup';
 
 interface PropertiesPageProps {
@@ -145,7 +144,6 @@ export const PropertiesPage: React.FC<PropertiesPageProps> = ({
           }}
         />
 
-        <BirdsAccent corner="bottom-left" size="16%" opacity={0.12} color="#3a7d6f" />
         <span className="hero-reveal" style={{ position: 'relative', zIndex: 1, color: '#e5b869', fontSize: '0.78rem', fontWeight: 700, letterSpacing: '3px', textTransform: 'uppercase', marginBottom: '0.6rem', textShadow: '0 2px 8px rgba(0,0,0,0.6)' }}>
           REVIVA PROJECTS Portfolio
         </span>

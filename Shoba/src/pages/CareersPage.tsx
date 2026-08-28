@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import type { CityInfo } from '../types';
 import { Upload, CheckCircle2, Award, HeartHandshake, Users } from 'lucide-react';
-import { DoveAccent } from '../components/DoveAccent';
 
 interface CareersPageProps {
   cityInfo: CityInfo;
@@ -43,7 +42,6 @@ export const CareersPage: React.FC<CareersPageProps> = () => {
           overflow: 'hidden',
         }}
       >
-        <DoveAccent corner="bottom-right" size="15%" opacity={0.12} color="#3a7d6f" />
         <h1
           className="hero-reveal gold-shimmer-text"
           style={{

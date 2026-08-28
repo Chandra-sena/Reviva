@@ -1,7 +1,6 @@
 import React from 'react';
 import type { CityInfo } from '../types';
 import { Breadcrumbs } from '../components/Breadcrumbs';
-import { LeafAccent } from '../components/LeafAccent';
 
 interface LegalPageProps {
   type: 'privacy-policy' | 'terms-and-conditions' | 'disclaimer';
@@ -21,7 +20,6 @@ export const LegalPage: React.FC<LegalPageProps> = ({ type, cityInfo, onNavigate
   return (
     <div className="page-enter" style={{ paddingBottom: '4rem' }}>
       <div style={{ background: 'linear-gradient(180deg, rgba(18, 24, 38, 0.95) 0%, rgba(10, 14, 23, 1) 100%)', borderBottom: '1px solid var(--border-subtle)', padding: '3rem 0', position: 'relative', overflow: 'hidden' }}>
-        <LeafAccent corner="top-right" size="10%" opacity={0.08} color="#3a7d6f" />
         <div className="container" style={{ position: 'relative', zIndex: 1 }}>
           <Breadcrumbs items={[{ label: title }]} onNavigate={onNavigate} />
 

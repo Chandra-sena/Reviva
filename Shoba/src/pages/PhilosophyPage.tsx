@@ -1,7 +1,6 @@
 import React from 'react';
 import type { CityInfo } from '../types';
 import { Award, ShieldCheck, HeartHandshake, Compass } from 'lucide-react';
-import { LeafAccent } from '../components/LeafAccent';
 
 const lifeIsBeautifulImage = '/media/images/life-is-beautiful.jpg';
 const visionImage = '/media/images/our-vision-dove.jpg';
@@ -29,7 +28,6 @@ export const PhilosophyPage: React.FC<PhilosophyPageProps> = ({ onOpenEnquiry })
           overflow: 'hidden',
         }}
       >
-        <LeafAccent corner="top-left" size="18%" opacity={0.12} color="#3a7d6f" />
         <div className="container" style={{ position: 'relative', zIndex: 1 }}>
           <span className="hero-reveal" style={{ color: 'var(--primary-accent)', fontSize: '0.85rem', fontWeight: 700, letterSpacing: '2px', textTransform: 'uppercase' }}>
             WHO WE ARE

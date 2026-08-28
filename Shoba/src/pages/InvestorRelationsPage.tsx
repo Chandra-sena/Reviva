@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import type { CityInfo } from '../types';
 import { FileText, Download, Check, TrendingUp } from 'lucide-react';
-import { BirdsAccent } from '../components/BirdsAccent';
 
 interface InvestorRelationsPageProps {
   cityInfo: CityInfo;
@@ -42,7 +41,6 @@ export const InvestorRelationsPage: React.FC<InvestorRelationsPageProps> = () =>
           overflow: 'hidden',
         }}
       >
-        <BirdsAccent corner="bottom-left" size="16%" opacity={0.12} color="#3a7d6f" />
         <div style={{ position: 'relative', zIndex: 1 }}>
           <span className="hero-reveal" style={{ color: '#e5b869', fontSize: '0.85rem', fontWeight: 700, letterSpacing: '2px', textTransform: 'uppercase', marginBottom: '0.5rem', textShadow: '0 2px 8px rgba(0,0,0,0.8)' }}>
             NSE: REVIVA (Illustrative Ticker)

@@ -1,7 +1,6 @@
 import React from 'react';
 import type { CityInfo } from '../types';
 import { Award, Trophy, Star } from 'lucide-react';
-import { BirdsAccent } from '../components/BirdsAccent';
 
 interface ShowcasePageProps {
   cityInfo: CityInfo;
@@ -21,7 +20,6 @@ export const ShowcasePage: React.FC<ShowcasePageProps> = () => {
           overflow: 'hidden',
         }}
       >
-        <BirdsAccent corner="top-right" size="16%" opacity={0.12} color="#3a7d6f" />
         <div className="container" style={{ position: 'relative', zIndex: 1 }}>
           <span className="hero-reveal" style={{ color: 'var(--primary-accent)', fontSize: '0.85rem', fontWeight: 700, letterSpacing: '2px', textTransform: 'uppercase' }}>
             SHOWCASE & LEGACY

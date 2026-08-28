@@ -1,7 +1,6 @@
 import React from 'react';
 import type { CityInfo } from '../types';
 import { ShieldCheck, Cpu, Users, Leaf, CheckCircle2 } from 'lucide-react';
-import { LeafAccent } from '../components/LeafAccent';
 
 interface WhoWeArePageProps {
   cityInfo: CityInfo;
@@ -52,7 +51,6 @@ export const WhoWeArePage: React.FC<WhoWeArePageProps> = () => {
 
         {/* Story Section */}
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '4rem', alignItems: 'center', marginBottom: '4.5rem', position: 'relative', overflow: 'hidden' }}>
-          <LeafAccent corner="bottom-left" size="11%" opacity={0.07} />
           <div className="reveal-left" style={{ position: 'relative', zIndex: 1 }}>
             <h2 style={{ fontFamily: 'var(--font-heading)', fontSize: '2.25rem', fontWeight: 600, color: '#9F783D', marginBottom: '1.25rem' }}>
               Our Story

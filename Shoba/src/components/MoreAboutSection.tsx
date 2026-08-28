@@ -1,11 +1,9 @@
 import React from 'react';
 import { ShieldCheck, Factory, Users } from 'lucide-react';
-import { LeafAccent } from './LeafAccent';
 
 export const MoreAboutSection: React.FC = () => {
   return (
     <section style={{ background: '#ffffff', padding: '5rem 0', position: 'relative', overflow: 'hidden' }}>
-      <LeafAccent corner="top-right" size="18%" opacity={0.1} />
       <div className="container" style={{ position: 'relative', zIndex: 1 }}>
         
         <div className="reveal-scale" style={{ maxWidth: '900px', margin: '0 auto', textAlign: 'center', marginBottom: '3.5rem' }}>
