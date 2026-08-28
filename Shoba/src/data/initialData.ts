@@ -43,7 +43,7 @@ export const INITIAL_PROPERTIES: Property[] = [
     location: 'Bengaluru, Karnataka',
     subLocation: 'Bengaluru',
     type: 'Apartment',
-    status: 'New Launch',
+    status: 'Yet to be Launched',
     price: 145,
     priceDisplay: 'Price on Request',
     bhk: ['2 BHK', '3 BHK', '4 BHK'],
@@ -74,7 +74,7 @@ export const INITIAL_PROPERTIES: Property[] = [
     location: 'Channasandra, Whitefield, Bengaluru',
     subLocation: 'Bengaluru',
     type: 'Apartment',
-    status: 'Under Construction',
+    status: 'Launched',
     price: 135,
     priceDisplay: '₹ 1.35 Cr* Onwards',
     bhk: ['2.5 BHK', '3 BHK'],
@@ -109,7 +109,7 @@ export const INITIAL_PROPERTIES: Property[] = [
     location: 'Off Bengaluru Suburbs, Bengaluru',
     subLocation: 'Bengaluru',
     type: 'Villa',
-    status: 'Under Construction',
+    status: 'Yet to be Launched',
     price: 95,
     priceDisplay: 'Price on Request',
     bhk: ['Plots & Villas', 'Farm Houses'],
@@ -117,7 +117,7 @@ export const INITIAL_PROPERTIES: Property[] = [
     image: '/media/images/reviva-farms.jpg',
     gallery: [
       '/media/images/reviva-farms.jpg',
-      '/media/images/reviva-building-with-nature.jpg',
+      '/media/images/reviva-building-with-nature-custom.png',
       '/media/images/reviva-harmony-with-nature.jpg'
     ],
     amenities: [

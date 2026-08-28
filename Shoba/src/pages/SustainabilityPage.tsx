@@ -238,7 +238,7 @@ export const SustainabilityPage: React.FC<SustainabilityPageProps> = () => {
               >
                 <img
                   className="flip-parallax"
-                  src="/media/images/reviva-building-with-nature.jpg"
+                  src="/media/images/reviva-building-with-nature-custom.png"
                   alt="Earth-Friendly Spaces - Reviva Projects"
                   style={{ width: '100%', height: 'auto', maxHeight: '420px', objectFit: 'cover', display: 'block', margin: '0 auto' }}
                 />

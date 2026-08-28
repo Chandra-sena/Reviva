@@ -17,6 +17,9 @@ export const PropertiesPage: React.FC<PropertiesPageProps> = ({
   onNavigate,
   onBookVisit,
 }) => {
+  // Keep only the top row projects (first 3)
+  const topRowProperties = useMemo(() => properties.slice(0, 3), [properties]);
+
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedStatus, setSelectedStatus] = useState<string>('All');
   const [selectedType, setSelectedType] = useState<string>('All');
@@ -49,17 +52,14 @@ export const PropertiesPage: React.FC<PropertiesPageProps> = ({
 
   // Filtered Properties List
   const filteredProperties = useMemo(() => {
-    return properties.filter((property) => {
+    return topRowProperties.filter((property) => {
       const matchesSearch =
         property.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
         property.location.toLowerCase().includes(searchQuery.toLowerCase()) ||
         (property.highlightTag && property.highlightTag.toLowerCase().includes(searchQuery.toLowerCase()));
 
       const matchesStatus =
-        selectedStatus === 'All' ||
-        (selectedStatus === 'New Launch' && property.status === 'New Launch') ||
-        (selectedStatus === 'Under Construction' && property.status === 'Under Construction') ||
-        (selectedStatus === 'Ready to Move' && property.status === 'Ready to Move');
+        selectedStatus === 'All' || property.status === selectedStatus;
 
       const matchesType =
         selectedType === 'All' ||
@@ -68,7 +68,7 @@ export const PropertiesPage: React.FC<PropertiesPageProps> = ({
 
       return matchesSearch && matchesStatus && matchesType;
     });
-  }, [properties, searchQuery, selectedStatus, selectedType]);
+  }, [topRowProperties, searchQuery, selectedStatus, selectedType]);
 
   // Masonry scroll-in: each card scales/rotates into place as it enters the
   // viewport, alternating rotation direction by column. Re-scans whenever the
@@ -218,7 +218,7 @@ export const PropertiesPage: React.FC<PropertiesPageProps> = ({
               <Filter size={15} color="#9E783C" /> Status:
             </span>
 
-            {['All', 'New Launch', 'Under Construction', 'Ready to Move'].map((status) => (
+            {['All', 'Launched', 'Yet to be Launched'].map((status) => (
               <button
                 key={status}
                 className="tab-pill-hover"
@@ -278,7 +278,7 @@ export const PropertiesPage: React.FC<PropertiesPageProps> = ({
           </div>
 
           <div style={{ fontSize: '0.85rem', color: '#64748b', fontWeight: 500, background: '#ffffff', padding: '0.4rem 1rem', borderRadius: '20px', border: '1px solid #e2e8f0' }}>
-            Showing <strong>{filteredProperties.length}</strong> of <strong>{properties.length}</strong> Projects
+            Showing <strong>{filteredProperties.length}</strong> of <strong>{topRowProperties.length}</strong> Projects
           </div>
         </div>
 
