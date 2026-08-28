@@ -1,0 +1,230 @@
+:root {
+  /* Reviva Brand Design System Tokens */
+  /* Primary: Gold/Bronze #9E783C | Secondary: Bright Teal #008F81 | Tertiary: Deep Teal #00403A (logo wordmark) */
+  --primary-accent: #9E783C;
+  --primary-accent-hover: #C09859;
+  --primary-accent-gradient: linear-gradient(135deg, #9E783C 0%, #4A381C 100%);
+  --secondary-accent: #008F81;
+  --tertiary-accent: #00403A;
+  --highlight-accent: #9E783C;
+  --bg-dark: #0a0d14;
+  --surface-dark: #0a0d14;
+  --header-bg: #0a0d14;
+  --bg-light: #ffffff;
+  --bg-alt: #f8f9fa;
+  --card-bg: rgba(20, 27, 38, 0.75);
+  --text-primary: #f8fafc;
+  --text-dark: #111827;
+  --text-secondary: #94a3b8;
+  --text-muted: #6b7280;
+  --border-subtle: rgba(158, 120, 60, 0.25);
+  --border-light: #e5e7eb;
+  --glass-bg: rgba(10, 13, 20, 0.92);
+  --font-heading: 'Fraunces', serif;
+  --font-body: 'Poppins', sans-serif;
+  --font-script: 'Fraunces', serif;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  width: 100%;
+  scroll-behavior: smooth;
+}
+
+body {
+  width: 100%;
+  min-height: 100vh;
+  overflow-x: clip;
+  background-color: var(--bg-dark);
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  letter-spacing: 0.5px;
+  color: var(--text-primary);
+  line-height: 1.2;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-dark);
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(158, 120, 60, 0.3);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--primary-accent);
+}
+
+/* Responsive Containers */
+.container {
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 0 1rem;
+  }
+}
+
+/* Glassmorphism Panel */
+.glass-panel {
+  background: var(--card-bg);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--border-subtle);
+  border-radius: 12px;
+  box-shadow: 0 12px 32px 0 rgba(0, 0, 0, 0.37);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.glass-panel:hover {
+  border-color: rgba(158, 120, 60, 0.5);
+  box-shadow: 0 16px 40px 0 rgba(0, 0, 0, 0.5), 0 0 20px rgba(158, 120, 60, 0.15);
+}
+
+/* Buttons */
+.btn-primary {
+  background: var(--primary-accent-gradient);
+  color: #0a0d14;
+  font-weight: 700;
+  font-family: var(--font-body);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  padding: 0.85rem 1.75rem;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 0.85rem;
+  box-shadow: 0 4px 14px rgba(158, 120, 60, 0.3);
+  transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(158, 120, 60, 0.5);
+}
+
+.btn-outline {
+  background: transparent;
+  color: var(--text-primary);
+  border: 1px solid var(--border-subtle);
+  font-weight: 600;
+  font-family: var(--font-body);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  padding: 0.85rem 1.75rem;
+  border-radius: 6px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 0.85rem;
+  transition: all 0.3s ease;
+}
+
+.btn-outline:hover {
+  border-color: var(--primary-accent);
+  color: var(--primary-accent);
+  background: rgba(158, 120, 60, 0.08);
+}
+
+/* Badges */
+.badge-accent {
+  background: rgba(158, 120, 60, 0.15);
+  color: var(--primary-accent);
+  border: 1px solid var(--border-subtle);
+  padding: 0.25rem 0.75rem;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+}
+
+.badge-status {
+  background: rgba(52, 211, 153, 0.15);
+  color: #34d399;
+  border: 1px solid rgba(52, 211, 153, 0.3);
+  padding: 0.25rem 0.75rem;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+/* Modal Overlay */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(8px);
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1.5rem;
+  animation: fadeIn 0.25s ease-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.97); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+/* Form Controls */
+.form-input {
+  width: 100%;
+  background: rgba(18, 24, 36, 0.8);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-primary);
+  padding: 0.75rem 1rem;
+  border-radius: 6px;
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.form-input:focus {
+  border-color: var(--primary-accent);
+  box-shadow: 0 0 0 3px rgba(158, 120, 60, 0.15);
+}
+
+/* Responsive Utilities */
+@media (max-width: 992px) {
+  .desktop-only {
+    display: none !important;
+  }
+}
+
+/* Script Accent Font — reserved for sparing hero-tagline / emotive-headline
+   moments only (e.g. "Life is Beautiful"). Not for dense headings. */
+.font-script {
+  font-family: var(--font-script);
+  font-style: italic;
+  font-weight: 400;
+  letter-spacing: 0.5px;
+  line-height: 1.3;
+}
