@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
 import type { CityInfo } from '../types';
-import { Calendar, Download, ExternalLink, Check } from 'lucide-react';
+import { Calendar } from 'lucide-react';
 
 interface MediaCentrePageProps {
   cityInfo: CityInfo;
@@ -8,11 +8,9 @@ interface MediaCentrePageProps {
 }
 
 export const MediaCentrePage: React.FC<MediaCentrePageProps> = () => {
-  const [pressDownloaded, setPressDownloaded] = useState(false);
-
   const mediaItems = [
     {
-      title: 'Reviva Reports Record Sales Booking of ₹1,850 Cr in Q3',
+      title: 'Reviva Reports Record Sales Booking in Q3',
       date: 'January 15, 2026',
       cat: 'Financial Announcement',
       image: '/media/images/office-lounge-plants.jpg',
@@ -26,14 +24,7 @@ export const MediaCentrePage: React.FC<MediaCentrePageProps> = () => {
       summary: 'A mega integrated community featuring 80% open green space, world-class clubhouses, and eco-conscious precision.'
     },
     {
-      title: 'Reviva Wins "Best Eco-Conscious Developer of the Year" at National Real Estate Awards',
-      date: 'November 22, 2025',
-      cat: 'Awards & Recognition',
-      image: '/media/images/award-trophies.jpg',
-      summary: 'Acknowledging decades of uncompromising quality, sustainable design, and zero-defect customer handovers.'
-    },
-    {
-      title: 'Reviva Expands Eco-Friendly Precast Construction Footprint in Bengaluru & NCR',
+      title: 'Reviva Expands Eco-Friendly Precast Construction Footprint in Bengaluru',
       date: 'October 05, 2025',
       cat: 'Sustainability',
       image: '/media/images/plant-atrium-corridor.jpg',
@@ -90,27 +81,6 @@ export const MediaCentrePage: React.FC<MediaCentrePageProps> = () => {
               Latest corporate updates, financial statements, and editorial features.
             </p>
           </div>
-
-          <button
-            className="btn-primary btn-magnetic"
-            onClick={() => { setPressDownloaded(true); setTimeout(() => setPressDownloaded(false), 3000); }}
-            style={{
-              padding: '0.75rem 1.25rem',
-              background: '#9E783C',
-              color: '#ffffff',
-              border: 'none',
-              borderRadius: '6px',
-              fontWeight: 700,
-              fontSize: '0.85rem',
-              cursor: 'pointer',
-              display: 'flex',
-              alignItems: 'center',
-              gap: '0.5rem',
-            }}
-          >
-            {pressDownloaded ? <Check size={16} /> : <Download size={16} />}
-            <span>{pressDownloaded ? 'Press Kit Downloaded!' : 'DOWNLOAD MEDIA PRESS KIT'}</span>
-          </button>
         </div>
 
         {/* Structured Photo + Info Grid */}
@@ -156,12 +126,8 @@ export const MediaCentrePage: React.FC<MediaCentrePageProps> = () => {
                 </div>
               </div>
 
-              <div style={{ padding: '1rem 1.5rem 1.5rem 1.5rem', borderTop: '1px solid #f1f5f9', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+              <div style={{ padding: '1rem 1.5rem 1.5rem 1.5rem', borderTop: '1px solid #f1f5f9' }}>
                 <span style={{ fontSize: '0.8rem', color: '#94a3b8' }}>Press Release</span>
-                <span className="link-glow" style={{ color: '#9E783C', fontSize: '0.85rem', fontWeight: 700, display: 'flex', alignItems: 'center', gap: '0.3rem', cursor: 'pointer' }}>
-                  <span>Read Article</span>
-                  <ExternalLink size={14} />
-                </span>
               </div>
             </div>
           ))}

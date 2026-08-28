@@ -1,10 +1,38 @@
-import React from 'react';
+import React, { useRef } from 'react';
+import { gsap, useGSAP, Draggable } from '../lib/gsapSetup';
 
 interface PassionAtWorkProps {
   onReadMore: () => void;
 }
 
 export const PassionAtWork: React.FC<PassionAtWorkProps> = ({ onReadMore }) => {
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  useGSAP(() => {
+    if (containerRef.current) {
+      Draggable.create(containerRef.current, {
+        type: 'x,y',
+        edgeResistance: 0.5,
+        cursor: 'grab',
+        activeCursor: 'grabbing',
+        onDragStart: function() {
+          gsap.to('.drag-badge', { opacity: 0, scale: 0.8, duration: 0.25 });
+        },
+        onDragEnd: function () {
+          gsap.to(this.target, {
+            x: 0,
+            y: 0,
+            duration: 1.2,
+            ease: 'elastic.out(1, 0.55)',
+            onComplete: () => {
+              gsap.to('.drag-badge', { opacity: 1, scale: 1, duration: 0.25 });
+            }
+          });
+        },
+      });
+    }
+  }, { scope: containerRef });
+
   return (
     <section 
       id="passion" 
@@ -28,17 +56,19 @@ export const PassionAtWork: React.FC<PassionAtWorkProps> = ({ onReadMore }) => {
           }}
         >
           {/* Left Column: Image */}
-          <div className="reveal-left">
+          <div className="reveal-left" style={{ overflow: 'visible' }}>
             <div
+              ref={containerRef}
               style={{
                 position: 'relative',
                 borderRadius: '8px',
-                overflow: 'hidden',
+                touchAction: 'none',
+                boxShadow: '0 15px 35px rgba(0,0,0,0.1)',
+                userSelect: 'none',
               }}
             >
               <img
-                className="flip-parallax"
-                src="/media/images/reviva-building-with-nature.jpg"
+                src="/media/images/reviva-building-with-nature-custom.png"
                 alt="Our Nature is truly down to earth - Reviva Projects building in harmony with lush greenery"
                 style={{
                   width: '100%',
@@ -47,9 +77,47 @@ export const PassionAtWork: React.FC<PassionAtWorkProps> = ({ onReadMore }) => {
                   display: 'block',
                   objectFit: 'cover',
                   borderRadius: '8px',
-                  boxShadow: '0 10px 30px rgba(0,0,0,0.08)',
+                  pointerEvents: 'none',
+                  WebkitUserDrag: 'none',
                 }}
               />
+              
+              {/* Drag Me Indicator */}
+              <div 
+                className="drag-badge"
+                style={{
+                  position: 'absolute',
+                  bottom: '1rem',
+                  right: '1rem',
+                  background: 'rgba(10, 13, 20, 0.75)',
+                  backdropFilter: 'blur(6px)',
+                  border: '1px solid rgba(159, 120, 61, 0.35)',
+                  padding: '0.4rem 0.85rem',
+                  borderRadius: '20px',
+                  color: '#ffffff',
+                  fontSize: '0.72rem',
+                  fontWeight: 600,
+                  letterSpacing: '0.1em',
+                  pointerEvents: 'none',
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '0.4rem',
+                  boxShadow: '0 4px 12px rgba(0,0,0,0.25)',
+                  transition: 'opacity 0.3s ease, transform 0.3s ease',
+                }}
+              >
+                <span 
+                  style={{ 
+                    display: 'inline-block', 
+                    width: '6px', 
+                    height: '6px', 
+                    borderRadius: '50%', 
+                    background: '#9F783D', 
+                    boxShadow: '0 0 8px #9F783D'
+                  }} 
+                />
+                DRAG ME
+              </div>
             </div>
           </div>
 

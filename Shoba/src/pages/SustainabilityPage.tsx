@@ -207,7 +207,6 @@ export const SustainabilityPage: React.FC<SustainabilityPageProps> = () => {
           </div>
         </div>
       </div>
-
     </div>
   );
 };
