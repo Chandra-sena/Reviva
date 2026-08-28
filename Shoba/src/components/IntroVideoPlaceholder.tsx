@@ -1,11 +1,7 @@
 import React, { useRef } from 'react';
 import { gsap, useGSAP } from '../lib/gsapSetup';
 
-interface IntroVideoPlaceholderProps {
-  onExplore: () => void;
-}
-
-export const IntroVideoPlaceholder: React.FC<IntroVideoPlaceholderProps> = ({ onExplore }) => {
+export const IntroVideoPlaceholder: React.FC = () => {
   const sectionRef = useRef<HTMLElement>(null);
   const parallaxRef = useRef<HTMLDivElement>(null);
 

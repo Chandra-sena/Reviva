@@ -1,5 +1,5 @@
 export type PropertyType = 'Apartment' | 'Villa' | 'Row House' | 'Plot' | 'Commercial';
-export type ProjectStatus = 'Ready to Move' | 'Under Construction' | 'Upcoming' | 'Delivered' | 'New Launch';
+export type ProjectStatus = 'Ready to Move' | 'Under Construction' | 'Upcoming' | 'Delivered' | 'New Launch' | 'Yet to be Launched' | 'Launched';
 
 export interface Property {
   id: string;

@@ -230,7 +230,7 @@ export function App() {
     return (
       <>
         {/* 1. Hero Banner */}
-        <IntroVideoPlaceholder onExplore={() => navigate('/properties')} />
+        <IntroVideoPlaceholder />
 
         {/* 2. REVIVA PHILOSOPHY Section */}
         <PassionAtWork onReadMore={() => navigate('/who-we-are')} />

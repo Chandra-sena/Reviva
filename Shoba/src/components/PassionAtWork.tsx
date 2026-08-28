@@ -78,7 +78,6 @@ export const PassionAtWork: React.FC<PassionAtWorkProps> = ({ onReadMore }) => {
                   objectFit: 'cover',
                   borderRadius: '8px',
                   pointerEvents: 'none',
-                  WebkitUserDrag: 'none',
                 }}
               />
               
