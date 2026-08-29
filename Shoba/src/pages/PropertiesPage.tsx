@@ -16,8 +16,8 @@ export const PropertiesPage: React.FC<PropertiesPageProps> = ({
   onNavigate,
   onBookVisit,
 }) => {
-  // Keep only the top row projects (first 3)
-  const topRowProperties = useMemo(() => properties.slice(0, 3), [properties]);
+  // Keep the active featured projects shown on the projects catalog (including Muthanallur)
+  const topRowProperties = useMemo(() => properties.slice(0, 4), [properties]);
 
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedStatus, setSelectedStatus] = useState<string>('All');
@@ -144,19 +144,19 @@ export const PropertiesPage: React.FC<PropertiesPageProps> = ({
           }}
         />
 
-        <span className="hero-reveal" style={{ position: 'relative', zIndex: 1, color: '#e5b869', fontSize: '0.78rem', fontWeight: 700, letterSpacing: '3px', textTransform: 'uppercase', marginBottom: '0.6rem', textShadow: '0 2px 8px rgba(0,0,0,0.6)' }}>
-          REVIVA PROJECTS Portfolio
+        <span className="hero-reveal" style={{ position: 'relative', zIndex: 1, fontFamily: 'var(--font-accent)', color: '#e5b869', fontSize: '0.78rem', fontWeight: 600, letterSpacing: '2.5px', textTransform: 'uppercase', marginBottom: '0.6rem', textShadow: '0 2px 8px rgba(0,0,0,0.6)' }}>
+          REVIVA PROJECTS PORTFOLIO
         </span>
         <h1
           className="hero-reveal hero-reveal-delay-1 gold-shimmer-text"
           style={{
             position: 'relative',
             zIndex: 1,
-            fontFamily: 'var(--font-heading, "Fraunces", serif)',
+            fontFamily: 'var(--font-heading)',
             fontSize: 'clamp(2.5rem, 5vw, 4rem)',
             fontWeight: 700,
             filter: 'drop-shadow(0 4px 20px rgba(0,0,0,0.85))',
-            letterSpacing: '0.02em',
+            letterSpacing: '-0.02em',
             marginBottom: '0.75rem',
           }}
         >
@@ -295,7 +295,13 @@ export const PropertiesPage: React.FC<PropertiesPageProps> = ({
               <PropertyCard 
                 key={property.id} 
                 property={property} 
-                onSelectProperty={(p) => onNavigate(`/project/${p.id}/`)}
+                onSelectProperty={(p) => {
+                  if (p.redirectToEnquiry) {
+                    onBookVisit(p);
+                  } else {
+                    onNavigate(`/project/${p.id}/`);
+                  }
+                }}
                 onBookVisit={onBookVisit}
               />
             ))}

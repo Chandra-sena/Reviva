@@ -23,6 +23,7 @@ export interface Property {
   brochureUrl?: string;
   masterPlanUrl?: string;
   floorPlanUrl?: string;
+  redirectToEnquiry?: boolean;
 }
 
 export interface DeliveredProject {

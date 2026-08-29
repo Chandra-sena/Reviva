@@ -28,15 +28,24 @@ export const BlogListPage: React.FC<BlogListPageProps> = ({ blogs, onNavigate })
     <div className="page-enter" style={{ background: '#ffffff', color: '#111827', minHeight: '100vh', paddingBottom: '5rem' }}>
 
       {/* Page Header */}
-      <section style={{ background: '#f8fafc', borderBottom: '1px solid #e2e8f0', padding: '7.5rem 0 3.5rem 0', textAlign: 'center', position: 'relative', overflow: 'hidden' }}>
+      <section
+        style={{
+          background: 'linear-gradient(180deg, rgba(13, 22, 22, 0.88) 0%, rgba(13, 22, 22, 0.72) 100%), url("/media/images/reviva-insights.jpg") center/cover no-repeat',
+          padding: '7.5rem 0 4rem 0',
+          color: '#ffffff',
+          textAlign: 'center',
+          position: 'relative',
+          overflow: 'hidden',
+        }}
+      >
         <div className="container" style={{ position: 'relative', zIndex: 1 }}>
-          <span className="hero-reveal" style={{ color: '#9E783C', fontSize: '1.25rem', fontWeight: 600, letterSpacing: '4px', textTransform: 'uppercase', display: 'inline-block', marginBottom: '0.5rem' }}>
+          <span className="hero-reveal" style={{ color: '#e5b869', fontSize: '0.85rem', fontWeight: 700, letterSpacing: '3px', textTransform: 'uppercase', display: 'inline-block', marginBottom: '0.5rem' }}>
             REAL ESTATE LIBRARY
           </span>
-          <h1 className="hero-reveal hero-reveal-delay-1 gold-shimmer-text" style={{ fontFamily: 'var(--font-heading)', fontSize: 'clamp(1.5rem, 2.5vw, 2.1rem)', fontWeight: 500, marginTop: '0.4rem', letterSpacing: '0.5px' }}>
+          <h1 className="hero-reveal hero-reveal-delay-1 gold-shimmer-text" style={{ fontFamily: 'var(--font-heading)', fontSize: 'clamp(2.2rem, 4vw, 3.2rem)', fontWeight: 700, marginTop: '0.4rem', letterSpacing: '0.5px' }}>
             Insights, Guides & Market Trends
           </h1>
-          <p className="hero-reveal hero-reveal-delay-2" style={{ color: '#64748b', fontSize: '0.95rem', maxWidth: '650px', margin: '0.75rem auto 0 auto', fontWeight: 300 }}>
+          <p className="hero-reveal hero-reveal-delay-2" style={{ color: '#cbd5e1', fontSize: '1.05rem', maxWidth: '650px', margin: '0.75rem auto 0 auto', fontWeight: 400 }}>
             Expert articles to guide your real estate journey and homeownership decisions.
           </p>
         </div>

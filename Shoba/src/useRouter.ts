@@ -52,10 +52,12 @@ export function useRouter() {
     window.history.pushState({}, '', target);
     setRoute(parsePath(target));
     
-    // Immediate hard scroll reset to top
-    window.scrollTo({ top: 0, left: 0, behavior: 'instant' as ScrollBehavior });
-    document.documentElement.scrollTop = 0;
-    document.body.scrollTop = 0;
+    // Immediate scroll reset unless targeting an in-page section like awards
+    if (!target.includes('/awards') && !target.includes('#awards')) {
+      window.scrollTo({ top: 0, left: 0, behavior: 'instant' as ScrollBehavior });
+      document.documentElement.scrollTop = 0;
+      document.body.scrollTop = 0;
+    }
   };
 
   return { route, navigate };

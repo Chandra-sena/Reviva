@@ -9,7 +9,7 @@ export const WhatWeDoSection: React.FC<WhatWeDoSectionProps> = ({ onNavigate }) 
     {
       title: 'Innovation in Design',
       desc: 'Design is at the heart of everything we create. Our thoughtfully curated spaces are a seamless blend of innovation, functionality, and aesthetics',
-      img: '/media/images/architect-sketching-building.jpg',
+      img: '/media/images/reviva-innovationdesign.jpg',
       imageLeft: true,
     },
     {
@@ -32,11 +32,11 @@ export const WhatWeDoSection: React.FC<WhatWeDoSectionProps> = ({ onNavigate }) 
         
         {/* Section Header */}
         <div className="reveal-scale" style={{ textAlign: 'center', marginBottom: '4rem' }}>
-          <h2 style={{ fontFamily: 'var(--font-heading)', fontSize: '2.25rem', fontWeight: 600, color: '#00433D', letterSpacing: '2px', textTransform: 'uppercase', marginBottom: '0.75rem' }}>
+          <h2 style={{ fontFamily: 'var(--font-accent)', fontSize: '1.85rem', fontWeight: 700, color: '#00433D', letterSpacing: '3px', textTransform: 'uppercase', marginBottom: '0.75rem' }}>
             OUR PROMISE
           </h2>
           <div style={{ width: '80px', height: '3px', background: 'linear-gradient(90deg, #9F783D 0%, #00433D 100%)', margin: '0 auto 1.25rem auto' }} />
-          <p style={{ fontSize: '1.2rem', color: '#9F783D', maxWidth: '720px', margin: '0 auto', lineHeight: 1.5 }}>
+          <p style={{ fontFamily: 'var(--font-heading)', fontSize: '1.25rem', fontWeight: 500, color: '#9F783D', maxWidth: '720px', margin: '0 auto', lineHeight: 1.45 }}>
             We transform spaces with designs with commitment to enhancing lives in every aspect
           </p>
         </div>
@@ -55,22 +55,22 @@ export const WhatWeDoSection: React.FC<WhatWeDoSectionProps> = ({ onNavigate }) 
             >
               {/* Image Block */}
               <div className={item.imageLeft ? 'reveal-left' : 'reveal-right'} style={{ order: item.imageLeft ? 1 : 2 }}>
-                <div className="card-tilt" style={{ borderRadius: '8px', overflow: 'hidden' }}>
+                <div className="card-tilt" style={{ borderRadius: '12px', overflow: 'hidden', background: 'transparent', boxShadow: 'none' }}>
                   <img
                     className="flip-parallax"
                     src={item.img}
                     alt={item.title}
-                    style={{ width: '100%', height: '320px', objectFit: 'cover', borderRadius: '8px', display: 'block' }}
+                    style={{ width: '100%', height: '340px', objectFit: 'cover', borderRadius: '12px', display: 'block', background: 'transparent', boxShadow: '0 14px 32px rgba(0,0,0,0.12)' }}
                   />
                 </div>
               </div>
 
               {/* Text Block */}
               <div className={item.imageLeft ? 'reveal-right' : 'reveal-left'} style={{ order: item.imageLeft ? 2 : 1, maxWidth: '520px' }}>
-                <h3 style={{ fontFamily: 'var(--font-heading)', fontSize: '1.85rem', fontWeight: 600, color: '#9F783D', marginBottom: '1rem' }}>
+                <h3 style={{ fontFamily: 'var(--font-heading)', fontSize: '1.75rem', fontWeight: 600, letterSpacing: '-0.01em', color: '#9F783D', marginBottom: '1rem' }}>
                   {item.title}
                 </h3>
-                <p style={{ fontSize: '1.05rem', color: '#4b5563', lineHeight: 1.7, marginBottom: '1.5rem' }}>
+                <p style={{ fontFamily: 'var(--font-body)', fontSize: '1.02rem', color: '#4b5563', lineHeight: 1.7, marginBottom: '1.5rem' }}>
                   {item.desc}
                 </p>
                 <button
@@ -80,9 +80,12 @@ export const WhatWeDoSection: React.FC<WhatWeDoSectionProps> = ({ onNavigate }) 
                     background: 'transparent',
                     border: '1.5px solid #9F783D',
                     color: '#9F783D',
-                    padding: '0.55rem 1.5rem',
-                    fontSize: '0.85rem',
+                    padding: '0.6rem 1.6rem',
+                    fontFamily: 'var(--font-button)',
+                    fontSize: '0.78rem',
                     fontWeight: 600,
+                    letterSpacing: '2px',
+                    textTransform: 'uppercase',
                     borderRadius: '50px',
                     cursor: 'pointer',
                   }}

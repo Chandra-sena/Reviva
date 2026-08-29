@@ -71,10 +71,10 @@ export const FeaturedCarousel: React.FC<FeaturedCarouselProps> = ({ onSelectProj
       <div className="container reveal" style={{ position: 'relative', zIndex: 1 }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: '1.5rem' }}>
           <div>
-            <span style={{ color: 'var(--primary-accent)', fontSize: '0.8rem', fontWeight: 700, letterSpacing: '2px', textTransform: 'uppercase' }}>
+            <span style={{ fontFamily: 'var(--font-accent)', color: 'var(--primary-accent)', fontSize: '0.78rem', fontWeight: 600, letterSpacing: '2.5px', textTransform: 'uppercase' }}>
               FEATURED DEVELOPMENTS
             </span>
-            <h2 style={{ fontFamily: 'var(--font-heading)', fontSize: 'clamp(1.8rem, 3vw, 2.4rem)', color: '#ffffff', marginTop: '0.25rem' }}>
+            <h2 style={{ fontFamily: 'var(--font-heading)', fontSize: 'clamp(1.8rem, 3vw, 2.4rem)', fontWeight: 600, color: '#ffffff', marginTop: '0.25rem' }}>
               Iconic Banners & Residences
             </h2>
           </div>
@@ -163,13 +163,13 @@ export const FeaturedCarousel: React.FC<FeaturedCarouselProps> = ({ onSelectProj
             }}
           >
             <div>
-              <span style={{ background: 'var(--primary-accent)', color: '#000', fontSize: '0.75rem', fontWeight: 700, padding: '0.2rem 0.6rem', borderRadius: '3px', textTransform: 'uppercase' }}>
+              <span style={{ fontFamily: 'var(--font-accent)', background: 'var(--primary-accent)', color: '#ffffff', fontSize: '0.72rem', fontWeight: 600, letterSpacing: '2px', padding: '0.25rem 0.75rem', borderRadius: '3px', textTransform: 'uppercase' }}>
                 FEATURED
               </span>
-              <h3 style={{ fontSize: '1.6rem', color: '#fff', margin: '0.4rem 0 0.2rem 0', fontFamily: 'var(--font-heading)' }}>
+              <h3 style={{ fontSize: '1.6rem', fontWeight: 600, color: '#fff', margin: '0.4rem 0 0.2rem 0', fontFamily: 'var(--font-heading)' }}>
                 {activeItem.title}
               </h3>
-              <p style={{ color: 'rgba(255,255,255,0.7)', fontSize: '0.9rem', margin: 0 }}>
+              <p style={{ fontFamily: 'var(--font-body)', color: 'rgba(255,255,255,0.7)', fontSize: '0.9rem', margin: 0 }}>
                 {activeItem.location}
               </p>
             </div>
@@ -178,12 +178,14 @@ export const FeaturedCarousel: React.FC<FeaturedCarouselProps> = ({ onSelectProj
               className="btn-primary btn-magnetic"
               style={{
                 background: 'var(--primary-accent)',
-                color: '#000',
+                color: '#ffffff',
                 border: 'none',
-                padding: '0.6rem 1.25rem',
-                borderRadius: '4px',
-                fontSize: '0.8rem',
-                fontWeight: 700,
+                padding: '0.65rem 1.4rem',
+                borderRadius: '50px',
+                fontFamily: 'var(--font-button)',
+                fontSize: '0.78rem',
+                fontWeight: 600,
+                letterSpacing: '2px',
                 cursor: 'pointer',
               }}
             >

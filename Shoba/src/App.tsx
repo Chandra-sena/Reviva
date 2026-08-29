@@ -111,10 +111,11 @@ export function App() {
       );
     }
 
-    if (path.startsWith('/showcase')) {
+    if (path.startsWith('/showcase') || path.startsWith('/awards') || path.startsWith('/journey')) {
       return (
         <ShowcasePage
           cityInfo={cityInfo}
+          initialSection={path.includes('award') ? 'awards' : 'journey'}
         />
       );
     }

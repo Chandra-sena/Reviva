@@ -47,7 +47,7 @@ export const INITIAL_PROPERTIES: Property[] = [
     price: 145,
     priceDisplay: 'Price on Request',
     bhk: ['2 BHK', '3 BHK', '4 BHK'],
-    areaSqFt: '1350 - 2200 Sq. Ft.',
+    areaSqFt: '1100 - 2900 Sq. Ft.',
     image: '/media/images/reviva-trinity-lifescape.jpg',
     gallery: [
       '/media/images/reviva-trinity-lifescape.jpg',
@@ -66,7 +66,10 @@ export const INITIAL_PROPERTIES: Property[] = [
     possessionDate: 'Dec 2028',
     description: 'Residences at Reviva Trinity Lifescape are positioned to overlook gardens, tree corridors, or landscaped courts, ensuring that every home has a strong visual connection to nature.',
     featured: true,
-    highlightTag: 'Nature-Inspired Living'
+    highlightTag: 'Nature-Inspired Living',
+    brochureUrl: '/media/documents/reviva-vintage-valley-digital-brochure.pdf',
+    masterPlanUrl: '/media/documents/masterplan-my.pdf',
+    floorPlanUrl: '/media/documents/floorplan-my.pdf'
   },
   {
     id: 'vintage-valley',
@@ -99,9 +102,9 @@ export const INITIAL_PROPERTIES: Property[] = [
     description: 'Reviva Vintage Valley is Reviva’s maiden eco-conscious residential venture in Whitefield, located at Sy No 13, Indian Gas Godown Road, Channasandra, Kadugodi, Bengaluru – 560067. Offering 2.5 & 3 BHK residences designed for sustainable living.',
     featured: true,
     highlightTag: 'Flagship Residential',
-    brochureUrl: '/media/documents/reviva-vintage-valley-digital-brochure.pdf',
-    masterPlanUrl: '/media/documents/reviva-vintage-valley-master-plan.pdf',
-    floorPlanUrl: '/media/documents/reviva-vintage-valley-floor-plan.pdf'
+    brochureUrl: '/media/documents/Reviva-Digital-Brochure.pdf',
+    masterPlanUrl: '/media/documents/Master-Plan.pdf',
+    floorPlanUrl: '/media/documents/Floor-Plan.pdf'
   },
   {
     id: 'reviva-farms',
@@ -109,29 +112,55 @@ export const INITIAL_PROPERTIES: Property[] = [
     location: 'Off Bengaluru Suburbs, Bengaluru',
     subLocation: 'Bengaluru',
     type: 'Villa',
-    status: 'Yet to be Launched',
-    price: 95,
-    priceDisplay: 'Price on Request',
-    bhk: ['Plots & Villas', 'Farm Houses'],
-    areaSqFt: '2400 - 5000 Sq. Ft.',
+    status: 'Upcoming',
+    price: 0,
+    priceDisplay: 'Coming Soon',
+    bhk: [],
+    areaSqFt: '',
     image: '/media/images/reviva-farms.jpg',
     gallery: [
       '/media/images/reviva-farms.jpg',
       '/media/images/reviva-building-with-nature-custom.png',
       '/media/images/reviva-harmony-with-nature.jpg'
     ],
-    amenities: [
-      'Self-sustaining Lifestyles',
-      'Urban Farming Plots',
-      'Eco Farm Houses',
-      'Rainwater Harvesting',
-      'Solar Powered Infrastructure'
-    ],
-    reraNumber: 'PRM/KA/RERA/1251/446/FARMS/001',
-    possessionDate: 'Dec 2026',
-    description: 'Explore self-sustaining lifestyles with Reviva Farms. Featuring eco-living plots, luxury villas, and farm houses designed with urban farming and natural habitats.',
+    amenities: [],
+    reraNumber: '',
+    possessionDate: 'Coming Soon',
+    description: 'Explore self-sustaining lifestyles with Reviva Farms. Featuring eco-living plots, luxury villas, and farm houses designed with urban farming. Register your interest for early access.',
     featured: true,
-    highlightTag: 'Eco Farm Houses & Plots'
+    highlightTag: 'Coming Soon',
+    brochureUrl: '/media/documents/reviva-vintage-valley-digital-brochure.pdf',
+    masterPlanUrl: '/media/documents/masterplan-my.pdf',
+    floorPlanUrl: '/media/documents/floorplan-my.pdf',
+    redirectToEnquiry: true
+  },
+  {
+    id: 'reviva-muthanallur',
+    name: 'Reviva Muthanallur',
+    location: 'Muthanallur, Bangalore',
+    subLocation: 'Bengaluru',
+    type: 'Apartment',
+    status: 'Upcoming',
+    price: 0,
+    priceDisplay: 'Coming Soon',
+    bhk: [],
+    areaSqFt: '',
+    image: '/media/images/modern-architecture-facade.jpg',
+    gallery: [
+      '/media/images/modern-architecture-facade.jpg',
+      '/media/images/green-building-exterior.jpg',
+      '/media/images/plant-atrium-corridor.jpg'
+    ],
+    amenities: [],
+    reraNumber: '',
+    possessionDate: 'Coming Soon',
+    description: 'Upcoming landmark eco-living residential project in Muthanallur, Bangalore.',
+    featured: true,
+    highlightTag: 'Coming Soon',
+    brochureUrl: '/media/documents/reviva-vintage-valley-digital-brochure.pdf',
+    masterPlanUrl: '/media/documents/masterplan-my.pdf',
+    floorPlanUrl: '/media/documents/floorplan-my.pdf',
+    redirectToEnquiry: true
   },
   {
     id: 'sobha-oneworld',

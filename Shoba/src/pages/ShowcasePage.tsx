@@ -1,18 +1,31 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import type { CityInfo } from '../types';
 import { Award, Trophy, Star } from 'lucide-react';
 
 interface ShowcasePageProps {
   cityInfo: CityInfo;
+  initialSection?: 'awards' | 'journey';
 }
 
-export const ShowcasePage: React.FC<ShowcasePageProps> = () => {
+export const ShowcasePage: React.FC<ShowcasePageProps> = ({ initialSection }) => {
+  useEffect(() => {
+    const isAwards = initialSection === 'awards' || window.location.hash === '#awards' || window.location.pathname.includes('/awards');
+    if (isAwards) {
+      const timer = setTimeout(() => {
+        const awardsEl = document.getElementById('awards');
+        if (awardsEl) {
+          awardsEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      }, 150);
+      return () => clearTimeout(timer);
+    }
+  }, [initialSection]);
   return (
     <div className="page-enter" style={{ background: '#ffffff', color: '#111827' }}>
       {/* Hero Banner */}
       <section
         style={{
-          background: 'linear-gradient(180deg, rgba(13, 22, 22, 0.9) 0%, rgba(13, 22, 22, 0.75) 100%), url("/media/images/legacy-heritage-hero.jpg") center/cover no-repeat',
+          background: 'linear-gradient(180deg, rgba(13, 22, 22, 0.9) 0%, rgba(13, 22, 22, 0.75) 100%), url("/media/images/reviva-journey.jpg") center/cover no-repeat',
           padding: '6rem 0 4rem 0',
           color: '#ffffff',
           textAlign: 'center',

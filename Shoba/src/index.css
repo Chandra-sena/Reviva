@@ -1,12 +1,10 @@
-/* Matched to the live revivaprojects.com site: it renders headings and body
-   copy in 'SegoeUI' (a self-hosted @font-face there) and links in 'Noto Sans'.
-   'Segoe UI' itself is a Microsoft system font (not distributable/embeddable),
-   so it's referenced as a system-font-stack entry — native on Windows, and
-   falls through to each OS's closest equivalent elsewhere, same as the source
-   site's own fallback chain. Noto Sans is a free Google Font, loaded below. */
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@300;400;500;600;700&display=swap');
-/* Playfair Display: elegant editorial serif, used sparingly for photo-overlay quote moments only */
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@1,500;1,600&display=swap');
+/* Matched to the live revivaprojects.com site:
+   - Primary & Headings: 'Noto Sans' (600/700 weight, modern clean geometric aesthetic)
+   - Eyebrows, Badges, Navigation & Buttons: 'Montserrat' (uppercase, elegant tracking)
+   - Body & Text: 'Noto Sans' / 'Segoe UI' (400 weight, comfortable readability)
+   - Editorial & Quotes: 'Playfair Display' (refined luxury serif)
+*/
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,600&family=Noto+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,600&family=Playfair+Display:ital,wght@1,500;1,600&family=Roboto:wght@400;500;700&display=swap');
 
 :root {
   /* Reviva Brand Design System Tokens */
@@ -32,18 +30,22 @@
   --glass-bg: rgba(255, 255, 255, 0.95);
   
   /* Matched to revivaprojects.com live site typography */
-  --font-heading: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, 'Helvetica Neue', Arial, sans-serif;
-  --font-body: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, 'Helvetica Neue', Arial, sans-serif;
-  --font-script: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, 'Helvetica Neue', Arial, sans-serif;
+  --font-heading: 'Noto Sans', 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, 'Helvetica Neue', Arial, sans-serif;
+  --font-body: 'Noto Sans', 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, 'Helvetica Neue', Arial, sans-serif;
+  --font-accent: 'Montserrat', 'Noto Sans', -apple-system, BlinkMacSystemFont, Roboto, 'Helvetica Neue', Arial, sans-serif;
+  --font-nav: 'Montserrat', 'Noto Sans', -apple-system, BlinkMacSystemFont, Roboto, 'Helvetica Neue', Arial, sans-serif;
+  --font-button: 'Montserrat', 'Noto Sans', -apple-system, BlinkMacSystemFont, Roboto, 'Helvetica Neue', Arial, sans-serif;
+  --font-serif: 'Playfair Display', Georgia, serif;
   --font-link: 'Noto Sans', -apple-system, BlinkMacSystemFont, Roboto, 'Helvetica Neue', Arial, sans-serif;
 
   /* Typography Scale */
-  --font-weight-body: 300;
-  --font-weight-ui: 400;
-  --font-weight-emphasis: 500;
-  --letter-spacing-body: 0.02em;
-  --letter-spacing-heading: 0.04em;
-  --letter-spacing-caps: 0.12em;
+  --font-weight-body: 400;
+  --font-weight-ui: 500;
+  --font-weight-heading: 600;
+  --font-weight-emphasis: 600;
+  --letter-spacing-body: 0.01em;
+  --letter-spacing-heading: -0.01em;
+  --letter-spacing-caps: 0.15em;
 }
 
 * {
@@ -157,10 +159,25 @@ h1, h2, h3, h4, h5, h6 {
   font-weight: 600;
   letter-spacing: var(--letter-spacing-heading);
   color: var(--text-primary);
-  line-height: 1.15;
+  line-height: 1.2;
 }
 
-p, span, li, button, a, label, input, textarea {
+h1 {
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+h2 {
+  font-weight: 600;
+  letter-spacing: -0.015em;
+}
+
+h3 {
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+p, span, li, label, input, textarea {
   font-family: var(--font-body);
   font-weight: var(--font-weight-body);
   letter-spacing: var(--letter-spacing-body);
@@ -170,12 +187,24 @@ a {
   font-family: var(--font-link);
 }
 
-/* Small caps / UI labels */
-.ui-label, .label-caps {
-  font-family: var(--font-body);
-  font-weight: var(--font-weight-ui);
-  letter-spacing: var(--letter-spacing-caps);
-  font-size: 0.72rem;
+button {
+  font-family: var(--font-button);
+}
+
+/* Eyebrow texts, Section Subtitles, Badges & Small caps */
+.ui-label, .label-caps, .section-subtitle, .eyebrow-text, .badge {
+  font-family: var(--font-accent);
+  font-weight: 600;
+  letter-spacing: 2.5px;
+  font-size: 0.76rem;
+  text-transform: uppercase;
+}
+
+/* Buttons and CTAs */
+.btn-primary, .btn-gold, .btn-outline, .btn-arrow-hover {
+  font-family: var(--font-button);
+  font-weight: 600;
+  letter-spacing: 2px;
   text-transform: uppercase;
 }
 
@@ -967,15 +996,10 @@ a:focus-visible {
 }
 
 /* ── 12. REDUCE MOTION OVERRIDE (accessibility) ── */
-@media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-  }
-  .reveal, .reveal-left, .reveal-right, .reveal-scale, .stagger-children > *, .masonry-reveal > * {
-    opacity: 1 !important;
-    transform: none !important;
+@media (max-width: 900px) {
+  .gallery-split-layout {
+    grid-template-columns: 1fr !important;
   }
 }
+
 

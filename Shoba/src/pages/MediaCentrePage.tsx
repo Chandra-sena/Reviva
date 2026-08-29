@@ -41,7 +41,7 @@ export const MediaCentrePage: React.FC<MediaCentrePageProps> = () => {
           position: 'relative',
           width: '100%',
           height: '380px',
-          background: `linear-gradient(180deg, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0.7) 100%), url('/media/images/media-centre-hero.jpg') center/cover no-repeat`,
+          background: `linear-gradient(180deg, rgba(0, 0, 0, 0.45) 0%, rgba(0, 0, 0, 0.72) 100%), url('/media/images/reviva-media.jpg') center/cover no-repeat`,
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',

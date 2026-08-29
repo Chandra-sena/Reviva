@@ -127,7 +127,7 @@ export const INITIAL_PROPERTIES: Property[] = [
     price: 145,
     priceDisplay: 'Price on Request',
     bhk: ['2 BHK', '3 BHK', '4 BHK'],
-    areaSqFt: '1350 - 2200 Sq. Ft.',
+    areaSqFt: '1100 - 2900 Sq. Ft.',
     image: '/assets/reviva-trinity-lifescape.jpg',
     gallery: [
       '/assets/reviva-trinity-lifescape.jpg',

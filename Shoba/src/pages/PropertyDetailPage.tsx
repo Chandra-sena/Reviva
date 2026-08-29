@@ -21,6 +21,144 @@ const RESOURCE_LABELS: Record<'brochure' | 'masterplan' | 'floorplan', string> =
   floorplan: 'Floor Plan',
 };
 
+interface GallerySlideInfo {
+  tag: string;
+  title: string;
+  description: string;
+  highlights: { label: string; value: string }[];
+}
+
+const PROPERTY_GALLERY_INFO: Record<string, GallerySlideInfo[]> = {
+  'vintage-valley': [
+    {
+      tag: 'MASTER ELEVATION',
+      title: 'Biophilic Façade & Staggered Planters',
+      description: 'The architectural design blends organic foliage with modern structure, maximizing cross-ventilation, natural sunlight, and panoramic garden perspectives across Whitefield.',
+      highlights: [
+        { label: 'Architecture', value: 'G+4 Eco-Conscious' },
+        { label: 'Green Cover', value: '75% Open Spaces' },
+        { label: 'Location', value: 'Kadugodi, Whitefield' },
+      ],
+    },
+    {
+      tag: 'ROOFTOP OASIS',
+      title: 'Sky Deck & Leisure Pool',
+      description: 'A rooftop retreat featuring an infinity swimming pool, open-air café gazebos, landscaped patios, and cozy relaxation nooks overlooking the tree corridors.',
+      highlights: [
+        { label: 'Rooftop Retreat', value: 'Infinity Leisure Pool' },
+        { label: 'Social Zones', value: 'Gazebos & Patios' },
+        { label: 'Wellness', value: 'Yoga & Sunset Deck' },
+      ],
+    },
+    {
+      tag: 'ECO HARMONY',
+      title: 'Sustainable Living Infrastructure',
+      description: 'Engineered for true eco-living with zero-discharge rainwater harvesting, solar-powered common lighting, and organic waste converter units.',
+      highlights: [
+        { label: 'Water Security', value: 'Rainwater Harvesting' },
+        { label: 'Clean Energy', value: 'Solar Common Grid' },
+        { label: 'Environment', value: 'Zero Carbon Footprint' },
+      ],
+    },
+    {
+      tag: 'LUXURY RESIDENCES',
+      title: 'Spacious 2.5 & 3 BHK Sanctuaries',
+      description: 'Generous layouts featuring floor-to-ceiling glass expanses, expansive living rooms, wide sit-out balconies, and handcrafted interior joinery.',
+      highlights: [
+        { label: 'Configurations', value: '2.5 & 3 BHK Homes' },
+        { label: 'Super Built-up', value: '1280 - 1750 Sq. Ft.' },
+        { label: 'Orientation', value: '100% Vastu Aligned' },
+      ],
+    },
+  ],
+  'reviva-trinity-lifescape': [
+    {
+      tag: 'ICONIC TOWER ELEVATION',
+      title: 'Residences Overlooking Tree Corridors',
+      description: 'Every home at Reviva Trinity Lifescape is positioned to overlook landscaped courts and lush tree corridors, ensuring an intimate visual connection with nature.',
+      highlights: [
+        { label: 'Development', value: 'High-Rise Eco Towers' },
+        { label: 'Unit Sizes', value: '1100 - 2900 Sq. Ft.' },
+        { label: 'Bedrooms', value: '2, 3 & 4 BHK Luxury' },
+      ],
+    },
+    {
+      tag: 'SUSTAINABLE FAÇADE',
+      title: 'Aerodynamic & Biophilic Architecture',
+      description: 'Architectural fins and lush balcony planters reduce solar heat gain while creating an inviting microclimate for residents throughout the year.',
+      highlights: [
+        { label: 'Green Envelope', value: 'Vertical Gardens' },
+        { label: 'Daylight', value: 'Optimal Sun Penetration' },
+        { label: 'Status', value: 'Yet to be Launched' },
+      ],
+    },
+    {
+      tag: 'WORLD-CLASS AMENITIES',
+      title: 'Modern Clubhouse & Grand Pool',
+      description: 'Features a contemporary clubhouse, wellness gymnasium, Olympic-length pool, children’s play courts, and 24/7 security surveillance.',
+      highlights: [
+        { label: 'Clubhouse', value: 'Multi-level Lifestyle' },
+        { label: 'Security', value: '24/7 Monitored Access' },
+        { label: 'Possession', value: 'Dec 2028' },
+      ],
+    },
+  ],
+  'reviva-farms': [
+    {
+      tag: 'SELF-SUSTAINING LIFESTYLES',
+      title: 'Eco Farm Houses & Luxury Plots',
+      description: 'Sprawling farm houses and residential plots designed around organic farming, private orchards, and solar-powered independent infrastructure.',
+      highlights: [
+        { label: 'Plot Areas', value: '2400 - 5000 Sq. Ft.' },
+        { label: 'Typology', value: 'Villas & Farm Plots' },
+        { label: 'Status', value: 'Coming Soon' },
+      ],
+    },
+    {
+      tag: 'URBAN FARMING',
+      title: 'Harvest Your Own Organic Living',
+      description: 'Dedicated farming plots with rich fertile soil, drip irrigation, and community agricultural experts supporting self-sustaining harvests.',
+      highlights: [
+        { label: 'Living Concept', value: 'Farm-to-Table' },
+        { label: 'Water System', value: 'Dedicated Harvesting' },
+        { label: 'Suburbs', value: 'Off Bengaluru' },
+      ],
+    },
+  ],
+};
+
+const getSlideInfo = (propId: string, idx: number, prop: Property): GallerySlideInfo => {
+  const propInfo = PROPERTY_GALLERY_INFO[propId];
+  if (propInfo && propInfo[idx]) {
+    return propInfo[idx];
+  }
+  const defaultTags = ['PROJECT ARCHITECTURE', 'LIFESTYLE & LEISURE', 'SUSTAINABILITY & LIVING', 'INTERIOR REFINEMENT', 'COMMUNITY SPACES'];
+  const defaultTitles = [
+    `${prop.name} Architectural Elevation`,
+    'Curated World-Class Amenities',
+    'Eco-Conscious Sustainable Living',
+    'Spacious & Sunlit Living Spaces',
+    'Community & Nature Connections',
+  ];
+  const defaultDescs = [
+    `Thoughtfully designed with focus on sustainability, ventilation, and connection with nature in ${prop.location}.`,
+    `Premium lifestyle amenities crafted for relaxation, fitness, and family leisure.`,
+    `Sustainable architecture incorporating green infrastructure, natural lighting, and open spaces.`,
+    `Refined residence layouts with expansive floor plans ranging from ${prop.areaSqFt || '1100 - 2900 Sq. Ft.'}.`,
+    `Vibrant community atmosphere nestled amidst verdant landscaped corridors.`,
+  ];
+  return {
+    tag: defaultTags[idx % defaultTags.length],
+    title: defaultTitles[idx % defaultTitles.length],
+    description: prop.description || defaultDescs[idx % defaultDescs.length],
+    highlights: [
+      { label: 'Project', value: prop.name },
+      { label: 'Location', value: prop.location || 'Bengaluru' },
+      { label: 'Possession', value: prop.possessionDate || 'Coming Soon' },
+    ],
+  };
+};
+
 export const PropertyDetailPage: React.FC<PropertyDetailPageProps> = ({
   propertyId,
   properties,
@@ -37,7 +175,6 @@ export const PropertyDetailPage: React.FC<PropertyDetailPageProps> = ({
   
   // Modal states for Master Plan, Floor Plan & Brochure
   const [modalMode, setModalMode] = useState<'brochure' | 'masterplan' | 'floorplan' | null>(null);
-  const [activeFloorPlanBhk, setActiveFloorPlanBhk] = useState<'2.5 BHK' | '3 BHK'>('2.5 BHK');
   const [isEnquiryOpen, setIsEnquiryOpen] = useState(false);
   const [enquirySubmitted, setEnquirySubmitted] = useState(false);
   const [pendingResource, setPendingResource] = useState<'brochure' | 'masterplan' | 'floorplan' | null>(null);
@@ -94,39 +231,67 @@ export const PropertyDetailPage: React.FC<PropertyDetailPageProps> = ({
   const handleEnquirySubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setEnquirySubmitted(true);
+    const targetResource = pendingResource;
     setTimeout(() => {
       setEnquirySubmitted(false);
       setIsEnquiryOpen(false);
-      if (pendingResource) {
-        const url = pendingResource === 'brochure' ? property.brochureUrl : pendingResource === 'masterplan' ? property.masterPlanUrl : property.floorPlanUrl;
+      if (targetResource) {
+        const url = targetResource === 'brochure'
+          ? (property.brochureUrl || '/media/documents/reviva-vintage-valley-digital-brochure.pdf')
+          : targetResource === 'masterplan'
+          ? (property.masterPlanUrl || '/media/documents/masterplan-my.pdf')
+          : (property.floorPlanUrl || '/media/documents/floorplan-my.pdf');
+
         if (url) {
           downloadFile(url);
-        } else {
-          setModalMode(pendingResource);
         }
         setPendingResource(null);
       }
-    }, 2500);
+    }, 1800);
   };
 
   return (
     <div className="page-enter" style={{ background: '#ffffff', color: '#111827', minHeight: '100vh', paddingBottom: '4rem' }}>
 
-      {/* 1. REVIVA HERO BANNER SECTION (Exact match to www.revivaprojects.com/projects/vintage-valley/) */}
+      {/* 1. REVIVA HERO BANNER SECTION */}
       <div
         style={{
           position: 'relative',
           width: '100%',
-          minHeight: '75vh',
+          minHeight: '82vh',
           display: 'flex',
           flexDirection: 'column',
           justifyContent: 'space-between',
-          background: `linear-gradient(180deg, rgba(0,0,0,0.35) 0%, rgba(0,0,0,0.65) 100%), url('${galleryImages[0]}') ${property.id === 'reviva-trinity-lifescape' ? 'top' : 'center'}/cover no-repeat`,
           color: '#ffffff',
           padding: '100px 1.5rem 3rem 1.5rem',
-          overflow: 'hidden'
+          overflow: 'hidden',
+          background: '#090d14'
         }}
       >
+        {/* Ambient Blur Layer + Full Crisp Image Layer */}
+        <div style={{ position: 'absolute', inset: 0, overflow: 'hidden', pointerEvents: 'none' }}>
+          <div
+            style={{
+              position: 'absolute',
+              inset: '-20px',
+              backgroundImage: `url('${galleryImages[0]}')`,
+              backgroundSize: 'cover',
+              backgroundPosition: 'center',
+              filter: 'blur(30px) brightness(0.35)',
+              transform: 'scale(1.1)'
+            }}
+          />
+          <div
+            style={{
+              position: 'absolute',
+              inset: 0,
+              backgroundImage: `linear-gradient(180deg, rgba(9,13,20,0.25) 0%, rgba(9,13,20,0.65) 100%), url('${galleryImages[0]}')`,
+              backgroundSize: 'contain',
+              backgroundPosition: 'center center',
+              backgroundRepeat: 'no-repeat',
+            }}
+          />
+        </div>
 
         {/* Top Breadcrumb & Share Actions Bar */}
         <div className="container" style={{ position: 'relative', zIndex: 1, display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '1rem' }}>
@@ -530,52 +695,291 @@ export const PropertyDetailPage: React.FC<PropertyDetailPageProps> = ({
           </h2>
         </div>
 
-        <div style={{ position: 'relative', borderRadius: '16px', overflow: 'hidden', boxShadow: '0 20px 40px rgba(0,0,0,0.12)', background: '#000000' }}>
-          <img
-            src={galleryImages[currentSlideIndex]}
-            alt={`${property.name} — view ${currentSlideIndex + 1}`}
+        <div
+          className="gallery-split-layout"
+          style={{
+            position: 'relative',
+            borderRadius: '16px',
+            overflow: 'hidden',
+            boxShadow: '0 20px 48px rgba(0,0,0,0.18)',
+            background: '#0a0f14',
+            border: '1px solid rgba(159, 120, 61, 0.3)',
+            display: 'grid',
+            gridTemplateColumns: 'minmax(0, 1.35fr) minmax(0, 1fr)',
+            minHeight: '520px',
+          }}
+        >
+          {/* Left Column: Docked Image with Previous/Next Controls */}
+          <div
             style={{
-              width: '100%',
-              height: '550px',
-              objectFit: 'cover',
-              objectPosition: property.id === 'reviva-trinity-lifescape' ? 'top' : 'center',
-              display: 'block',
+              position: 'relative',
+              background: '#070b0e',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              overflow: 'hidden',
+              minHeight: '380px',
             }}
-          />
+          >
+            {/* Background subtle blur */}
+            <div
+              style={{
+                position: 'absolute',
+                inset: '-20px',
+                backgroundImage: `url('${galleryImages[currentSlideIndex]}')`,
+                backgroundSize: 'cover',
+                backgroundPosition: 'center',
+                filter: 'blur(30px) brightness(0.25)',
+                transform: 'scale(1.15)',
+                pointerEvents: 'none',
+              }}
+            />
 
-          {galleryImages.length > 1 && (
-            <>
-              <button
-                onClick={handlePrevSlide}
-                aria-label="Previous image"
-                style={{
-                  position: 'absolute', top: '50%', left: '1rem', transform: 'translateY(-50%)',
-                  background: 'rgba(0,0,0,0.6)', color: '#ffffff', border: 'none', width: '44px', height: '44px',
-                  borderRadius: '50%', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center',
-                  backdropFilter: 'blur(4px)',
-                }}
-              >
-                <ChevronLeft size={24} />
-              </button>
+            {/* Main Slide Image */}
+            <img
+              key={currentSlideIndex}
+              src={galleryImages[currentSlideIndex]}
+              alt={`${property.name} — view ${currentSlideIndex + 1}`}
+              className="fade-in-up"
+              style={{
+                position: 'relative',
+                zIndex: 2,
+                width: '100%',
+                height: '100%',
+                maxHeight: '580px',
+                objectFit: 'cover',
+                display: 'block',
+              }}
+            />
 
-              <button
-                onClick={handleNextSlide}
-                aria-label="Next image"
-                style={{
-                  position: 'absolute', top: '50%', right: '1rem', transform: 'translateY(-50%)',
-                  background: 'rgba(0,0,0,0.6)', color: '#ffffff', border: 'none', width: '44px', height: '44px',
-                  borderRadius: '50%', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center',
-                  backdropFilter: 'blur(4px)',
-                }}
-              >
-                <ChevronRight size={24} />
-              </button>
+            {/* Navigation Arrows on Left Image Panel */}
+            {galleryImages.length > 1 && (
+              <>
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    handlePrevSlide();
+                  }}
+                  aria-label="Previous image"
+                  className="btn-magnetic"
+                  style={{
+                    position: 'absolute',
+                    top: '50%',
+                    left: '1rem',
+                    transform: 'translateY(-50%)',
+                    background: 'rgba(0, 0, 0, 0.75)',
+                    color: '#ffffff',
+                    border: '1px solid rgba(255, 255, 255, 0.25)',
+                    width: '46px',
+                    height: '46px',
+                    borderRadius: '50%',
+                    cursor: 'pointer',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    backdropFilter: 'blur(8px)',
+                    zIndex: 20,
+                    pointerEvents: 'auto',
+                    boxShadow: '0 4px 16px rgba(0,0,0,0.5)',
+                  }}
+                >
+                  <ChevronLeft size={24} />
+                </button>
 
-              <div style={{ position: 'absolute', bottom: '1rem', right: '1rem', background: 'rgba(0,0,0,0.6)', color: '#ffffff', fontSize: '0.75rem', padding: '0.3rem 0.7rem', borderRadius: '50px' }}>
-                {currentSlideIndex + 1} / {galleryImages.length}
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    handleNextSlide();
+                  }}
+                  aria-label="Next image"
+                  className="btn-magnetic"
+                  style={{
+                    position: 'absolute',
+                    top: '50%',
+                    right: '1rem',
+                    transform: 'translateY(-50%)',
+                    background: 'rgba(0, 0, 0, 0.75)',
+                    color: '#ffffff',
+                    border: '1px solid rgba(255, 255, 255, 0.25)',
+                    width: '46px',
+                    height: '46px',
+                    borderRadius: '50%',
+                    cursor: 'pointer',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    backdropFilter: 'blur(8px)',
+                    zIndex: 20,
+                    pointerEvents: 'auto',
+                    boxShadow: '0 4px 16px rgba(0,0,0,0.5)',
+                  }}
+                >
+                  <ChevronRight size={24} />
+                </button>
+
+                <div
+                  style={{
+                    position: 'absolute',
+                    bottom: '1rem',
+                    left: '1rem',
+                    background: 'rgba(0, 0, 0, 0.75)',
+                    border: '1px solid rgba(159, 120, 61, 0.4)',
+                    color: '#e5b869',
+                    fontFamily: 'var(--font-accent)',
+                    fontSize: '0.75rem',
+                    fontWeight: 700,
+                    letterSpacing: '1.5px',
+                    padding: '0.35rem 0.85rem',
+                    borderRadius: '50px',
+                    zIndex: 10,
+                    backdropFilter: 'blur(6px)',
+                  }}
+                >
+                  {currentSlideIndex + 1} / {galleryImages.length}
+                </div>
+              </>
+            )}
+          </div>
+
+          {/* Right Column: Curated Slide Details */}
+          <div
+            style={{
+              position: 'relative',
+              zIndex: 3,
+              padding: '2.5rem 2rem',
+              display: 'flex',
+              flexDirection: 'column',
+              justifyContent: 'space-between',
+              background: 'linear-gradient(160deg, rgba(15, 23, 34, 0.96) 0%, rgba(9, 14, 20, 0.98) 100%)',
+              borderLeft: '1px solid rgba(255, 255, 255, 0.08)',
+            }}
+          >
+            <div>
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '1rem', flexWrap: 'wrap', gap: '0.5rem' }}>
+                <span
+                  style={{
+                    fontFamily: 'var(--font-accent)',
+                    fontSize: '0.72rem',
+                    fontWeight: 700,
+                    letterSpacing: '2px',
+                    textTransform: 'uppercase',
+                    color: '#e5b869',
+                    background: 'rgba(159, 120, 61, 0.15)',
+                    border: '1px solid rgba(159, 120, 61, 0.35)',
+                    padding: '0.3rem 0.75rem',
+                    borderRadius: '4px',
+                  }}
+                >
+                  {getSlideInfo(property.id, currentSlideIndex, property).tag}
+                </span>
+
+                <span style={{ fontSize: '0.8rem', color: '#94a3b8', fontFamily: 'var(--font-body)' }}>
+                  {property.name}
+                </span>
               </div>
-            </>
-          )}
+
+              <h3
+                key={`title-${currentSlideIndex}`}
+                className="fade-in-up"
+                style={{
+                  fontFamily: 'var(--font-heading)',
+                  fontSize: 'clamp(1.4rem, 2vw, 1.85rem)',
+                  fontWeight: 600,
+                  color: '#ffffff',
+                  lineHeight: 1.3,
+                  marginBottom: '1rem',
+                }}
+              >
+                {getSlideInfo(property.id, currentSlideIndex, property).title}
+              </h3>
+
+              <p
+                key={`desc-${currentSlideIndex}`}
+                className="fade-in-up"
+                style={{
+                  fontFamily: 'var(--font-body)',
+                  fontSize: '0.95rem',
+                  color: '#cbd5e1',
+                  lineHeight: 1.75,
+                  marginBottom: '1.75rem',
+                }}
+              >
+                {getSlideInfo(property.id, currentSlideIndex, property).description}
+              </p>
+
+              {/* Key Highlight Chips / Metrics */}
+              <div
+                key={`chips-${currentSlideIndex}`}
+                className="fade-in-up"
+                style={{
+                  display: 'grid',
+                  gridTemplateColumns: 'repeat(auto-fit, minmax(130px, 1fr))',
+                  gap: '0.85rem',
+                  marginBottom: '1.5rem',
+                }}
+              >
+                {getSlideInfo(property.id, currentSlideIndex, property).highlights.map((item, idx) => (
+                  <div
+                    key={idx}
+                    style={{
+                      background: 'rgba(255, 255, 255, 0.04)',
+                      border: '1px solid rgba(159, 120, 61, 0.25)',
+                      padding: '0.75rem 0.85rem',
+                      borderRadius: '8px',
+                    }}
+                  >
+                    <div style={{ fontSize: '0.7rem', color: '#94a3b8', textTransform: 'uppercase', letterSpacing: '1px', marginBottom: '0.2rem' }}>
+                      {item.label}
+                    </div>
+                    <div style={{ fontSize: '0.88rem', fontWeight: 600, color: '#e5b869' }}>
+                      {item.value}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Quick Actions */}
+            <div style={{ display: 'flex', gap: '0.75rem', paddingTop: '1rem', borderTop: '1px solid rgba(255, 255, 255, 0.08)' }}>
+              <button
+                onClick={() => setIsEnquiryOpen(true)}
+                className="btn-primary"
+                style={{
+                  flex: 1,
+                  padding: '0.65rem 1rem',
+                  fontSize: '0.78rem',
+                  fontWeight: 700,
+                  letterSpacing: '1.5px',
+                  borderRadius: '6px',
+                  cursor: 'pointer',
+                  background: '#9F783D',
+                  color: '#ffffff',
+                  border: 'none',
+                }}
+              >
+                ENQUIRE NOW
+              </button>
+
+              <button
+                onClick={() => handleResourceClick('brochure')}
+                className="btn-outline"
+                style={{
+                  flex: 1,
+                  padding: '0.65rem 1rem',
+                  fontSize: '0.78rem',
+                  fontWeight: 700,
+                  letterSpacing: '1.5px',
+                  borderRadius: '6px',
+                  cursor: 'pointer',
+                  border: '1px solid #9F783D',
+                  color: '#e5b869',
+                  background: 'transparent',
+                }}
+              >
+                BROCHURE
+              </button>
+            </div>
+          </div>
         </div>
 
         {galleryImages.length > 1 && (
@@ -691,7 +1095,6 @@ export const PropertyDetailPage: React.FC<PropertyDetailPageProps> = ({
       </div>
       )}
 
-
       {/* POPUP MODALS: BROCHURE, MASTER PLAN, FLOOR PLAN */}
       {modalMode && (
         <div className="modal-overlay" onClick={() => setModalMode(null)}>
@@ -700,19 +1103,19 @@ export const PropertyDetailPage: React.FC<PropertyDetailPageProps> = ({
             style={{
               background: '#ffffff',
               color: '#111827',
-              width: '100%',
-              maxWidth: '700px',
-              padding: '2rem',
+              width: '95%',
+              maxWidth: modalMode === 'masterplan' || modalMode === 'floorplan' ? '1020px' : '700px',
+              padding: modalMode === 'masterplan' || modalMode === 'floorplan' ? '1.5rem' : '2rem',
               borderRadius: '16px',
               position: 'relative',
               boxShadow: '0 24px 48px rgba(0,0,0,0.3)',
-              maxHeight: '90vh',
+              maxHeight: '92vh',
               overflowY: 'auto'
             }}
           >
             <button 
               onClick={() => setModalMode(null)}
-              style={{ position: 'absolute', top: '1.25rem', right: '1.25rem', background: 'none', border: 'none', cursor: 'pointer', color: '#374151' }}
+              style={{ position: 'absolute', top: '1.25rem', right: '1.25rem', background: 'none', border: 'none', cursor: 'pointer', color: '#374151', zIndex: 10 }}
             >
               <X size={24} />
             </button>
@@ -752,83 +1155,132 @@ export const PropertyDetailPage: React.FC<PropertyDetailPageProps> = ({
               </div>
             )}
 
-            {/* Modal Content: Master Plan */}
+            {/* Modal Content: Master Plan PDF Viewer */}
             {modalMode === 'masterplan' && (
-              <div style={{ textAlign: 'center', padding: '1rem 0' }}>
-                <LayoutGrid size={48} color="#9F783D" style={{ margin: '0 auto 1rem auto' }} />
-                <h3 style={{ fontFamily: 'serif', fontSize: '1.75rem', color: '#111827', marginBottom: '0.5rem' }}>
-                  {property.name} Master Plan Diagram
-                </h3>
-                <p style={{ color: '#6b7280', fontSize: '0.9rem', marginBottom: '1.5rem' }}>
-                  Site layout diagram detailing residential blocks, rooftop pool, gazebos, and green patio.
-                </p>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', paddingRight: '2.5rem', flexWrap: 'wrap', gap: '0.75rem' }}>
+                  <div>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: '#9F783D', fontWeight: 700, fontSize: '0.78rem', textTransform: 'uppercase', letterSpacing: '1.5px' }}>
+                      <LayoutGrid size={16} />
+                      <span>{property.name}</span>
+                    </div>
+                    <h3 style={{ fontFamily: 'var(--font-heading)', fontSize: '1.45rem', fontWeight: 700, color: '#111827', marginTop: '0.2rem' }}>
+                      Official Master Plan
+                    </h3>
+                  </div>
 
-                <div style={{ background: '#0a0d14', padding: '1.5rem', borderRadius: '12px', border: '1px solid #9F783D', marginBottom: '1.5rem' }}>
-                  <svg width="100%" height="280" viewBox="0 0 500 280" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <rect width="500" height="280" fill="#0b0f17" rx="8" />
-                    <rect x="15" y="15" width="470" height="250" stroke="#9E783C" strokeWidth="2" rx="4" />
-                    
-                    <rect x="40" y="40" width="130" height="90" fill="rgba(158, 120, 60, 0.3)" stroke="#9E783C" strokeWidth="2" />
-                    <text x="65" y="90" fill="#ffffff" fontSize="13" fontWeight="700">TOWER A (2.5 BHK)</text>
+                  <div style={{ display: 'flex', gap: '0.65rem' }}>
+                    <a
+                      href={property.masterPlanUrl || '/media/documents/masterplan-my.pdf'}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="btn-outline"
+                      style={{
+                        padding: '0.5rem 1rem',
+                        fontSize: '0.8rem',
+                        borderRadius: '6px',
+                        border: '1px solid #9F783D',
+                        color: '#9F783D',
+                        textDecoration: 'none',
+                        display: 'inline-flex',
+                        alignItems: 'center',
+                        gap: '0.4rem',
+                        fontWeight: 600
+                      }}
+                    >
+                      <span>Open in New Tab</span>
+                    </a>
 
-                    <rect x="330" y="40" width="130" height="90" fill="rgba(158, 120, 60, 0.3)" stroke="#9E783C" strokeWidth="2" />
-                    <text x="355" y="90" fill="#ffffff" fontSize="13" fontWeight="700">TOWER B (3 BHK)</text>
+                    <button
+                      onClick={() => downloadFile(property.masterPlanUrl || '/media/documents/masterplan-my.pdf')}
+                      className="btn-primary"
+                      style={{
+                        padding: '0.5rem 1.15rem',
+                        fontSize: '0.8rem',
+                        borderRadius: '6px',
+                        display: 'inline-flex',
+                        alignItems: 'center',
+                        gap: '0.4rem',
+                        fontWeight: 600
+                      }}
+                    >
+                      <Download size={15} />
+                      <span>Download PDF</span>
+                    </button>
+                  </div>
+                </div>
 
-                    <circle cx="250" cy="140" r="60" fill="rgba(0, 67, 61, 0.4)" stroke="#00433D" strokeWidth="2" />
-                    <text x="200" y="140" fill="#9F783D" fontSize="12" fontWeight="700">Rooftop Swimming Pool</text>
-                    <text x="215" y="155" fill="#e2e8f0" fontSize="10">& Landscaped Patios</text>
-
-                    <rect x="40" y="160" width="130" height="80" fill="rgba(255,255,255,0.06)" stroke="#64748b" strokeWidth="2" />
-                    <text x="65" y="205" fill="#e2e8f0" fontSize="12" fontWeight="600">Outdoor Cafe & Gazebo</text>
-                  </svg>
+                <div style={{ width: '100%', height: '65vh', minHeight: '480px', borderRadius: '10px', overflow: 'hidden', border: '1px solid #e5e7eb', background: '#0a0d14' }}>
+                  <iframe
+                    src={`${property.masterPlanUrl || '/media/documents/masterplan-my.pdf'}#toolbar=1&navpanes=0`}
+                    title={`${property.name} Master Plan`}
+                    style={{ width: '100%', height: '100%', border: 'none' }}
+                  />
                 </div>
               </div>
             )}
 
-            {/* Modal Content: Floor Plan Selector */}
+            {/* Modal Content: Floor Plan PDF Viewer */}
             {modalMode === 'floorplan' && (
-              <div style={{ textAlign: 'center', padding: '1rem 0' }}>
-                <Map size={48} color="#9F783D" style={{ margin: '0 auto 1rem auto' }} />
-                <h3 style={{ fontFamily: 'serif', fontSize: '1.75rem', color: '#111827', marginBottom: '0.5rem' }}>
-                  Architectural Floor Plans
-                </h3>
-                
-                {/* BHK selector tabs */}
-                <div style={{ display: 'inline-flex', gap: '0.5rem', background: '#f3f4f6', padding: '0.35rem', borderRadius: '50px', marginBottom: '1.5rem' }}>
-                  {(['2.5 BHK', '3 BHK'] as const).map((bhkOption) => (
-                    <button
-                      key={bhkOption}
-                      onClick={() => setActiveFloorPlanBhk(bhkOption)}
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', paddingRight: '2.5rem', flexWrap: 'wrap', gap: '0.75rem' }}>
+                  <div>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: '#9F783D', fontWeight: 700, fontSize: '0.78rem', textTransform: 'uppercase', letterSpacing: '1.5px' }}>
+                      <Map size={16} />
+                      <span>{property.name}</span>
+                    </div>
+                    <h3 style={{ fontFamily: 'var(--font-heading)', fontSize: '1.45rem', fontWeight: 700, color: '#111827', marginTop: '0.2rem' }}>
+                      Architectural Floor Plans (Block A, B, C)
+                    </h3>
+                  </div>
+
+                  <div style={{ display: 'flex', gap: '0.65rem' }}>
+                    <a
+                      href={property.floorPlanUrl || '/media/documents/floorplan-my.pdf'}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="btn-outline"
                       style={{
-                        border: 'none',
-                        padding: '0.5rem 1.5rem',
-                        borderRadius: '50px',
-                        background: activeFloorPlanBhk === bhkOption ? '#9F783D' : 'transparent',
-                        color: activeFloorPlanBhk === bhkOption ? '#ffffff' : '#374151',
-                        fontWeight: 700,
-                        fontSize: '0.85rem',
-                        cursor: 'pointer'
+                        padding: '0.5rem 1rem',
+                        fontSize: '0.8rem',
+                        borderRadius: '6px',
+                        border: '1px solid #9F783D',
+                        color: '#9F783D',
+                        textDecoration: 'none',
+                        display: 'inline-flex',
+                        alignItems: 'center',
+                        gap: '0.4rem',
+                        fontWeight: 600
                       }}
                     >
-                      {bhkOption} Layout
+                      <span>Open in New Tab</span>
+                    </a>
+
+                    <button
+                      onClick={() => downloadFile(property.floorPlanUrl || '/media/documents/floorplan-my.pdf')}
+                      className="btn-primary"
+                      style={{
+                        padding: '0.5rem 1.15rem',
+                        fontSize: '0.8rem',
+                        borderRadius: '6px',
+                        display: 'inline-flex',
+                        alignItems: 'center',
+                        gap: '0.4rem',
+                        fontWeight: 600
+                      }}
+                    >
+                      <Download size={15} />
+                      <span>Download PDF</span>
                     </button>
-                  ))}
+                  </div>
                 </div>
 
-                <div style={{ background: '#0a0d14', padding: '1.5rem', borderRadius: '12px', border: '1px stroke #9F783D', marginBottom: '1.5rem' }}>
-                  <svg width="100%" height="220" viewBox="0 0 400 220" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <rect width="400" height="220" fill="#0f172a" rx="6" />
-                    <rect x="20" y="20" width="160" height="110" stroke="#9E783C" strokeWidth="2" fill="rgba(158, 120, 60, 0.1)" strokeDasharray="4 4" />
-                    <text x="35" y="70" fill="#e2e8f0" fontSize="13" fontWeight="600">Master Bedroom ({activeFloorPlanBhk})</text>
-                    <text x="45" y="90" fill="#94a3b8" fontSize="11">15'0" x 13'0"</text>
-
-                    <rect x="200" y="20" width="180" height="110" stroke="#9E783C" strokeWidth="2" fill="rgba(158, 120, 60, 0.1)" strokeDasharray="4 4" />
-                    <text x="220" y="70" fill="#e2e8f0" fontSize="13" fontWeight="600">Living / Dining Hall</text>
-                    <text x="235" y="90" fill="#94a3b8" fontSize="11">20'0" x 15'0"</text>
-
-                    <rect x="20" y="140" width="160" height="60" stroke="#9E783C" strokeWidth="2" fill="rgba(158, 120, 60, 0.2)" />
-                    <text x="40" y="175" fill="#9E783C" fontSize="12" fontWeight="700">Landscaped Patio Balcony</text>
-                  </svg>
+                <div style={{ width: '100%', height: '65vh', minHeight: '480px', borderRadius: '10px', overflow: 'hidden', border: '1px solid #e5e7eb', background: '#0a0d14' }}>
+                  <iframe
+                    src={`${property.floorPlanUrl || '/media/documents/floorplan-my.pdf'}#toolbar=1&navpanes=0`}
+                    title={`${property.name} Floor Plan`}
+                    style={{ width: '100%', height: '100%', border: 'none' }}
+                  />
                 </div>
               </div>
             )}

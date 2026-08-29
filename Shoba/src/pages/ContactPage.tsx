@@ -234,8 +234,8 @@ export const ContactPage: React.FC<ContactPageProps> = () => {
 
             <div style={{ display: 'flex', alignItems: 'center', gap: '1.25rem' }}>
               <Mail size={24} color="#9F783D" aria-hidden="true" style={{ flexShrink: 0 }} />
-              <a href="mailto:info@revivaprojects.com" className="link-glow" style={{ color: '#ffffff', fontSize: '1.05rem', fontWeight: 500, textDecoration: 'none' }}>
-                info@revivaprojects.com
+              <a href="mailto:digital@revivaprojects.com" className="link-glow" style={{ color: '#ffffff', fontSize: '1.05rem', fontWeight: 500, textDecoration: 'none' }}>
+                digital@revivaprojects.com
               </a>
             </div>
           </div>

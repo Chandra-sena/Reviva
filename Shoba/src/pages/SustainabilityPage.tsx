@@ -166,15 +166,14 @@ export const SustainabilityPage: React.FC<SustainabilityPageProps> = () => {
                 borderRadius: '12px',
                 overflow: 'hidden',
                 boxShadow: '0 12px 30px rgba(0,0,0,0.1)',
-                border: '1px solid #e2e8f0',
-                background: '#f8fafc',
+                background: 'transparent',
               }}
             >
               <img
                 className="flip-parallax"
-                src="/media/images/solar-farmhouse.jpg"
+                src="/media/images/reviva-eco.jpg"
                 alt="Eco-Conscious Design - Reviva Projects"
-                style={{ width: '100%', height: 'auto', maxHeight: '420px', objectFit: 'cover', display: 'block', margin: '0 auto' }}
+                style={{ width: '100%', height: 'auto', maxHeight: '420px', objectFit: 'cover', display: 'block', margin: '0 auto', borderRadius: '12px' }}
               />
             </div>
           </div>

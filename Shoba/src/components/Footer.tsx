@@ -46,7 +46,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
               <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', width: '153px' }}>
                 <RevivaWordmark height={26} color="#ffffff" />
                 <div style={{ width: '115.5%', alignSelf: 'flex-end', marginTop: '3px' }}>
-                  <span style={{ fontSize: '0.59rem', fontWeight: 400, letterSpacing: '0.329em', color: '#e5b869', textTransform: 'uppercase', display: 'block', textAlign: 'center' }}>
+                  <span style={{ fontFamily: 'var(--font-accent)', fontSize: '0.6rem', fontWeight: 500, letterSpacing: '0.34em', color: '#e5b869', textTransform: 'uppercase', display: 'block', textAlign: 'center' }}>
                     PROJECTS
                   </span>
                 </div>
@@ -63,6 +63,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
                 marginTop: '1.75rem',
                 paddingTop: '1.5rem',
                 borderTop: '1px solid rgba(255,255,255,0.08)',
+                fontFamily: 'var(--font-body)',
                 fontSize: '0.78rem',
                 color: '#cbd5e1'
               }}
@@ -99,14 +100,14 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
           >
             {/* Column 1: Who We Are */}
             <div>
-              <h4 style={{ fontSize: '0.72rem', fontWeight: 500, textTransform: 'uppercase', letterSpacing: '3px', color: '#9E783C', marginBottom: '1.25rem' }}>
+              <h4 style={{ fontFamily: 'var(--font-accent)', fontSize: '0.74rem', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '2.5px', color: '#9E783C', marginBottom: '1.25rem' }}>
                 Who We Are
               </h4>
               <div style={{ display: 'flex', flexDirection: 'column', gap: '0.65rem' }}>
                 {[
                   { name: 'Philosophy & Vision', path: '/philosophy' },
                   { name: 'Reviva Journey & Showcase', path: '/showcase' },
-                  { name: 'Awards & Honours', path: '/showcase' }
+                  { name: 'Awards & Honours', path: '/awards' }
                 ].map((item, idx) => (
                   <button
                     key={idx}
@@ -142,7 +143,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
 
             {/* Column 2: Our Projects */}
             <div>
-              <h4 style={{ fontSize: '0.72rem', fontWeight: 500, textTransform: 'uppercase', letterSpacing: '3px', color: '#9E783C', marginBottom: '1.25rem' }}>
+              <h4 style={{ fontFamily: 'var(--font-accent)', fontSize: '0.74rem', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '2.5px', color: '#9E783C', marginBottom: '1.25rem' }}>
                 Our Projects
               </h4>
               <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
@@ -215,12 +216,43 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
                 >
                   Reviva Farms (Eco Plots & Villas)
                 </button>
+
+                {/* More Projects Option */}
+                <button
+                  onClick={() => onNavigate('/properties')}
+                  style={{
+                    background: 'none',
+                    border: 'none',
+                    textAlign: 'left',
+                    cursor: 'pointer',
+                    color: '#9E783C',
+                    fontSize: '0.82rem',
+                    fontWeight: 600,
+                    letterSpacing: '0.5px',
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    gap: '0.35rem',
+                    paddingTop: '0.25rem',
+                    transition: 'all 0.2s ease'
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.color = '#e5b869';
+                    e.currentTarget.style.transform = 'translateX(4px)';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.color = '#9E783C';
+                    e.currentTarget.style.transform = 'translateX(0)';
+                  }}
+                >
+                  <span>More</span>
+                  <span style={{ fontSize: '0.85rem' }}>→</span>
+                </button>
               </div>
             </div>
 
             {/* Column 3: Quick Navigation */}
             <div>
-              <h4 style={{ fontSize: '0.72rem', fontWeight: 500, textTransform: 'uppercase', letterSpacing: '3px', color: '#9E783C', marginBottom: '1.25rem' }}>
+              <h4 style={{ fontFamily: 'var(--font-accent)', fontSize: '0.74rem', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '2.5px', color: '#9E783C', marginBottom: '1.25rem' }}>
                 Quick Navigation
               </h4>
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.65rem' }}>
@@ -263,7 +295,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
 
             {/* Column 4: Location Focus */}
             <div>
-              <h4 style={{ fontSize: '0.72rem', fontWeight: 500, textTransform: 'uppercase', letterSpacing: '3px', color: '#9E783C', marginBottom: '1.25rem' }}>
+              <h4 style={{ fontFamily: 'var(--font-accent)', fontSize: '0.74rem', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '2.5px', color: '#9E783C', marginBottom: '1.25rem' }}>
                 Location Focus
               </h4>
               <div style={{ display: 'flex', flexDirection: 'column', gap: '0.65rem', fontSize: '0.82rem' }}>
@@ -284,8 +316,8 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
                 >
                   Bengaluru, Karnataka
                 </button>
-                <span style={{ color: '#9aa5b5', fontSize: '0.78rem', lineHeight: 1.5, fontWeight: 400 }}>
-                  Channasandra • Kadugodi • Whitefield East Suburbs
+                <span style={{ color: '#9aa5b5', fontSize: '0.78rem', lineHeight: 1.6, fontWeight: 400 }}>
+                  Channasandra • Kadugodi • Whitefield East Suburbs • Muthanallur • Barkai
                 </span>
               </div>
             </div>

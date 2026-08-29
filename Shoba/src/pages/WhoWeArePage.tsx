@@ -18,7 +18,7 @@ export const WhoWeArePage: React.FC<WhoWeArePageProps> = () => {
           position: 'relative',
           width: '100%',
           height: '380px',
-          background: `linear-gradient(180deg, rgba(0, 0, 0, 0.45) 0%, rgba(0, 0, 0, 0.75) 100%), url('/media/images/reviva-harmony-with-nature.jpg') center/cover no-repeat`,
+          background: `linear-gradient(180deg, rgba(0, 0, 0, 0.45) 0%, rgba(0, 0, 0, 0.75) 100%), url('/media/images/reviva-abtprojs.jpg') center/cover no-repeat`,
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
@@ -78,12 +78,12 @@ export const WhoWeArePage: React.FC<WhoWeArePageProps> = () => {
           </div>
 
           <div className="reveal-right">
-            <div className="card-tilt" style={{ borderRadius: '8px', overflow: 'hidden' }}>
+            <div className="card-tilt" style={{ borderRadius: '12px', overflow: 'hidden', background: 'transparent' }}>
               <img
                 className="flip-parallax"
-                src="/media/images/eco-house-hero.jpg"
+                src="/media/images/reviva-ourstort.jpg"
                 alt="Reviva Projects Craftsmanship" 
-                style={{ width: '100%', height: '360px', objectFit: 'cover', borderRadius: '8px', display: 'block' }}
+                style={{ width: '100%', height: '360px', objectFit: 'cover', borderRadius: '12px', display: 'block' }}
               />
             </div>
           </div>

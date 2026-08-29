@@ -27,6 +27,18 @@ const LOCATIONS_DATA: LocationCard[] = [
     image: '/media/images/reviva-farms.jpg',
     citySlug: 'bengaluru',
   },
+  {
+    id: 'muthanallur-bengaluru',
+    name: 'Muthanallur, Bengaluru',
+    image: '/media/images/modern-architecture-facade.jpg',
+    citySlug: 'bengaluru',
+  },
+  {
+    id: 'barkai-bengaluru',
+    name: 'Barkai, Bengaluru',
+    image: '/media/images/green-building-exterior.jpg',
+    citySlug: 'bengaluru',
+  },
 ];
 
 interface LocationsSectionProps {
@@ -68,10 +80,10 @@ export const LocationsSection: React.FC<LocationsSectionProps> = ({
         <div className="reveal-scale" style={{ textAlign: 'center', maxWidth: '720px', margin: '0 auto 2.5rem auto' }}>
           <h3 
             style={{
-              fontFamily: 'var(--font-heading)',
+              fontFamily: 'var(--font-accent)',
               fontSize: 'clamp(1.8rem, 3vw, 2.5rem)',
               fontWeight: 700,
-              letterSpacing: '1.5px',
+              letterSpacing: '3px',
               color: '#0a0a0a',
               marginBottom: '0.75rem',
               textTransform: 'uppercase',
@@ -79,7 +91,7 @@ export const LocationsSection: React.FC<LocationsSectionProps> = ({
           >
             LOCATIONS
           </h3>
-          <p style={{ color: '#4b5563', fontSize: '1rem', lineHeight: 1.6 }}>
+          <p style={{ fontFamily: 'var(--font-body)', color: '#4b5563', fontSize: '1rem', lineHeight: 1.6 }}>
             We handpick locations that offer seamless connectivity, unmatched return on investments,
             in a neighborhood that is truly one-of-a-kind.
           </p>
@@ -97,7 +109,7 @@ export const LocationsSection: React.FC<LocationsSectionProps> = ({
             margin: '0 auto 3.5rem auto',
           }}
         >
-          <h5 style={{ textAlign: 'center', fontSize: '0.9rem', fontWeight: 700, letterSpacing: '1px', textTransform: 'uppercase', color: '#334155', marginBottom: '1.25rem' }}>
+          <h5 style={{ fontFamily: 'var(--font-accent)', textAlign: 'center', fontSize: '0.85rem', fontWeight: 600, letterSpacing: '2px', textTransform: 'uppercase', color: '#334155', marginBottom: '1.25rem' }}>
             SEARCH PROPERTIES
           </h5>
 
@@ -111,6 +123,7 @@ export const LocationsSection: React.FC<LocationsSectionProps> = ({
                 padding: '0 1rem',
                 border: '1px solid #cbd5e1',
                 borderRadius: '6px',
+                fontFamily: 'var(--font-body)',
                 fontSize: '0.9rem',
                 color: '#1e293b',
                 background: '#ffffff',
@@ -143,6 +156,7 @@ export const LocationsSection: React.FC<LocationsSectionProps> = ({
                 padding: '0 1rem',
                 border: '1px solid #cbd5e1',
                 borderRadius: '6px',
+                fontFamily: 'var(--font-body)',
                 fontSize: '0.9rem',
                 color: '#1e293b',
                 background: '#ffffff',
@@ -171,8 +185,11 @@ export const LocationsSection: React.FC<LocationsSectionProps> = ({
                 color: '#ffffff',
                 border: 'none',
                 borderRadius: '6px',
-                fontWeight: 700,
-                fontSize: '0.9rem',
+                fontFamily: 'var(--font-button)',
+                fontWeight: 600,
+                letterSpacing: '2px',
+                textTransform: 'uppercase',
+                fontSize: '0.82rem',
                 cursor: 'pointer',
                 display: 'inline-flex',
                 alignItems: 'center',
@@ -228,7 +245,7 @@ export const LocationsSection: React.FC<LocationsSectionProps> = ({
                   alignItems: 'center',
                 }}
               >
-                <h6 style={{ fontSize: '1rem', fontWeight: 700, color: '#0f172a', margin: 0 }}>
+                <h6 style={{ fontFamily: 'var(--font-heading)', fontSize: '0.95rem', fontWeight: 600, color: '#0f172a', margin: 0 }}>
                   {loc.name}
                 </h6>
                 <ChevronRight size={18} color="#9E783C" />

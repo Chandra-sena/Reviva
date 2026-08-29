@@ -61,7 +61,7 @@ export const Header: React.FC<HeaderProps> = ({ onNavigate, onOpenEnquiry }) => 
       subItems: [
         { label: 'Philosophy & Vision', path: '/philosophy' },
         { label: 'Reviva Journey & Showcase', path: '/showcase' },
-        { label: 'Awards & Honours', path: '/showcase' },
+        { label: 'Awards & Honours', path: '/awards' },
       ],
     },
     { label: 'WHAT WE DO', path: '/what-we-do', hasArrow: true },
@@ -121,9 +121,10 @@ export const Header: React.FC<HeaderProps> = ({ onNavigate, onOpenEnquiry }) => 
               border: '1px solid rgba(255, 255, 255, 0.18)',
               borderRadius: '40px',
               color: '#ffffff',
-              fontSize: '0.82rem',
-              fontWeight: 400,
-              letterSpacing: '3px',
+              fontFamily: 'var(--font-accent)',
+              fontSize: '0.8rem',
+              fontWeight: 500,
+              letterSpacing: '2.5px',
               cursor: 'pointer',
               display: 'inline-flex',
               alignItems: 'center',
@@ -193,7 +194,7 @@ export const Header: React.FC<HeaderProps> = ({ onNavigate, onOpenEnquiry }) => 
             <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', width: '135px' }}>
               <RevivaWordmark height={23} color="#ffffff" />
               <div style={{ width: '115.5%', alignSelf: 'flex-end', marginTop: '3px' }}>
-                <span style={{ fontSize: '0.52rem', fontWeight: 300, letterSpacing: '0.329em', color: '#e5b869', textTransform: 'uppercase', display: 'block', textAlign: 'center' }}>
+                <span style={{ fontFamily: 'var(--font-accent)', fontSize: '0.54rem', fontWeight: 500, letterSpacing: '0.34em', color: '#e5b869', textTransform: 'uppercase', display: 'block', textAlign: 'center' }}>
                   PROJECTS
                 </span>
               </div>
@@ -210,9 +211,10 @@ export const Header: React.FC<HeaderProps> = ({ onNavigate, onOpenEnquiry }) => 
                 border: 'none',
                 borderRadius: '50px',
                 padding: '0.6rem 1.5rem',
+                fontFamily: 'var(--font-button)',
                 fontSize: '0.75rem',
-                fontWeight: 400,
-                letterSpacing: '2.5px',
+                fontWeight: 600,
+                letterSpacing: '2px',
                 textTransform: 'uppercase',
                 cursor: 'pointer',
                 display: 'inline-flex',
@@ -308,10 +310,10 @@ export const Header: React.FC<HeaderProps> = ({ onNavigate, onOpenEnquiry }) => 
                       >
                         <span
                           style={{
-                            fontFamily: 'var(--font-heading)',
-                            fontSize: '0.92rem',
+                            fontFamily: 'var(--font-accent)',
+                            fontSize: '0.88rem',
                             fontWeight: 600,
-                            letterSpacing: '1.5px',
+                            letterSpacing: '1.8px',
                             color: '#0f172a',
                             textTransform: 'uppercase',
                             transition: 'color 0.2s ease',
@@ -355,7 +357,8 @@ export const Header: React.FC<HeaderProps> = ({ onNavigate, onOpenEnquiry }) => 
                                 padding: '0.6rem 0 0.6rem 1rem',
                                 textAlign: 'left',
                                 cursor: 'pointer',
-                                fontSize: '0.8rem',
+                                fontFamily: 'var(--font-body)',
+                                fontSize: '0.82rem',
                                 fontWeight: 500,
                                 letterSpacing: '0.3px',
                                 color: '#64748b',
@@ -398,10 +401,10 @@ export const Header: React.FC<HeaderProps> = ({ onNavigate, onOpenEnquiry }) => 
                       border: 'none',
                       padding: 0,
                       textAlign: 'left',
-                      fontFamily: 'var(--font-heading)',
-                      fontSize: '0.84rem',
-                      fontWeight: 500,
-                      letterSpacing: '1.5px',
+                      fontFamily: 'var(--font-accent)',
+                      fontSize: '0.82rem',
+                      fontWeight: 600,
+                      letterSpacing: '1.8px',
                       color: '#1e293b',
                       textTransform: 'uppercase',
                       cursor: 'pointer',
@@ -455,7 +458,7 @@ export const Header: React.FC<HeaderProps> = ({ onNavigate, onOpenEnquiry }) => 
             <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', width: '176px' }}>
               <RevivaWordmark height={30} color="rgba(255, 255, 255, 0.95)" />
               <div style={{ width: '115.5%', alignSelf: 'flex-end', marginTop: '3px' }}>
-                <span style={{ fontSize: '0.68rem', fontWeight: 300, letterSpacing: '0.329em', color: '#e5b869', textTransform: 'uppercase', display: 'block', textAlign: 'center' }}>
+                <span style={{ fontFamily: 'var(--font-accent)', fontSize: '0.68rem', fontWeight: 500, letterSpacing: '0.34em', color: '#e5b869', textTransform: 'uppercase', display: 'block', textAlign: 'center' }}>
                   PROJECTS
                 </span>
               </div>
