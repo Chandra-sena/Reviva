@@ -55,14 +55,12 @@ export const WhatWeDoSection: React.FC<WhatWeDoSectionProps> = ({ onNavigate }) 
             >
               {/* Image Block */}
               <div className={item.imageLeft ? 'reveal-left' : 'reveal-right'} style={{ order: item.imageLeft ? 1 : 2 }}>
-                <div className="card-tilt" style={{ borderRadius: '12px', overflow: 'hidden', background: 'transparent', boxShadow: 'none' }}>
-                  <img
-                    className="flip-parallax"
-                    src={item.img}
-                    alt={item.title}
-                    style={{ width: '100%', height: '340px', objectFit: 'cover', borderRadius: '12px', display: 'block', background: 'transparent', boxShadow: '0 14px 32px rgba(0,0,0,0.12)' }}
-                  />
-                </div>
+                <img
+                  className="flip-parallax"
+                  src={item.img}
+                  alt={item.title}
+                  style={{ width: '100%', height: '340px', objectFit: 'cover', borderRadius: '12px', display: 'block', background: 'transparent', boxShadow: '0 14px 32px rgba(0,0,0,0.12)' }}
+                />
               </div>
 
               {/* Text Block */}

@@ -55,22 +55,12 @@ export const SustainabilityPage: React.FC<SustainabilityPageProps> = () => {
       <div className="container" style={{ paddingTop: '5rem', paddingBottom: '3rem' }}>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '3.5rem', alignItems: 'center' }}>
           <div className="reveal-left">
-            <div
-              style={{
-                borderRadius: '12px',
-                overflow: 'hidden',
-                boxShadow: '0 12px 30px rgba(0,0,0,0.1)',
-                border: '1px solid #e2e8f0',
-                background: '#f8fafc',
-              }}
-            >
-              <img
-                className="flip-parallax"
-                src="/media/images/cultivating-tomorrow.webp"
-                alt="Cultivating Tomorrow - Reviva Eco Living" 
-                style={{ width: '100%', height: 'auto', maxHeight: '420px', objectFit: 'contain', display: 'block', margin: '0 auto' }}
-              />
-            </div>
+            <img
+              className="flip-parallax"
+              src="/media/images/cultivating-tomorrow.webp"
+              alt="Cultivating Tomorrow - Reviva Eco Living"
+              style={{ width: '100%', height: 'auto', maxHeight: '420px', objectFit: 'contain', display: 'block', margin: '0 auto' }}
+            />
           </div>
 
           <div className="reveal-right">
@@ -136,22 +126,12 @@ export const SustainabilityPage: React.FC<SustainabilityPageProps> = () => {
             </div>
 
             <div className="reveal-right">
-              <div
-                  style={{
-                  borderRadius: '12px',
-                  overflow: 'hidden',
-                  boxShadow: '0 12px 30px rgba(0,0,0,0.1)',
-                  border: '1px solid #e2e8f0',
-                  background: '#ffffff',
-                }}
-              >
-                <img
-                  className="flip-parallax"
-                  src="/media/images/smart-sustainability.webp"
-                  alt="Smart Sustainability - Reviva Projects" 
-                  style={{ width: '100%', height: 'auto', maxHeight: '420px', objectFit: 'contain', display: 'block', margin: '0 auto' }}
-                />
-              </div>
+              <img
+                className="flip-parallax"
+                src="/media/images/smart-sustainability.webp"
+                alt="Smart Sustainability - Reviva Projects"
+                style={{ width: '100%', height: 'auto', maxHeight: '420px', objectFit: 'contain', display: 'block', margin: '0 auto' }}
+              />
             </div>
           </div>
         </div>
@@ -161,21 +141,12 @@ export const SustainabilityPage: React.FC<SustainabilityPageProps> = () => {
       <div className="container" style={{ paddingTop: '5rem', paddingBottom: '3rem' }}>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '3.5rem', alignItems: 'center' }}>
           <div className="reveal-left">
-            <div
-              style={{
-                borderRadius: '12px',
-                overflow: 'hidden',
-                boxShadow: '0 12px 30px rgba(0,0,0,0.1)',
-                background: 'transparent',
-              }}
-            >
-              <img
-                className="flip-parallax"
-                src="/media/images/reviva-eco.jpg"
-                alt="Eco-Conscious Design - Reviva Projects"
-                style={{ width: '100%', height: 'auto', maxHeight: '420px', objectFit: 'cover', display: 'block', margin: '0 auto', borderRadius: '12px' }}
-              />
-            </div>
+            <img
+              className="flip-parallax"
+              src="/media/images/reviva-eco.jpg"
+              alt="Eco-Conscious Design - Reviva Projects"
+              style={{ width: '100%', height: 'auto', maxHeight: '420px', objectFit: 'cover', display: 'block', margin: '0 auto', borderRadius: '12px' }}
+            />
           </div>
 
           <div className="reveal-right">

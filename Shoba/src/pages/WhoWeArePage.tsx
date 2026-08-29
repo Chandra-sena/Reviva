@@ -78,14 +78,12 @@ export const WhoWeArePage: React.FC<WhoWeArePageProps> = () => {
           </div>
 
           <div className="reveal-right">
-            <div className="card-tilt" style={{ borderRadius: '12px', overflow: 'hidden', background: 'transparent' }}>
-              <img
-                className="flip-parallax"
-                src="/media/images/reviva-ourstort.jpg"
-                alt="Reviva Projects Craftsmanship" 
-                style={{ width: '100%', height: '360px', objectFit: 'cover', borderRadius: '12px', display: 'block' }}
-              />
-            </div>
+            <img
+              className="flip-parallax"
+              src="/media/images/reviva-ourstort.jpg"
+              alt="Reviva Projects Craftsmanship"
+              style={{ width: '100%', height: '360px', objectFit: 'cover', borderRadius: '12px', display: 'block' }}
+            />
           </div>
         </div>
 
@@ -96,7 +94,7 @@ export const WhoWeArePage: React.FC<WhoWeArePageProps> = () => {
               Our Vision
             </h3>
             <p style={{ fontSize: '1.05rem', lineHeight: 1.7, color: 'rgba(255, 255, 255, 0.9)' }}>
-              To redefine modern living by creating sustainable, eco-friendly, and thoughtfully designed spaces where communities thrive and every family discovers a place to flourish.
+              We are committed to building eco-conscious spaces to enhance the quality of life.
             </p>
           </div>
 
@@ -105,7 +103,7 @@ export const WhoWeArePage: React.FC<WhoWeArePageProps> = () => {
               Our Mission
             </h3>
             <p style={{ fontSize: '1.05rem', lineHeight: 1.7, color: '#4b5563' }}>
-              To deliver exceptional construction quality, pioneer innovative sustainable architecture, and build transparent, lasting relationships with every homeowner we serve.
+              We aim to embrace progressive design thought processes with purpose that elevates living.
             </p>
           </div>
         </div>

@@ -1,9 +1,8 @@
 import React from 'react';
 import type { CityInfo } from '../types';
-import { Home, Building, Sparkles, Wrench, ArrowRight } from 'lucide-react';
+import { Home, Sparkles, Wrench } from 'lucide-react';
 
 const residentialImage = '/media/images/residential-towers.jpeg';
-const commercialImage = '/media/images/commercial-business-park.jpeg';
 const contractingImage = '/media/images/contracting-site.jpeg';
 const manufacturingImage = '/media/images/manufacturing-facility.jpeg';
 
@@ -13,7 +12,7 @@ interface WhatWeDoPageProps {
   onOpenEnquiry: () => void;
 }
 
-export const WhatWeDoPage: React.FC<WhatWeDoPageProps> = ({ onNavigate }) => {
+export const WhatWeDoPage: React.FC<WhatWeDoPageProps> = () => {
   const verticals = [
     {
       icon: Home,
@@ -22,14 +21,6 @@ export const WhatWeDoPage: React.FC<WhatWeDoPageProps> = ({ onNavigate }) => {
       features: ['Reviva Neopolis', 'Reviva Crystal Meadows', 'Reviva Townpark', 'Reviva OneWorld'],
       actionPath: '/properties',
       image: residentialImage,
-    },
-    {
-      icon: Building,
-      title: 'Commercial Landmarks',
-      desc: 'Grade-A tech parks, retail gallerias, corporate headquarters, and LEED-certified commercial office complexes.',
-      features: ['Reviva Tech Park Whitefield', 'Reviva City Mall', 'Reviva Commercial Hub'],
-      actionPath: '/commercial',
-      image: commercialImage,
     },
     {
       icon: Wrench,
@@ -135,31 +126,6 @@ export const WhatWeDoPage: React.FC<WhatWeDoPageProps> = ({ onNavigate }) => {
                       ))}
                     </div>
                   </div>
-                </div>
-
-                <div style={{ padding: '1rem 1.5rem 1.5rem 1.5rem' }}>
-                  <button
-                    className="btn-primary btn-arrow-hover"
-                    onClick={() => onNavigate(item.actionPath)}
-                    style={{
-                      width: '100%',
-                      padding: '0.75rem',
-                      background: '#0f172a',
-                      color: '#ffffff',
-                      border: 'none',
-                      borderRadius: '6px',
-                      fontSize: '0.85rem',
-                      fontWeight: 700,
-                      cursor: 'pointer',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      gap: '0.5rem',
-                    }}
-                  >
-                    <span>EXPLORE PORTFOLIO</span>
-                    <ArrowRight size={16} color="#9E783C" />
-                  </button>
                 </div>
               </div>
             );

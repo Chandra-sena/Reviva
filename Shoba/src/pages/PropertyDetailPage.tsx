@@ -1,7 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import type { Property, CityInfo } from '../types';
 import { Breadcrumbs } from '../components/Breadcrumbs';
-import { DoveMark, RevivaWordmark } from '../components/RevivaLogo';
 import {
   MapPin, Download, Share2, ArrowLeft, Check,
   FileText, LayoutGrid, Map, X, Send, Sparkles, Navigation, ChevronLeft, ChevronRight
@@ -32,42 +31,30 @@ const PROPERTY_GALLERY_INFO: Record<string, GallerySlideInfo[]> = {
   'vintage-valley': [
     {
       tag: 'MASTER ELEVATION',
-      title: 'Biophilic Façade & Staggered Planters',
-      description: 'The architectural design blends organic foliage with modern structure, maximizing cross-ventilation, natural sunlight, and panoramic garden perspectives across Whitefield.',
-      highlights: [
-        { label: 'Architecture', value: 'G+4 Eco-Conscious' },
-        { label: 'Green Cover', value: '75% Open Spaces' },
-        { label: 'Location', value: 'Kadugodi, Whitefield' },
-      ],
+      title: 'The Grace of Classic Living',
+      description: 'Vintage Valley seamlessly merges classical charm with modern design, offering a refined and sophisticated living experience in Channasandra, Whitefield.',
+      highlights: [],
     },
     {
-      tag: 'ROOFTOP OASIS',
-      title: 'Sky Deck & Leisure Pool',
-      description: 'A rooftop retreat featuring an infinity swimming pool, open-air café gazebos, landscaped patios, and cozy relaxation nooks overlooking the tree corridors.',
-      highlights: [
-        { label: 'Rooftop Retreat', value: 'Infinity Leisure Pool' },
-        { label: 'Social Zones', value: 'Gazebos & Patios' },
-        { label: 'Wellness', value: 'Yoga & Sunset Deck' },
-      ],
+      tag: 'ROOFTOP RETREAT',
+      title: 'Rooftop Pool & Lounge',
+      description: 'A spacious rooftop retreat complete with a swimming pool, landscaped patios, an outdoor café, gazebos, and cozy seating nooks — crafted for relaxation and connection.',
+      highlights: [],
     },
     {
-      tag: 'ECO HARMONY',
-      title: 'Sustainable Living Infrastructure',
-      description: 'Engineered for true eco-living with zero-discharge rainwater harvesting, solar-powered common lighting, and organic waste converter units.',
-      highlights: [
-        { label: 'Water Security', value: 'Rainwater Harvesting' },
-        { label: 'Clean Energy', value: 'Solar Common Grid' },
-        { label: 'Environment', value: 'Zero Carbon Footprint' },
-      ],
+      tag: 'SURROUNDED BY GREEN',
+      title: "Whitefield's Nature-Wrapped Address",
+      description: 'Set on Indian Gas Godown Road in Channasandra, Kadugodi, with open farmland and mature tree cover at the doorstep, keeping residents close to nature yet minutes from Whitefield.',
+      highlights: [],
     },
     {
-      tag: 'LUXURY RESIDENCES',
-      title: 'Spacious 2.5 & 3 BHK Sanctuaries',
-      description: 'Generous layouts featuring floor-to-ceiling glass expanses, expansive living rooms, wide sit-out balconies, and handcrafted interior joinery.',
+      tag: 'CLASSICAL FAÇADE',
+      title: 'Timeless Elegance, After Dark',
+      description: 'Vintage Valley reimagines timeless elegance with a contemporary touch, inspired by the rich architectural legacy of classical forms.',
       highlights: [
         { label: 'Configurations', value: '2.5 & 3 BHK Homes' },
         { label: 'Super Built-up', value: '1280 - 1750 Sq. Ft.' },
-        { label: 'Orientation', value: '100% Vastu Aligned' },
+        { label: 'Location', value: 'Channasandra, Whitefield' },
       ],
     },
   ],
@@ -200,6 +187,17 @@ export const PropertyDetailPage: React.FC<PropertyDetailPageProps> = ({
     ])
   ].filter((src, idx, arr) => arr.indexOf(src) === idx);
 
+  const heroImage = galleryImages[2] ?? galleryImages[0];
+
+  // Warm the browser cache for every gallery image so prev/next feels instant instead of re-fetching on click
+  useEffect(() => {
+    galleryImages.forEach((src) => {
+      const img = new Image();
+      img.src = src;
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [property.id]);
+
   const handleNextSlide = () => {
     setCurrentSlideIndex((prev) => (prev + 1) % galleryImages.length);
   };
@@ -268,26 +266,15 @@ export const PropertyDetailPage: React.FC<PropertyDetailPageProps> = ({
           background: '#090d14'
         }}
       >
-        {/* Ambient Blur Layer + Full Crisp Image Layer */}
+        {/* Ambient Blur Layer + Full Crisp Image Layer — crossfades across the project's images */}
         <div style={{ position: 'absolute', inset: 0, overflow: 'hidden', pointerEvents: 'none' }}>
           <div
             style={{
               position: 'absolute',
-              inset: '-20px',
-              backgroundImage: `url('${galleryImages[0]}')`,
+              inset: 0,
+              backgroundImage: `linear-gradient(180deg, rgba(9,13,20,0.25) 0%, rgba(9,13,20,0.65) 100%), url('${heroImage}')`,
               backgroundSize: 'cover',
               backgroundPosition: 'center',
-              filter: 'blur(30px) brightness(0.35)',
-              transform: 'scale(1.1)'
-            }}
-          />
-          <div
-            style={{
-              position: 'absolute',
-              inset: 0,
-              backgroundImage: `linear-gradient(180deg, rgba(9,13,20,0.25) 0%, rgba(9,13,20,0.65) 100%), url('${galleryImages[0]}')`,
-              backgroundSize: 'contain',
-              backgroundPosition: 'center center',
               backgroundRepeat: 'no-repeat',
             }}
           />
@@ -422,28 +409,17 @@ export const PropertyDetailPage: React.FC<PropertyDetailPageProps> = ({
               />
             </div>
           ) : property.id === 'reviva-trinity-lifescape' ? (
-            <div
-              className="reveal-left card-tilt"
-              style={{
-                background: 'linear-gradient(160deg, #00433D 0%, #012e2a 100%)',
-                borderRadius: '16px',
-                padding: '4rem 2rem',
-                textAlign: 'center',
-                color: '#ffffff',
-                boxShadow: '0 20px 40px rgba(0, 67, 61, 0.25)',
-                position: 'relative',
-                overflow: 'hidden'
-              }}
-            >
-              <div style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, opacity: 0.08, background: 'radial-gradient(circle, #ffffff 10%, transparent 10%) center/20px 20px' }} />
-              <div style={{ position: 'relative', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                <DoveMark size={46} color="#e5b869" />
-                <RevivaWordmark height={30} color="#e5b869" style={{ marginTop: '0.85rem' }} />
-                <div style={{ width: '40px', height: '2px', background: '#9F783D', margin: '1.5rem 0' }} />
-                <h2 style={{ fontFamily: 'serif', fontStyle: 'italic', fontSize: '2.25rem', fontWeight: 400, color: '#ffffff' }}>
-                  trinity lifescape
-                </h2>
-              </div>
+            <div className="reveal-left card-tilt" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.75rem', borderRadius: '16px', overflow: 'hidden', boxShadow: '0 20px 40px rgba(0, 67, 61, 0.25)' }}>
+              <img
+                src="/media/images/reviva-trinity-lifescape-2.jpg"
+                alt="Reviva Trinity Lifescape"
+                style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+              />
+              <img
+                src="/media/images/reviva-trinity-lifescape-3.jpg"
+                alt="Reviva Trinity Lifescape"
+                style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+              />
             </div>
           ) : (
             <div
@@ -695,144 +671,64 @@ export const PropertyDetailPage: React.FC<PropertyDetailPageProps> = ({
           </h2>
         </div>
 
+        {/* Split panel: full image (left, never cropped) + curated slide details (right) */}
         <div
-          className="gallery-split-layout"
           style={{
             position: 'relative',
+            width: '100%',
+            maxWidth: '1100px',
+            margin: '0 auto',
+            background: '#0a0f14',
             borderRadius: '16px',
             overflow: 'hidden',
-            boxShadow: '0 20px 48px rgba(0,0,0,0.18)',
-            background: '#0a0f14',
             border: '1px solid rgba(159, 120, 61, 0.3)',
+            boxShadow: '0 20px 48px rgba(0,0,0,0.18)',
             display: 'grid',
-            gridTemplateColumns: 'minmax(0, 1.35fr) minmax(0, 1fr)',
-            minHeight: '520px',
+            gridTemplateColumns: 'minmax(0, 1.3fr) minmax(0, 1fr)',
           }}
         >
-          {/* Left Column: Docked Image with Previous/Next Controls */}
-          <div
-            style={{
-              position: 'relative',
-              background: '#070b0e',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              overflow: 'hidden',
-              minHeight: '380px',
-            }}
-          >
-            {/* Background subtle blur */}
-            <div
-              style={{
-                position: 'absolute',
-                inset: '-20px',
-                backgroundImage: `url('${galleryImages[currentSlideIndex]}')`,
-                backgroundSize: 'cover',
-                backgroundPosition: 'center',
-                filter: 'blur(30px) brightness(0.25)',
-                transform: 'scale(1.15)',
-                pointerEvents: 'none',
-              }}
-            />
-
-            {/* Main Slide Image */}
+          {/* Full image, sized to its own natural aspect ratio — never cropped, never letterboxed */}
+          <div style={{ position: 'relative', background: '#0a0f14', alignSelf: 'start' }}>
             <img
-              key={currentSlideIndex}
               src={galleryImages[currentSlideIndex]}
               alt={`${property.name} — view ${currentSlideIndex + 1}`}
-              className="fade-in-up"
-              style={{
-                position: 'relative',
-                zIndex: 2,
-                width: '100%',
-                height: '100%',
-                maxHeight: '580px',
-                objectFit: 'cover',
-                display: 'block',
-              }}
+              style={{ width: '100%', height: 'auto', display: 'block' }}
             />
 
-            {/* Navigation Arrows on Left Image Panel */}
             {galleryImages.length > 1 && (
               <>
                 <button
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    handlePrevSlide();
-                  }}
+                  onClick={handlePrevSlide}
                   aria-label="Previous image"
                   className="btn-magnetic"
                   style={{
-                    position: 'absolute',
-                    top: '50%',
-                    left: '1rem',
-                    transform: 'translateY(-50%)',
-                    background: 'rgba(0, 0, 0, 0.75)',
-                    color: '#ffffff',
-                    border: '1px solid rgba(255, 255, 255, 0.25)',
-                    width: '46px',
-                    height: '46px',
-                    borderRadius: '50%',
-                    cursor: 'pointer',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    backdropFilter: 'blur(8px)',
-                    zIndex: 20,
-                    pointerEvents: 'auto',
-                    boxShadow: '0 4px 16px rgba(0,0,0,0.5)',
+                    position: 'absolute', top: '50%', left: '1rem', transform: 'translateY(-50%)',
+                    background: 'rgba(0,0,0,0.75)', color: '#ffffff', border: '1px solid rgba(255,255,255,0.25)',
+                    width: '44px', height: '44px', borderRadius: '50%', cursor: 'pointer',
+                    display: 'flex', alignItems: 'center', justifyContent: 'center', backdropFilter: 'blur(8px)', zIndex: 20,
                   }}
                 >
-                  <ChevronLeft size={24} />
+                  <ChevronLeft size={22} />
                 </button>
-
                 <button
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    handleNextSlide();
-                  }}
+                  onClick={handleNextSlide}
                   aria-label="Next image"
                   className="btn-magnetic"
                   style={{
-                    position: 'absolute',
-                    top: '50%',
-                    right: '1rem',
-                    transform: 'translateY(-50%)',
-                    background: 'rgba(0, 0, 0, 0.75)',
-                    color: '#ffffff',
-                    border: '1px solid rgba(255, 255, 255, 0.25)',
-                    width: '46px',
-                    height: '46px',
-                    borderRadius: '50%',
-                    cursor: 'pointer',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    backdropFilter: 'blur(8px)',
-                    zIndex: 20,
-                    pointerEvents: 'auto',
-                    boxShadow: '0 4px 16px rgba(0,0,0,0.5)',
+                    position: 'absolute', top: '50%', right: '1rem', transform: 'translateY(-50%)',
+                    background: 'rgba(0,0,0,0.75)', color: '#ffffff', border: '1px solid rgba(255,255,255,0.25)',
+                    width: '44px', height: '44px', borderRadius: '50%', cursor: 'pointer',
+                    display: 'flex', alignItems: 'center', justifyContent: 'center', backdropFilter: 'blur(8px)', zIndex: 20,
                   }}
                 >
-                  <ChevronRight size={24} />
+                  <ChevronRight size={22} />
                 </button>
-
                 <div
                   style={{
-                    position: 'absolute',
-                    bottom: '1rem',
-                    left: '1rem',
-                    background: 'rgba(0, 0, 0, 0.75)',
-                    border: '1px solid rgba(159, 120, 61, 0.4)',
-                    color: '#e5b869',
-                    fontFamily: 'var(--font-accent)',
-                    fontSize: '0.75rem',
-                    fontWeight: 700,
-                    letterSpacing: '1.5px',
-                    padding: '0.35rem 0.85rem',
-                    borderRadius: '50px',
-                    zIndex: 10,
-                    backdropFilter: 'blur(6px)',
+                    position: 'absolute', bottom: '1rem', left: '1rem',
+                    background: 'rgba(0,0,0,0.75)', border: '1px solid rgba(159, 120, 61, 0.4)', color: '#e5b869',
+                    fontFamily: 'var(--font-accent)', fontSize: '0.75rem', fontWeight: 700, letterSpacing: '1.5px',
+                    padding: '0.35rem 0.85rem', borderRadius: '50px', zIndex: 10, backdropFilter: 'blur(6px)',
                   }}
                 >
                   {currentSlideIndex + 1} / {galleryImages.length}
@@ -841,54 +737,29 @@ export const PropertyDetailPage: React.FC<PropertyDetailPageProps> = ({
             )}
           </div>
 
-          {/* Right Column: Curated Slide Details */}
+          {/* Curated slide details */}
           <div
             style={{
-              position: 'relative',
-              zIndex: 3,
-              padding: '2.5rem 2rem',
-              display: 'flex',
-              flexDirection: 'column',
-              justifyContent: 'space-between',
-              background: 'linear-gradient(160deg, rgba(15, 23, 34, 0.96) 0%, rgba(9, 14, 20, 0.98) 100%)',
+              position: 'relative', zIndex: 3, padding: '2.25rem 2rem', display: 'flex', flexDirection: 'column',
+              justifyContent: 'space-between', background: 'linear-gradient(160deg, rgba(15, 23, 34, 0.96) 0%, rgba(9, 14, 20, 0.98) 100%)',
               borderLeft: '1px solid rgba(255, 255, 255, 0.08)',
             }}
           >
             <div>
-              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '1rem', flexWrap: 'wrap', gap: '0.5rem' }}>
-                <span
-                  style={{
-                    fontFamily: 'var(--font-accent)',
-                    fontSize: '0.72rem',
-                    fontWeight: 700,
-                    letterSpacing: '2px',
-                    textTransform: 'uppercase',
-                    color: '#e5b869',
-                    background: 'rgba(159, 120, 61, 0.15)',
-                    border: '1px solid rgba(159, 120, 61, 0.35)',
-                    padding: '0.3rem 0.75rem',
-                    borderRadius: '4px',
-                  }}
-                >
-                  {getSlideInfo(property.id, currentSlideIndex, property).tag}
-                </span>
-
-                <span style={{ fontSize: '0.8rem', color: '#94a3b8', fontFamily: 'var(--font-body)' }}>
-                  {property.name}
-                </span>
-              </div>
+              <span
+                style={{
+                  display: 'inline-block', fontFamily: 'var(--font-accent)', fontSize: '0.72rem', fontWeight: 700,
+                  letterSpacing: '2px', textTransform: 'uppercase', color: '#e5b869', background: 'rgba(159, 120, 61, 0.15)',
+                  border: '1px solid rgba(159, 120, 61, 0.35)', padding: '0.3rem 0.75rem', borderRadius: '4px', marginBottom: '1rem',
+                }}
+              >
+                {getSlideInfo(property.id, currentSlideIndex, property).tag}
+              </span>
 
               <h3
                 key={`title-${currentSlideIndex}`}
                 className="fade-in-up"
-                style={{
-                  fontFamily: 'var(--font-heading)',
-                  fontSize: 'clamp(1.4rem, 2vw, 1.85rem)',
-                  fontWeight: 600,
-                  color: '#ffffff',
-                  lineHeight: 1.3,
-                  marginBottom: '1rem',
-                }}
+                style={{ fontFamily: 'var(--font-heading)', fontSize: 'clamp(1.4rem, 2vw, 1.85rem)', fontWeight: 600, color: '#ffffff', lineHeight: 1.3, marginBottom: '1rem' }}
               >
                 {getSlideInfo(property.id, currentSlideIndex, property).title}
               </h3>
@@ -896,85 +767,43 @@ export const PropertyDetailPage: React.FC<PropertyDetailPageProps> = ({
               <p
                 key={`desc-${currentSlideIndex}`}
                 className="fade-in-up"
-                style={{
-                  fontFamily: 'var(--font-body)',
-                  fontSize: '0.95rem',
-                  color: '#cbd5e1',
-                  lineHeight: 1.75,
-                  marginBottom: '1.75rem',
-                }}
+                style={{ fontFamily: 'var(--font-body)', fontSize: '0.95rem', color: '#cbd5e1', lineHeight: 1.75, marginBottom: '1.75rem' }}
               >
                 {getSlideInfo(property.id, currentSlideIndex, property).description}
               </p>
 
-              {/* Key Highlight Chips / Metrics */}
-              <div
-                key={`chips-${currentSlideIndex}`}
-                className="fade-in-up"
-                style={{
-                  display: 'grid',
-                  gridTemplateColumns: 'repeat(auto-fit, minmax(130px, 1fr))',
-                  gap: '0.85rem',
-                  marginBottom: '1.5rem',
-                }}
-              >
-                {getSlideInfo(property.id, currentSlideIndex, property).highlights.map((item, idx) => (
-                  <div
-                    key={idx}
-                    style={{
-                      background: 'rgba(255, 255, 255, 0.04)',
-                      border: '1px solid rgba(159, 120, 61, 0.25)',
-                      padding: '0.75rem 0.85rem',
-                      borderRadius: '8px',
-                    }}
-                  >
-                    <div style={{ fontSize: '0.7rem', color: '#94a3b8', textTransform: 'uppercase', letterSpacing: '1px', marginBottom: '0.2rem' }}>
-                      {item.label}
+              {getSlideInfo(property.id, currentSlideIndex, property).highlights.length > 0 && (
+                <div
+                  key={`chips-${currentSlideIndex}`}
+                  className="fade-in-up"
+                  style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(130px, 1fr))', gap: '0.85rem', marginBottom: '1.5rem' }}
+                >
+                  {getSlideInfo(property.id, currentSlideIndex, property).highlights.map((item, idx) => (
+                    <div key={idx} style={{ background: 'rgba(255, 255, 255, 0.04)', border: '1px solid rgba(159, 120, 61, 0.25)', padding: '0.75rem 0.85rem', borderRadius: '8px' }}>
+                      <div style={{ fontSize: '0.7rem', color: '#94a3b8', textTransform: 'uppercase', letterSpacing: '1px', marginBottom: '0.2rem' }}>
+                        {item.label}
+                      </div>
+                      <div style={{ fontSize: '0.88rem', fontWeight: 600, color: '#e5b869' }}>
+                        {item.value}
+                      </div>
                     </div>
-                    <div style={{ fontSize: '0.88rem', fontWeight: 600, color: '#e5b869' }}>
-                      {item.value}
-                    </div>
-                  </div>
-                ))}
-              </div>
+                  ))}
+                </div>
+              )}
             </div>
 
-            {/* Quick Actions */}
             <div style={{ display: 'flex', gap: '0.75rem', paddingTop: '1rem', borderTop: '1px solid rgba(255, 255, 255, 0.08)' }}>
               <button
                 onClick={() => setIsEnquiryOpen(true)}
                 className="btn-primary"
-                style={{
-                  flex: 1,
-                  padding: '0.65rem 1rem',
-                  fontSize: '0.78rem',
-                  fontWeight: 700,
-                  letterSpacing: '1.5px',
-                  borderRadius: '6px',
-                  cursor: 'pointer',
-                  background: '#9F783D',
-                  color: '#ffffff',
-                  border: 'none',
-                }}
+                style={{ flex: 1, padding: '0.65rem 1rem', fontSize: '0.78rem', fontWeight: 700, letterSpacing: '1.5px', borderRadius: '6px', cursor: 'pointer', background: '#9F783D', color: '#ffffff', border: 'none' }}
               >
                 ENQUIRE NOW
               </button>
-
               <button
                 onClick={() => handleResourceClick('brochure')}
                 className="btn-outline"
-                style={{
-                  flex: 1,
-                  padding: '0.65rem 1rem',
-                  fontSize: '0.78rem',
-                  fontWeight: 700,
-                  letterSpacing: '1.5px',
-                  borderRadius: '6px',
-                  cursor: 'pointer',
-                  border: '1px solid #9F783D',
-                  color: '#e5b869',
-                  background: 'transparent',
-                }}
+                style={{ flex: 1, padding: '0.65rem 1rem', fontSize: '0.78rem', fontWeight: 700, letterSpacing: '1.5px', borderRadius: '6px', cursor: 'pointer', border: '1px solid #9F783D', color: '#e5b869', background: 'transparent' }}
               >
                 BROCHURE
               </button>
@@ -1046,6 +875,18 @@ export const PropertyDetailPage: React.FC<PropertyDetailPageProps> = ({
                   <span style={{ color: '#6b7280' }}>Kempegowda Int. Airport</span>
                   <span style={{ fontWeight: 700, color: '#111827' }}>~ 45 Mins</span>
                 </div>
+                {property.id === 'reviva-trinity-lifescape' && (
+                  <>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.9rem' }}>
+                      <span style={{ color: '#6b7280' }}>Huskur Metro Station</span>
+                      <span style={{ fontWeight: 700, color: '#111827' }}>2.5 km</span>
+                    </div>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.9rem' }}>
+                      <span style={{ color: '#6b7280' }}>Hebbagodi Metro Station</span>
+                      <span style={{ fontWeight: 700, color: '#111827' }}>3 km</span>
+                    </div>
+                  </>
+                )}
               </div>
             </div>
 

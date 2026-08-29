@@ -82,12 +82,12 @@ export const INITIAL_PROPERTIES: Property[] = [
     priceDisplay: '₹ 1.35 Cr* Onwards',
     bhk: ['2.5 BHK', '3 BHK'],
     areaSqFt: '1280 - 1750 Sq. Ft.',
-    image: '/media/images/reviva-vintage-valley.jpg',
+    image: '/media/images/reviva-vintage-valley-render-1.webp',
     gallery: [
-      '/media/images/reviva-vintage-valley.jpg',
-      '/media/images/reviva-vintage-valley-brand-cover.jpg',
-      '/media/images/reviva-harmony-with-nature.jpg',
-      '/media/images/eco-house-hero.jpg'
+      '/media/images/reviva-vintage-valley-render-1.webp',
+      '/media/images/reviva-vintage-valley-render-4.webp',
+      '/media/images/reviva-vintage-valley-render-3.webp',
+      '/media/images/reviva-vintage-valley-render-2.webp'
     ],
     amenities: [
       'Swimming Pool',

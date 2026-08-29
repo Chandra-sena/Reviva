@@ -19,7 +19,6 @@ import { WhoWeArePage } from './pages/WhoWeArePage';
 import { PhilosophyPage } from './pages/PhilosophyPage';
 import { ShowcasePage } from './pages/ShowcasePage';
 import { WhatWeDoPage } from './pages/WhatWeDoPage';
-import { CommercialPage } from './pages/CommercialPage';
 import { ContractingPage } from './pages/ContractingPage';
 import { ManufacturingPage } from './pages/ManufacturingPage';
 import { CareersPage } from './pages/CareersPage';
@@ -126,15 +125,6 @@ export function App() {
           cityInfo={cityInfo}
           onNavigate={navigate}
           onOpenEnquiry={() => { setEnquiryProperty(null); setIsEnquiryOpen(true); }}
-        />
-      );
-    }
-
-    if (path.startsWith('/commercial')) {
-      return (
-        <CommercialPage
-          cityInfo={cityInfo}
-          onNavigate={navigate}
         />
       );
     }
