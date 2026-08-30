@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import type { Property, CityInfo } from '../types';
 import { Breadcrumbs } from '../components/Breadcrumbs';
+import { TrinityLifescapeScrollHero } from '../components/TrinityLifescapeScrollHero';
+import { VintageValleyScrollHero } from '../components/VintageValleyScrollHero';
 import {
   MapPin, Download, Share2, ArrowLeft, Check,
   FileText, LayoutGrid, Map, X, Send, Sparkles, Navigation, ChevronLeft, ChevronRight
@@ -251,148 +253,156 @@ export const PropertyDetailPage: React.FC<PropertyDetailPageProps> = ({
   return (
     <div className="page-enter" style={{ background: '#ffffff', color: '#111827', minHeight: '100vh', paddingBottom: '4rem' }}>
 
-      {/* 1. REVIVA HERO BANNER SECTION */}
-      <div
-        style={{
-          position: 'relative',
-          width: '100%',
-          minHeight: '82vh',
-          display: 'flex',
-          flexDirection: 'column',
-          justifyContent: 'space-between',
-          color: '#ffffff',
-          padding: '100px 1.5rem 3rem 1.5rem',
-          overflow: 'hidden',
-          background: '#090d14'
-        }}
-      >
-        {/* Ambient Blur Layer + Full Crisp Image Layer — crossfades across the project's images */}
-        <div style={{ position: 'absolute', inset: 0, overflow: 'hidden', pointerEvents: 'none' }}>
-          <div
-            style={{
-              position: 'absolute',
-              inset: 0,
-              backgroundImage: `linear-gradient(180deg, rgba(9,13,20,0.25) 0%, rgba(9,13,20,0.65) 100%), url('${heroImage}')`,
-              backgroundSize: 'cover',
-              backgroundPosition: 'center',
-              backgroundRepeat: 'no-repeat',
-            }}
-          />
-        </div>
-
-        {/* Top Breadcrumb & Share Actions Bar */}
-        <div className="container" style={{ position: 'relative', zIndex: 1, display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '1rem' }}>
-          <Breadcrumbs
-            items={[
-              { label: 'Projects', path: '/properties' },
-              { label: property.name }
-            ]}
-            onNavigate={onNavigate}
-          />
-
-          <div style={{ display: 'flex', gap: '0.75rem' }}>
-            <button
-              onClick={handleShare}
+      {/* 1. HERO SECTION: CINEMATIC SCROLL HERO FOR TRINITY LIFESCAPE / VINTAGE VALLEY OR STANDARD HERO */}
+      {property.id === 'reviva-trinity-lifescape' ? (
+        <TrinityLifescapeScrollHero
+          property={property}
+          onNavigate={onNavigate}
+          onEnquireClick={() => setIsEnquiryOpen(true)}
+        />
+      ) : property.id === 'vintage-valley' ? (
+        <VintageValleyScrollHero
+          property={property}
+          onNavigate={onNavigate}
+          onEnquireClick={() => setIsEnquiryOpen(true)}
+        />
+      ) : (
+        <div
+          style={{
+            position: 'relative',
+            width: '100%',
+            minHeight: '82vh',
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'space-between',
+            color: '#ffffff',
+            padding: '100px 1.5rem 3rem 1.5rem',
+            overflow: 'hidden',
+            background: '#090d14'
+          }}
+        >
+          {/* Ambient Blur Layer + Full Crisp Image Layer — crossfades across the project's images */}
+          <div style={{ position: 'absolute', inset: 0, overflow: 'hidden', pointerEvents: 'none' }}>
+            <div
               style={{
-                background: 'rgba(0,0,0,0.5)',
-                border: '1px solid rgba(255,255,255,0.4)',
-                color: '#fff',
-                padding: '0.45rem 1rem',
-                borderRadius: '50px',
-                fontSize: '0.8rem',
-                cursor: 'pointer',
-                display: 'flex',
-                alignItems: 'center',
-                gap: '0.4rem',
-                backdropFilter: 'blur(6px)'
+                position: 'absolute',
+                inset: 0,
+                backgroundImage: `linear-gradient(180deg, rgba(9,13,20,0.25) 0%, rgba(9,13,20,0.65) 100%), url('${heroImage}')`,
+                backgroundSize: 'cover',
+                backgroundPosition: 'center',
+                backgroundRepeat: 'no-repeat',
               }}
-            >
-              <Share2 size={14} />
-              <span>{copiedLink ? 'Link Copied!' : 'Share'}</span>
-            </button>
-
-            <button
-              onClick={() => onNavigate('/properties')}
-              style={{
-                background: 'rgba(0,0,0,0.5)',
-                border: '1px solid rgba(255,255,255,0.4)',
-                color: '#fff',
-                padding: '0.45rem 1rem',
-                borderRadius: '50px',
-                fontSize: '0.8rem',
-                cursor: 'pointer',
-                display: 'flex',
-                alignItems: 'center',
-                gap: '0.4rem',
-                backdropFilter: 'blur(6px)'
-              }}
-            >
-              <ArrowLeft size={14} />
-              <span>All Projects</span>
-            </button>
+            />
           </div>
-        </div>
 
-        {/* Center Hero Overlay Headline */}
-        <div className="container" style={{ position: 'relative', zIndex: 1, textAlign: 'center', margin: '2.5rem auto' }}>
-          <h1
-            className="hero-reveal gold-shimmer-text"
-            style={{
-              fontFamily: 'var(--font-heading)',
-              fontSize: 'clamp(2rem, 5vw, 3.8rem)',
-              fontWeight: 700,
-              letterSpacing: '2px',
-              textTransform: 'uppercase',
-              lineHeight: 1.2,
-              filter: 'drop-shadow(0 4px 20px rgba(0,0,0,0.9))'
-            }}
-          >
-            WHERE LIFE BLOOMS IN EVERY CORNER
-          </h1>
-        </div>
+          {/* Top Breadcrumb & Share Actions Bar */}
+          <div className="container" style={{ position: 'relative', zIndex: 1, display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '1rem' }}>
+            <Breadcrumbs
+              items={[
+                { label: 'Projects', path: '/properties' },
+                { label: property.name }
+              ]}
+              onNavigate={onNavigate}
+            />
 
-        {/* Bottom Hero Info & Floating ENQUIRE Pill Button */}
-        <div className="container hero-reveal hero-reveal-delay-1" style={{ position: 'relative', zIndex: 1, display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', flexWrap: 'wrap', gap: '1.5rem' }}>
-          {property.id === 'reviva-trinity-lifescape' && (
-            <div className="desktop-only" style={{ maxWidth: '380px', fontFamily: 'serif', fontStyle: 'italic', fontSize: 'clamp(1.2rem, 1.8vw, 1.6rem)', lineHeight: 1.35, color: '#ffffff', opacity: 0.75, textShadow: '0 2px 10px rgba(0,0,0,0.8)' }}>
-              Residences are positioned to overlook garden
-            </div>
-          )}
+            <div style={{ display: 'flex', gap: '0.75rem' }}>
+              <button
+                onClick={handleShare}
+                style={{
+                  background: 'rgba(0,0,0,0.5)',
+                  border: '1px solid rgba(255,255,255,0.4)',
+                  color: '#fff',
+                  padding: '0.45rem 1rem',
+                  borderRadius: '50px',
+                  fontSize: '0.8rem',
+                  cursor: 'pointer',
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '0.4rem',
+                  backdropFilter: 'blur(6px)'
+                }}
+              >
+                <Share2 size={14} />
+                <span>{copiedLink ? 'Link Copied!' : 'Share'}</span>
+              </button>
 
-          <div>
-            <div style={{ fontSize: '1.4rem', fontWeight: 600, fontFamily: 'var(--font-heading)', letterSpacing: '0.5px', color: '#ffffff', textShadow: '0 2px 10px rgba(0,0,0,0.8)' }}>
-              The Grace of Classic Living
-            </div>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '0.95rem', color: '#ffffff', marginTop: '0.25rem', textShadow: '0 2px 8px rgba(0,0,0,0.8)' }}>
-              <MapPin size={16} color="#e5b869" />
-              <span>{property.location || 'Channasandra, Whitefield, Bangalore'}</span>
-            </div>
-            <div style={{ fontSize: '0.85rem', fontWeight: 700, letterSpacing: '1px', marginTop: '0.25rem', color: '#e5b869', textShadow: '0 2px 8px rgba(0,0,0,0.8)' }}>
-              {property.bhk ? property.bhk.join(' • ') : '2.5 BHK • 3 BHK'}
+              <button
+                onClick={() => onNavigate('/properties')}
+                style={{
+                  background: 'rgba(0,0,0,0.5)',
+                  border: '1px solid rgba(255,255,255,0.4)',
+                  color: '#fff',
+                  padding: '0.45rem 1rem',
+                  borderRadius: '50px',
+                  fontSize: '0.8rem',
+                  cursor: 'pointer',
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '0.4rem',
+                  backdropFilter: 'blur(6px)'
+                }}
+              >
+                <ArrowLeft size={14} />
+                <span>All Projects</span>
+              </button>
             </div>
           </div>
 
-          <button
-            className="btn-primary btn-magnetic"
-            onClick={() => setIsEnquiryOpen(true)}
-            style={{
-              background: '#9F783D',
-              color: '#ffffff',
-              border: 'none',
-              borderRadius: '50px',
-              padding: '0.75rem 2rem',
-              fontWeight: 700,
-              fontSize: '0.85rem',
-              letterSpacing: '1.5px',
-              textTransform: 'uppercase',
-              cursor: 'pointer',
-              boxShadow: '0 6px 20px rgba(159, 120, 61, 0.4)',
-            }}
-          >
-            ENQUIRE NOW
-          </button>
+          {/* Center Hero Overlay Headline */}
+          <div className="container" style={{ position: 'relative', zIndex: 1, textAlign: 'center', margin: '2.5rem auto' }}>
+            <h1
+              className="hero-reveal gold-shimmer-text"
+              style={{
+                fontFamily: 'var(--font-heading)',
+                fontSize: 'clamp(2rem, 5vw, 3.8rem)',
+                fontWeight: 700,
+                letterSpacing: '2px',
+                textTransform: 'uppercase',
+                lineHeight: 1.2,
+                filter: 'drop-shadow(0 4px 20px rgba(0,0,0,0.9))'
+              }}
+            >
+              WHERE LIFE BLOOMS IN EVERY CORNER
+            </h1>
+          </div>
+
+          {/* Bottom Hero Info & Floating ENQUIRE Pill Button */}
+          <div className="container hero-reveal hero-reveal-delay-1" style={{ position: 'relative', zIndex: 1, display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', flexWrap: 'wrap', gap: '1.5rem' }}>
+            <div>
+              <div style={{ fontSize: '1.4rem', fontWeight: 600, fontFamily: 'var(--font-heading)', letterSpacing: '0.5px', color: '#ffffff', textShadow: '0 2px 10px rgba(0,0,0,0.8)' }}>
+                The Grace of Classic Living
+              </div>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '0.95rem', color: '#ffffff', marginTop: '0.25rem', textShadow: '0 2px 8px rgba(0,0,0,0.8)' }}>
+                <MapPin size={16} color="#e5b869" />
+                <span>{property.location || 'Channasandra, Whitefield, Bangalore'}</span>
+              </div>
+              <div style={{ fontSize: '0.85rem', fontWeight: 700, letterSpacing: '1px', marginTop: '0.25rem', color: '#e5b869', textShadow: '0 2px 8px rgba(0,0,0,0.8)' }}>
+                {property.bhk ? property.bhk.join(' • ') : '2.5 BHK • 3 BHK'}
+              </div>
+            </div>
+
+            <button
+              className="btn-primary btn-magnetic"
+              onClick={() => setIsEnquiryOpen(true)}
+              style={{
+                background: '#9F783D',
+                color: '#ffffff',
+                border: 'none',
+                borderRadius: '50px',
+                padding: '0.75rem 2rem',
+                fontWeight: 700,
+                fontSize: '0.85rem',
+                letterSpacing: '1.5px',
+                textTransform: 'uppercase',
+                cursor: 'pointer',
+                boxShadow: '0 6px 20px rgba(159, 120, 61, 0.4)',
+              }}
+            >
+              ENQUIRE NOW
+            </button>
+          </div>
         </div>
-      </div>
+      )}
 
       {/* 2. OVERVIEW & BRAND LOGO SECTION (Reviva Project Overview & Leaf Logo Branding) */}
       {property.id !== 'reviva-farms' && (

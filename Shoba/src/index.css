@@ -131,7 +131,7 @@ html, body {
      content is short, but lets the box grow (and the real page scroll
      normally) when content is taller. */
   min-height: 100%;
-  overflow-x: hidden;
+  overflow-x: clip;
   background-color: #ffffff;
   color: #111827;
   font-family: var(--font-body);
@@ -790,11 +790,206 @@ html {
 
 /* ── 2. PAGE ENTRY ANIMATION ── */
 @keyframes pageEnter {
-  from { opacity: 0; transform: translateY(16px); }
-  to   { opacity: 1; transform: translateY(0); }
+  from { opacity: 0; }
+  to   { opacity: 1; }
 }
 .page-enter {
-  animation: pageEnter 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+  animation: pageEnter 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* ── 3. HERO TEXT REVEAL — letter by letter feel via clip ── */
+@keyframes heroReveal {
+  from { opacity: 0; transform: translateY(32px) skewY(2deg); filter: blur(6px); }
+  to   { opacity: 1; transform: translateY(0) skewY(0deg);   filter: blur(0); }
+}
+.hero-reveal {
+  animation: heroReveal 0.85s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+.hero-reveal-delay-1 { animation-delay: 0.12s; }
+.hero-reveal-delay-2 { animation-delay: 0.24s; }
+.hero-reveal-delay-3 { animation-delay: 0.36s; }
+.hero-reveal-delay-4 { animation-delay: 0.48s; }
+
+/* ── 4. ENHANCED IMAGE HOVER — Zoom + brightness + overlay ── */
+.img-hover-wrap {
+  overflow: hidden;
+  position: relative;
+  border-radius: inherit;
+}
+
+.img-hover-wrap img {
+  transition: transform 0.65s cubic-bezier(0.25, 1, 0.5, 1),
+              filter 0.65s cubic-bezier(0.25, 1, 0.5, 1) !important;
+  will-change: transform;
+}
+
+.img-hover-wrap:hover img {
+  transform: scale(1.08) !important;
+  filter: brightness(1.08) saturate(1.1) !important;
+}
+
+/* Gold overlay shimmer on image hover */
+.img-hover-wrap::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, transparent 40%, rgba(159, 120, 61, 0.12) 100%);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  pointer-events: none;
+  z-index: 2;
+}
+.img-hover-wrap:hover::after {
+  opacity: 1;
+}
+
+/* ── 5. PREMIUM BUTTON ANIMATIONS ── */
+
+/* Gold ripple effect on click */
+.btn-ripple {
+  position: relative;
+  overflow: hidden;
+}
+.btn-ripple::after {
+  content: '';
+  position: absolute;
+  inset: 50% 50%;
+  width: 0;
+  height: 0;
+  background: rgba(255, 255, 255, 0.25);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition: width 0.5s ease, height 0.5s ease, opacity 0.5s ease;
+  opacity: 0;
+}
+.btn-ripple:active::after {
+  width: 220%;
+  height: 220%;
+  opacity: 0;
+  transition: width 0.5s ease, height 0.5s ease, opacity 0.4s ease 0.1s;
+}
+
+/* Magnetic hover lift */
+.btn-magnetic {
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+.btn-magnetic:hover {
+  transform: translateY(-4px) scale(1.03) !important;
+  box-shadow: 0 14px 32px rgba(0, 0, 0, 0.2), 0 0 20px rgba(159, 120, 61, 0.3) !important;
+}
+.btn-magnetic:active {
+  transform: translateY(0) scale(0.98) !important;
+  transition-duration: 0.12s !important;
+}
+
+/* ── 6. CARD 3D TILT — subtle perspective hover ── */
+.card-tilt {
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.35s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  transform-style: preserve-3d;
+}
+.card-tilt:hover {
+  transform: perspective(800px) rotateX(2deg) rotateY(-2deg) translateY(-6px) !important;
+  box-shadow: 0 24px 48px rgba(0, 0, 0, 0.18), 0 0 28px rgba(159, 120, 61, 0.2) !important;
+}
+
+/* ── 7. GOLD TEXT SHIMMER (for headings) ── */
+@keyframes goldShimmer {
+  0%   { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+.gold-shimmer-text {
+  background: linear-gradient(90deg, #9F783D 0%, #f3d79b 40%, #e5b869 55%, #9F783D 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: goldShimmer 4s linear infinite;
+}
+
+/* ── 8. FLOATING / BREATHING ANIMATION ── */
+@keyframes float {
+  0%,100% { transform: translateY(0); }
+  50%      { transform: translateY(-8px); }
+}
+.float-anim {
+  animation: float 4s ease-in-out infinite;
+}
+
+/* ── 9. SECTION DIVIDER LINE DRAW ── */
+@keyframes drawLine {
+  from { width: 0; opacity: 0; }
+  to   { width: 60px; opacity: 1; }
+}
+.line-draw {
+  display: block;
+  height: 2px;
+  background: #9E783C;
+  animation: drawLine 0.8s cubic-bezier(0.22, 1, 0.36, 1) 0.3s both;
+  border-radius: 2px;
+}
+
+/* ── 10. FOOTER & NAV LINK UNDERLINE GLOW ── */
+.link-glow {
+  position: relative;
+  transition: color 0.25s ease;
+}
+.link-glow::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: #9E783C;
+  box-shadow: 0 0 6px rgba(159, 120, 61, 0.7);
+  transition: width 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.link-glow:hover::after {
+  width: 100%;
+}
+.link-glow:hover {
+  color: #e5b869 !important;
+}
+
+/* ── 11. SKELETON SHIMMER (loading state) ── */
+@keyframes skeletonShimmer {
+  from { background-position: -400px 0; }
+  to   { background-position: 400px 0; }
+}
+.skeleton {
+  background: linear-gradient(90deg, rgba(255,255,255,0.05) 25%, rgba(255,255,255,0.12) 50%, rgba(255,255,255,0.05) 75%);
+  background-size: 800px 100%;
+  animation: skeletonShimmer 1.8s infinite linear;
+  border-radius: 6px;
+}
+
+/* ── 12b. KEN BURNS — slow ambient zoom for CSS background-image heroes ── */
+@keyframes kenBurns {
+  from { transform: scale(1); }
+  to   { transform: scale(1.09); }
+}
+.ken-burns {
+  animation: kenBurns 14s cubic-bezier(0.25, 0.1, 0.25, 1) infinite alternate;
+  will-change: transform;
+}
+
+/* ── 12c. BG-IMAGE HOVER ZOOM — for div[style*=backgroundImage] card thumbnails ── */
+.bg-zoom-hover {
+  overflow: hidden;
+}
+.bg-zoom-hover > * {
+  transition: transform 0.65s cubic-bezier(0.25, 1, 0.5, 1), filter 0.65s cubic-bezier(0.25, 1, 0.5, 1);
+}
+.bg-zoom-hover:hover > * {
+  transform: scale(1.08);
+  filter: brightness(1.06) saturate(1.08);
+}
+
+/* ── 12d. FOCUS-VISIBLE RING for keyboard nav on interactive elements ── */
+button:focus-visible,
+a:focus-visible {
 }
 
 /* ── 3. HERO TEXT REVEAL — letter by letter feel via clip ── */
@@ -1002,4 +1197,40 @@ a:focus-visible {
   }
 }
 
+/* ── 13. TRINITY LIFESCAPE SCROLL-DRIVEN HERO ── */
+@keyframes mouseScroll {
+  0% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  50% {
+    opacity: 0.3;
+    transform: translateY(10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
 
+.trinity-scroll-container,
+.vintage-scroll-container,
+.home-scroll-container {
+  will-change: transform;
+}
+
+.trinity-sticky-viewport,
+.vintage-sticky-viewport,
+.home-sticky-viewport {
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+}
+
+@media (max-width: 768px) {
+  .trinity-scroll-container,
+  .vintage-scroll-container {
+    height: 300vh !important; /* Calibrated swipe travel for mobile */
+  }
+  .home-scroll-container {
+    height: 360vh !important; /* Calibrated swipe travel for 679 frames on mobile */
+  }
+}

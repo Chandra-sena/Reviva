@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { useScrollReveal } from './hooks/useScrollReveal';
 import { useRouter } from './useRouter';
 import { Header } from './components/Header';
-import { IntroVideoPlaceholder } from './components/IntroVideoPlaceholder';
+import { HomeScrollHero } from './components/HomeScrollHero';
 import { PassionAtWork } from './components/PassionAtWork';
 import { FeaturedCarousel } from './components/FeaturedCarousel';
 import { WhatWeDoSection } from './components/WhatWeDoSection';
@@ -220,8 +220,11 @@ export function App() {
     // Default Reviva Homepage
     return (
       <>
-        {/* 1. Hero Banner */}
-        <IntroVideoPlaceholder />
+        {/* 1. 3-Stage Cinematic Scroll Hero (hero1 -> hero2 -> hero3) */}
+        <HomeScrollHero
+          onNavigate={navigate}
+          onOpenEnquiry={() => { setEnquiryProperty(null); setIsEnquiryOpen(true); }}
+        />
 
         {/* 2. REVIVA PHILOSOPHY Section */}
         <PassionAtWork onReadMore={() => navigate('/who-we-are')} />
