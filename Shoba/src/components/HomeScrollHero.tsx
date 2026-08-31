@@ -7,18 +7,18 @@ interface HomeScrollHeroProps {
 }
 
 // Stage 1: Hero 1 (240 frames)
-// Stage 2: Hero 2 (179 frames)
-// Stage 3: Hero 3 (260 frames)
+// Stage 2: Hero 2 (180 frames)
+// Stage 3: Hero 3 (261 frames)
 const HERO1_COUNT = 240;
-const HERO2_COUNT = 179;
-const HERO3_COUNT = 260;
-const TOTAL_FRAMES = HERO1_COUNT + HERO2_COUNT + HERO3_COUNT; // 679 frames
+const HERO2_COUNT = 180;
+const HERO3_COUNT = 261;
+const TOTAL_FRAMES = HERO1_COUNT + HERO2_COUNT + HERO3_COUNT; // 681 frames
 
 const getFramePath = (index: number): { path: string; chapter: number; chapterFrame: number; chapterTotal: number } => {
   if (index < HERO1_COUNT) {
     const frameNum = String(index + 1).padStart(3, '0');
     return {
-      path: `/hero1-frames/ezgif-frame-${frameNum}.jpg`,
+      path: `/hero1(8k)-frames/ezgif-frame-${frameNum}.jpg`,
       chapter: 1,
       chapterFrame: index + 1,
       chapterTotal: HERO1_COUNT,
@@ -27,7 +27,7 @@ const getFramePath = (index: number): { path: string; chapter: number; chapterFr
     const localIdx = index - HERO1_COUNT;
     const frameNum = String(localIdx + 1).padStart(3, '0');
     return {
-      path: `/hero2-frames/ezgif-frame-${frameNum}.jpg`,
+      path: `/hero2(8k)-frames/ezgif-frame-${frameNum}.jpg`,
       chapter: 2,
       chapterFrame: localIdx + 1,
       chapterTotal: HERO2_COUNT,
@@ -36,7 +36,7 @@ const getFramePath = (index: number): { path: string; chapter: number; chapterFr
     const localIdx = index - (HERO1_COUNT + HERO2_COUNT);
     const frameNum = String(localIdx + 1).padStart(3, '0');
     return {
-      path: `/hero3-frames/ezgif-frame-${frameNum}.jpg`,
+      path: `/hero3(8k)-frames/ezgif-frame-${frameNum}.jpg`,
       chapter: 3,
       chapterFrame: localIdx + 1,
       chapterTotal: HERO3_COUNT,
