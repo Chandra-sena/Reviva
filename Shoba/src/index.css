@@ -1231,6 +1231,6 @@ a:focus-visible {
     height: 300vh !important; /* Calibrated swipe travel for mobile */
   }
   .home-scroll-container {
-    height: 360vh !important; /* Calibrated swipe travel for 679 frames on mobile */
+    height: 450vh !important; /* Calibrated swipe travel for 681 frames on mobile */
   }
 }

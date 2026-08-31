@@ -63,8 +63,11 @@ export const VintageValleyScrollHero: React.FC<VintageValleyScrollHeroProps> = (
   const drawFrame = useCallback((frameIdx: number) => {
     const canvas = canvasRef.current;
     if (!canvas) return;
-    const ctx = canvas.getContext('2d');
+    const ctx = canvas.getContext('2d', { alpha: false });
     if (!ctx) return;
+
+    ctx.imageSmoothingEnabled = true;
+    ctx.imageSmoothingQuality = 'high';
 
     const img = getNearestLoadedImage(frameIdx);
     if (!img || !img.complete || img.naturalWidth === 0) return;
@@ -96,8 +99,10 @@ export const VintageValleyScrollHero: React.FC<VintageValleyScrollHeroProps> = (
     const targetW = Math.round(width * dpr);
     const targetH = Math.round(height * dpr);
 
-    canvas.width = targetW;
-    canvas.height = targetH;
+    if (canvas.width !== targetW || canvas.height !== targetH) {
+      canvas.width = targetW;
+      canvas.height = targetH;
+    }
     drawFrame(Math.round(currentFrameRef.current));
   }, [drawFrame]);
 
@@ -227,8 +232,8 @@ export const VintageValleyScrollHero: React.FC<VintageValleyScrollHeroProps> = (
       const current = currentFrameRef.current;
       const diff = target - current;
 
-      if (Math.abs(diff) > 0.02) {
-        currentFrameRef.current += diff * 0.32;
+      if (Math.abs(diff) > 0.005) {
+        currentFrameRef.current += diff * 0.11;
       } else {
         currentFrameRef.current = target;
       }
@@ -299,7 +304,6 @@ export const VintageValleyScrollHero: React.FC<VintageValleyScrollHeroProps> = (
             objectFit: 'cover',
             display: 'block',
             zIndex: 1,
-            filter: 'contrast(102%) brightness(98%)',
           }}
         />
 

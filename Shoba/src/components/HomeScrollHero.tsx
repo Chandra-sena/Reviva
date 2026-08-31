@@ -89,26 +89,60 @@ export const HomeScrollHero: React.FC<HomeScrollHeroProps> = ({
   const drawFrame = useCallback((frameIdx: number) => {
     const canvas = canvasRef.current;
     if (!canvas) return;
-    const ctx = canvas.getContext('2d');
+    const ctx = canvas.getContext('2d', { alpha: false });
     if (!ctx) return;
 
-    const img = getNearestLoadedImage(frameIdx);
-    if (!img || !img.complete || img.naturalWidth === 0) return;
+    // Enable high-quality bicubic image smoothing
+    ctx.imageSmoothingEnabled = true;
+    ctx.imageSmoothingQuality = 'high';
 
     const canvasWidth = canvas.width;
     const canvasHeight = canvas.height;
     if (canvasWidth === 0 || canvasHeight === 0) return;
 
-    // Calculate "cover" dimensions
-    const imgWidth = img.naturalWidth;
-    const imgHeight = img.naturalHeight;
-    const scale = Math.max(canvasWidth / imgWidth, canvasHeight / imgHeight);
-    const renderWidth = imgWidth * scale;
-    const renderHeight = imgHeight * scale;
-    const offsetX = (canvasWidth - renderWidth) / 2;
-    const offsetY = (canvasHeight - renderHeight) / 2;
+    // Helper to draw single image with cover fit
+    const renderImageCover = (img: HTMLImageElement, alpha: number = 1) => {
+      if (!img || !img.complete || img.naturalWidth === 0) return;
+      const imgWidth = img.naturalWidth;
+      const imgHeight = img.naturalHeight;
+      const scale = Math.max(canvasWidth / imgWidth, canvasHeight / imgHeight);
+      const renderWidth = imgWidth * scale;
+      const renderHeight = imgHeight * scale;
+      const offsetX = (canvasWidth - renderWidth) / 2;
+      const offsetY = (canvasHeight - renderHeight) / 2;
 
-    ctx.drawImage(img, offsetX, offsetY, renderWidth, renderHeight);
+      ctx.globalAlpha = alpha;
+      ctx.drawImage(img, offsetX, offsetY, renderWidth, renderHeight);
+    };
+
+    // Check for chapter cross-dissolve transitions
+    const BOUNDARY_1 = HERO1_COUNT; // Frame 240
+    const BOUNDARY_2 = HERO1_COUNT + HERO2_COUNT; // Frame 420
+    const BLEND_RADIUS = 6; // 12-frame cross-dissolve window
+
+    if (Math.abs(frameIdx - BOUNDARY_1) <= BLEND_RADIUS) {
+      // Transition from Chapter 1 to Chapter 2
+      const t = (frameIdx - (BOUNDARY_1 - BLEND_RADIUS)) / (BLEND_RADIUS * 2);
+      const outgoingImg = getNearestLoadedImage(BOUNDARY_1 - 1);
+      const incomingImg = getNearestLoadedImage(BOUNDARY_1);
+
+      if (outgoingImg) renderImageCover(outgoingImg, 1);
+      if (incomingImg) renderImageCover(incomingImg, Math.max(0, Math.min(1, t)));
+      ctx.globalAlpha = 1.0;
+    } else if (Math.abs(frameIdx - BOUNDARY_2) <= BLEND_RADIUS) {
+      // Transition from Chapter 2 to Chapter 3
+      const t = (frameIdx - (BOUNDARY_2 - BLEND_RADIUS)) / (BLEND_RADIUS * 2);
+      const outgoingImg = getNearestLoadedImage(BOUNDARY_2 - 1);
+      const incomingImg = getNearestLoadedImage(BOUNDARY_2);
+
+      if (outgoingImg) renderImageCover(outgoingImg, 1);
+      if (incomingImg) renderImageCover(incomingImg, Math.max(0, Math.min(1, t)));
+      ctx.globalAlpha = 1.0;
+    } else {
+      // Standard single frame render
+      const img = getNearestLoadedImage(frameIdx);
+      if (img) renderImageCover(img, 1.0);
+    }
   }, [getNearestLoadedImage]);
 
   // Canvas resize handler
@@ -122,12 +156,14 @@ export const HomeScrollHero: React.FC<HomeScrollHeroProps> = ({
     const targetW = Math.round(width * dpr);
     const targetH = Math.round(height * dpr);
 
-    canvas.width = targetW;
-    canvas.height = targetH;
+    if (canvas.width !== targetW || canvas.height !== targetH) {
+      canvas.width = targetW;
+      canvas.height = targetH;
+    }
     drawFrame(Math.round(currentFrameRef.current));
   }, [drawFrame]);
 
-  // Robust Concurrent Preloader for 3 sequential stages
+  // Multi-Tier High-Efficiency Preloader
   useEffect(() => {
     let isCancelled = false;
     let loadedCount = 0;
@@ -142,7 +178,7 @@ export const HomeScrollHero: React.FC<HomeScrollHeroProps> = ({
         setIsInitialReady(true);
       }
 
-      // Redraw if the loaded frame is near the current scrub position
+      // Instant redraw if the newly loaded frame is within active scrub proximity
       const current = Math.round(currentFrameRef.current);
       if (Math.abs(current - loadedIndex) <= 3) {
         drawFrame(current);
@@ -151,6 +187,11 @@ export const HomeScrollHero: React.FC<HomeScrollHeroProps> = ({
 
     const loadImage = (index: number): Promise<HTMLImageElement | null> => {
       return new Promise((resolve) => {
+        if (index < 0 || index >= TOTAL_FRAMES) {
+          resolve(null);
+          return;
+        }
+
         if (imagesRef.current[index] && isFrameLoadedRef.current[index]) {
           resolve(imagesRef.current[index]);
           return;
@@ -186,31 +227,62 @@ export const HomeScrollHero: React.FC<HomeScrollHeroProps> = ({
       });
     };
 
-    // 1. Immediately prioritize Keyframes (Frame 001 of Hero 1, Hero 2, Hero 3)
-    const priorityKeyframes = [0, HERO1_COUNT, HERO1_COUNT + HERO2_COUNT];
-    Promise.all(priorityKeyframes.map(loadImage)).then(() => {
+    // 1. Tier 1: Immediately load Frame 001 and keyframe grid (every 4th frame)
+    // This gives instant 60fps continuity across the entire sequence within milliseconds
+    const tier1Indices: number[] = [0, HERO1_COUNT, HERO1_COUNT + HERO2_COUNT, TOTAL_FRAMES - 1];
+    for (let i = 0; i < TOTAL_FRAMES; i += 4) {
+      if (!tier1Indices.includes(i)) tier1Indices.push(i);
+    }
+
+    Promise.all([loadImage(0), loadImage(HERO1_COUNT), loadImage(HERO1_COUNT + HERO2_COUNT)]).then(() => {
       if (isCancelled) return;
       handleResize();
       drawFrame(0);
 
-      // 2. Load all 679 frames concurrently in ordered batches
-      const allIndices = Array.from({ length: TOTAL_FRAMES }, (_, i) => i);
-      const BATCH_SIZE = 18;
-      let currentIndex = 0;
+      // Load remaining Tier 1 grid
+      const BATCH_SIZE = 24;
+      let t1Idx = 0;
 
-      const loadNextBatch = () => {
-        if (isCancelled || currentIndex >= allIndices.length) return;
-        const batch = allIndices.slice(currentIndex, currentIndex + BATCH_SIZE);
-        currentIndex += BATCH_SIZE;
+      const loadTier1Batch = () => {
+        if (isCancelled) return;
+        if (t1Idx >= tier1Indices.length) {
+          // Tier 1 finished: now fill in all remaining frames (Tier 2)
+          loadRemainingFrames();
+          return;
+        }
+        const batch = tier1Indices.slice(t1Idx, t1Idx + BATCH_SIZE);
+        t1Idx += BATCH_SIZE;
 
         Promise.all(batch.map(loadImage)).then(() => {
           if (!isCancelled) {
-            setTimeout(loadNextBatch, 12);
+            setTimeout(loadTier1Batch, 6);
           }
         });
       };
 
-      loadNextBatch();
+      const loadRemainingFrames = () => {
+        const remainingIndices: number[] = [];
+        for (let i = 0; i < TOTAL_FRAMES; i++) {
+          if (!isFrameLoadedRef.current[i]) remainingIndices.push(i);
+        }
+
+        let remIdx = 0;
+        const loadNextRemBatch = () => {
+          if (isCancelled || remIdx >= remainingIndices.length) return;
+          const batch = remainingIndices.slice(remIdx, remIdx + BATCH_SIZE);
+          remIdx += BATCH_SIZE;
+
+          Promise.all(batch.map(loadImage)).then(() => {
+            if (!isCancelled) {
+              setTimeout(loadNextRemBatch, 6);
+            }
+          });
+        };
+
+        loadNextRemBatch();
+      };
+
+      loadTier1Batch();
     });
 
     return () => {
@@ -227,7 +299,7 @@ export const HomeScrollHero: React.FC<HomeScrollHeroProps> = ({
     };
   }, [handleResize]);
 
-  // Scroll listener & smooth interpolation render loop
+  // Scroll listener & smooth cinematic interpolation render loop
   useEffect(() => {
     let lastRenderedFrame = -1;
 
@@ -249,14 +321,15 @@ export const HomeScrollHero: React.FC<HomeScrollHeroProps> = ({
     window.addEventListener('scroll', updateScroll, { passive: true });
     updateScroll();
 
-    // Lerping Animation Loop for 60/120fps fluid playback
+    // Fluid Cinematic Lerp Loop: smooth gliding across all intermediate frames
     const renderLoop = () => {
       const target = targetFrameRef.current;
       const current = currentFrameRef.current;
       const diff = target - current;
 
-      if (Math.abs(diff) > 0.02) {
-        currentFrameRef.current += diff * 0.32;
+      if (Math.abs(diff) > 0.005) {
+        // Calibrated damping factor (0.11) guarantees every wheel notch glides through intermediate frames smoothly
+        currentFrameRef.current += diff * 0.11;
       } else {
         currentFrameRef.current = target;
       }
@@ -298,7 +371,7 @@ export const HomeScrollHero: React.FC<HomeScrollHeroProps> = ({
       style={{
         position: 'relative',
         width: '100%',
-        height: '480vh',
+        height: '650vh',
         background: '#070b10',
       }}
     >
@@ -319,18 +392,21 @@ export const HomeScrollHero: React.FC<HomeScrollHeroProps> = ({
           zIndex: 10,
         }}
       >
-        {/* Full Viewport Canvas */}
+        {/* Full Viewport Canvas - Inset Frame */}
         <canvas
           ref={canvasRef}
           style={{
             position: 'absolute',
-            inset: 0,
-            width: '100%',
-            height: '100%',
+            top: '12px',
+            left: '12px',
+            right: '12px',
+            bottom: '12px',
+            width: 'calc(100% - 24px)',
+            height: 'calc(100% - 24px)',
             objectFit: 'cover',
             display: 'block',
+            borderRadius: '12px',
             zIndex: 1,
-            filter: 'contrast(102%) brightness(96%)',
           }}
         />
 
@@ -338,7 +414,11 @@ export const HomeScrollHero: React.FC<HomeScrollHeroProps> = ({
         <div
           style={{
             position: 'absolute',
-            inset: 0,
+            top: '12px',
+            left: '12px',
+            right: '12px',
+            bottom: '12px',
+            borderRadius: '12px',
             background: 'linear-gradient(180deg, rgba(7,11,16,0.65) 0%, rgba(7,11,16,0.12) 30%, rgba(7,11,16,0.12) 65%, rgba(7,11,16,0.85) 100%)',
             pointerEvents: 'none',
             zIndex: 2,
@@ -349,7 +429,11 @@ export const HomeScrollHero: React.FC<HomeScrollHeroProps> = ({
         <div
           style={{
             position: 'absolute',
-            inset: 0,
+            top: '12px',
+            left: '12px',
+            right: '12px',
+            bottom: '12px',
+            borderRadius: '12px',
             background: 'radial-gradient(circle at center, transparent 40%, rgba(4,7,11,0.55) 100%)',
             pointerEvents: 'none',
             zIndex: 2,
