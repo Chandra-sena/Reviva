@@ -128,11 +128,11 @@ export const INITIAL_PROPERTIES: Property[] = [
     priceDisplay: 'Price on Request',
     bhk: ['2 BHK', '3 BHK', '4 BHK'],
     areaSqFt: '1100 - 2900 Sq. Ft.',
-    image: '/assets/reviva-trinity-lifescape.jpg',
+    image: '/assets/reviva-trinity-lifescape-3.jpg',
     gallery: [
-      '/assets/reviva-trinity-lifescape.jpg',
+      '/assets/reviva-trinity-lifescape-3.jpg',
       '/assets/reviva-trinity-lifescape-2.jpg',
-      '/assets/reviva-trinity-lifescape-3.jpg'
+      '/assets/reviva-trinity-lifescape.jpg'
     ],
     amenities: [
       'Landscaped Courts',

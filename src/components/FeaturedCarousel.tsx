@@ -14,7 +14,7 @@ const FEATURED_ITEMS: FeaturedItem[] = [
     id: 'reviva-trinity-lifescape',
     title: 'Reviva Trinity Lifescape',
     location: 'Bengaluru, Karnataka (2, 3 & 4 BHK Luxury Residences)',
-    imageDesktop: '/assets/reviva-trinity-lifescape.jpg',
+    imageDesktop: '/assets/reviva-trinity-lifescape-3.jpg',
     link: '/project/reviva-trinity-lifescape',
   },
   {
