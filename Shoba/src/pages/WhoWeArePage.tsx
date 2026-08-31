@@ -94,7 +94,7 @@ export const WhoWeArePage: React.FC<WhoWeArePageProps> = () => {
               Our Vision
             </h3>
             <p style={{ fontSize: '1.05rem', lineHeight: 1.7, color: 'rgba(255, 255, 255, 0.9)' }}>
-              We are committed to building eco-conscious spaces to enhance the quality of life.
+              Reviva aims to transform the real estate market, redefining modern living by creating spaces that inspire beauty, promote harmony, and enhance lifestyles. They blend creativity, sustainability, and innovation to shape a promising future.
             </p>
           </div>
 
@@ -103,7 +103,7 @@ export const WhoWeArePage: React.FC<WhoWeArePageProps> = () => {
               Our Mission
             </h3>
             <p style={{ fontSize: '1.05rem', lineHeight: 1.7, color: '#4b5563' }}>
-              We aim to embrace progressive design thought processes with purpose that elevates living.
+              We are committed to designing thoughtfully curated, eco-conscious spaces that enhance the quality of life. By passionately embracing forward-thinking design and creativity, we aim to transform living environments into experiences that reflect elegance, sustainability, and purposeful living.
             </p>
           </div>
         </div>

@@ -185,7 +185,7 @@ export const PhilosophyPage: React.FC<PhilosophyPageProps> = ({ onOpenEnquiry })
                 Our Vision
               </h3>
               <p style={{ color: '#cbd5e1', lineHeight: 1.8, fontSize: '1.05rem' }}>
-                We are committed to building eco-conscious spaces to enhance the quality of life.
+                Reviva aims to transform the real estate market, redefining modern living by creating spaces that inspire beauty, promote harmony, and enhance lifestyles. They blend creativity, sustainability, and innovation to shape a promising future.
               </p>
             </div>
 
@@ -205,7 +205,7 @@ export const PhilosophyPage: React.FC<PhilosophyPageProps> = ({ onOpenEnquiry })
                 Our Mission
               </h3>
               <p style={{ color: '#cbd5e1', lineHeight: 1.8, fontSize: '1.05rem' }}>
-                We aim to embrace progressive design thought processes with purpose that elevates living.
+                We are committed to designing thoughtfully curated, eco-conscious spaces that enhance the quality of life. By passionately embracing forward-thinking design and creativity, we aim to transform living environments into experiences that reflect elegance, sustainability, and purposeful living.
               </p>
             </div>
           </div>
